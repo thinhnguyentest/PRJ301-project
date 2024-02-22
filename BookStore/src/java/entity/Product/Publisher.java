@@ -2,18 +2,28 @@ package entity.Product;
 
 import java.sql.Date;
 
-class Publisher {
+public class Publisher {
+    private int PublisherId;
     private String PublisherName;
     private Date DateEstablished;
 
     public Publisher() {
     }
 
-    public Publisher(String PublisherName, Date DateEstablished) {
+    public Publisher(int PublisherId, String PublisherName, Date DateEstablished) {
+        this.PublisherId = PublisherId;
         this.PublisherName = PublisherName;
         this.DateEstablished = DateEstablished;
     }
 
+    public int getPublisherId() {
+        return PublisherId;
+    }
+
+    public void setPublisherId(int PublisherId) {
+        this.PublisherId = PublisherId;
+    }
+    
     public String getPublisherName() {
         return PublisherName;
     }
@@ -32,7 +42,6 @@ class Publisher {
 
     @Override
     public String toString() {
-        return "\nPublisher{" + "PublisherName=" + PublisherName + ", DateEstablished=" + DateEstablished + '}';
+        return "Publisher{" + "PublisherId=" + PublisherId + ", PublisherName=" + PublisherName + ", DateEstablished=" + DateEstablished + '}';
     }
-
 }

@@ -7,6 +7,7 @@ package entity.Product;
 import java.util.Date;
 
 public class Author {
+    private int id;
     private String name;
     private Date birthday;
     private String bio;
@@ -14,10 +15,19 @@ public class Author {
     public Author() {
     }
 
-    public Author(String name, Date birthday, String bio) {
+    public Author(int id, String name, Date birthday, String bio) {
+        this.id = id;
         this.name = name;
         this.birthday = birthday;
         this.bio = bio;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -32,8 +42,8 @@ public class Author {
         return birthday;
     }
 
-    public void setBirthday(Date birthDate) {
-        this.birthday = birthDate;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public String getBio() {
@@ -46,11 +56,6 @@ public class Author {
 
     @Override
     public String toString() {
-        return "\nAuthor{" + "name=" + name + ", birthday=" + birthday + ", bio=" + bio + '}';
+        return "Author{" + "id=" + id + ", name=" + name + ", birthday=" + birthday + ", bio=" + bio + '}';
     }
-    
-    
-    
-    
-    
 }

@@ -1,28 +1,31 @@
 
 package entity.Product;
 
+import dao.BookDAO;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Book {
     private int id;
     private String title, genre, description;
     private int quantity;
     private float price;
-    private String[] images;
     private Author author;
     private Publisher publisher;
-
+    private List<String> images = new ArrayList<>();
     public Book() {
     }
 
-    public Book(int id, String title, String genre, String description, int quantity, float price, String[] images, Author author, Publisher publisher) {
+    public Book(int id, String title, String genre, String description, int quantity, float price, int AuthorId, int PublisherId) {
         this.id = id;
         this.title = title;
         this.genre = genre;
         this.description = description;
         this.quantity = quantity;
         this.price = price;
-        this.images = images;
-        this.author = author;
-        this.publisher = publisher;
+        this.author = BookDAO.getAuthor(AuthorId);
+        this.publisher = BookDAO.getPublisher(PublisherId);
+        this.images = BookDAO.getImages(id);
     }
 
     public int getId() {
@@ -89,18 +92,19 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public String[] getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(String[] images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 
     @Override
     public String toString() {
-        return "Book{" + "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + author + publisher + '}';
+        return "Book{" + "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + ", author=" + author + ", publisher=" + publisher + ", images=" + images + '}';
     }
+
     
     
 }

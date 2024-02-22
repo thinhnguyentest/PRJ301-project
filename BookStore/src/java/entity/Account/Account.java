@@ -5,19 +5,29 @@ package entity.Account;
  * @author tuanngp
  */
 public class Account {
+    private int id;
     private String username, password, role;
     private boolean isActive;
 
     public Account() {
     }
 
-    public Account(String username, String password, String role, boolean isActive) {
+    public Account(int id, String username, String password, String role, boolean isActive) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
         this.isActive = isActive;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -52,6 +62,6 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "username=" + username + ", password=" + password + ", role=" + role + ", isActive=" + isActive + '}';
+        return "Account{" + "id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", isActive=" + isActive + '}';
     }
 }

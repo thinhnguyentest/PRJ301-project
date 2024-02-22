@@ -17,8 +17,8 @@ public class UserInfo extends Account{
         this.address = address;
     }
 
-    public UserInfo(String name, String email, String phone, String address, String username, String password, String role, boolean isActive) {
-        super(username, password, role, isActive);
+    public UserInfo( int id, String username, String password, String name, String email, String phone, String address,  String role, boolean isActive) {
+        super(id, username, password, role, isActive);
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -32,7 +32,7 @@ public class UserInfo extends Account{
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public String getEmail() {
         return email;
     }
@@ -59,6 +59,8 @@ public class UserInfo extends Account{
 
     @Override
     public String toString() {
-        return "User{" + "name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address + '}';
+        return super.toString() + "\nUserInfo{" + "name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address + '}';
     }
+
+    
 }
