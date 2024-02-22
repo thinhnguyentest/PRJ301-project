@@ -41,7 +41,7 @@ public class AccountDAO {
     
     public static UserInfo searchUserInfo(String username) {
         String QUERY = "SELECT * FROM Users WHERE Username=?";
-        UserInfo userInfo = new UserInfo();
+        UserInfo userInfo = null;
         try (Connection conn = DBcontext.getConnection()){
             try(PreparedStatement pst = conn.prepareStatement(QUERY)) {
                 pst.setString(1, username);
@@ -83,7 +83,8 @@ public class AccountDAO {
     }
     
     public static void main(String[] args) {
-        listUsers().forEach(p -> System.out.println(p));
+//        listUsers().forEach(p -> System.out.println(p));
+//        System.out.println(searchUserInfo("as"));
     }
 
 }
