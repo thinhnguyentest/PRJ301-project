@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
         UserInfo u = new UserInfo(email, phone, name, pass);
         boolean status = u.registerUser();
         if (status) {
-            
+            response.sendRedirect("login.jsp");
         } else {
             request.setAttribute("status", "User already exist.");
             request.getRequestDispatcher("registration.jsp").forward(request, response);

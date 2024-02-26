@@ -35,11 +35,11 @@ CREATE TABLE ImageStoring (
 
 CREATE TABLE Users (
     UserId INT IDENTITY(1,1) PRIMARY KEY,
-    Username VARCHAR(255) NOT NULL,
+    Username VARCHAR(255) NOT NULL UNIQUE,
     [Password] VARCHAR(255) NOT NULL,
 	[Name] NVARCHAR(255),
-    Email VARCHAR(255) NOT NULL,
-    Phone VARCHAR(255),
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    Phone VARCHAR(255) UNIQUE,
     [Address] VARCHAR(255),
     [Role] VARCHAR(50),
     IsActive BIT,
@@ -145,3 +145,6 @@ INSERT INTO Payments (OrderId, PaymentType, Amount)
 VALUES
 (1, 'Credit Card', 65.97),
 (2, 'PayPal', 24.99);
+
+select * from Users
+

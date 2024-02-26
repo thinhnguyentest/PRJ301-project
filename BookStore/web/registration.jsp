@@ -29,7 +29,7 @@
                                 <div class="form-group">
                                     <label for="name"><i
                                             class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                        type="text" name="name" id="name" placeholder="Your Name" />
+                                        type="text" name="name" id="name" placeholder="Username" />
                                 </div>
                                 <div class="form-group">
                                     <label for="email"><i class="zmdi zmdi-email"></i></label> <input

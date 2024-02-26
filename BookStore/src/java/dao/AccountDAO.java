@@ -73,11 +73,12 @@ public class AccountDAO {
                 pst.setString(2, u.getPassword());
                 pst.setString(3, u.getEmail());
                 pst.setString(4, u.getPhone());
-                return pst.execute();
+                pst.execute();
+                return true;
             }
         } catch (Exception e) {
+            return false;
         }
-        return false;
     }
     
     public static void main(String[] args) {
