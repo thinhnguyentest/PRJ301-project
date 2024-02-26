@@ -4,7 +4,10 @@
  */
 package entity.Product;
 
-import java.util.Date;
+import dao.BookDAO;
+import java.sql.Date;
+
+
 
 public class Author {
     private int id;
@@ -57,5 +60,9 @@ public class Author {
     @Override
     public String toString() {
         return "Author{" + "id=" + id + ", name=" + name + ", birthday=" + birthday + ", bio=" + bio + '}';
+    }
+    
+    public boolean addAuthor() {
+        return BookDAO.addAuthor(this);
     }
 }
