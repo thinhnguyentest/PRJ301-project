@@ -17,10 +17,11 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet(name="LoginServlet", urlPatterns={"/login"})
 public class LoginServlet extends HttpServlet {
-   
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String username = request.getParameter("username");
+                String username = request.getParameter("username");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
         
@@ -39,18 +40,6 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("status", "Thông tin đăng nhập không chính xác.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
     }
     
     public boolean checkLogin(String username, String password) {

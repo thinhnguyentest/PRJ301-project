@@ -65,16 +65,14 @@ public class AccountDAO {
     }
     
     public static boolean registerUser(UserInfo u) {
-        String QUERY = "INSERT INTO Users (Username, [Password], Email, Phone, [Address], [Role], IsActive) " +
-                        "VALUES (?,?,?,?,?,?,1)";
+        String QUERY = "INSERT INTO Users ([Username], [Password], [Email], [Phone], [Role], IsActive) " +
+                        "VALUES (?,?,?,?,'User',1)";
         try(Connection conn = DBcontext.getConnection()) {
             try(PreparedStatement pst = conn.prepareStatement(QUERY)) {
                 pst.setString(1, u.getUsername());
                 pst.setString(2, u.getPassword());
                 pst.setString(3, u.getEmail());
                 pst.setString(4, u.getPhone());
-                pst.setString(5, u.getAddress());
-                pst.setString(6, u.getRole());
                 return pst.execute();
             }
         } catch (Exception e) {
@@ -84,7 +82,7 @@ public class AccountDAO {
     
     public static void main(String[] args) {
 //        listUsers().forEach(p -> System.out.println(p));
-//        System.out.println(searchUserInfo("as"));
+//        System.out.println(searchUserInfo("admin1"));
+        System.out.println(registerUser(new UserInfo("nguyengiaphuongtuan1@gmail.com", "01234567893", "tuantuan2", "tuantuan")));
     }
-
 }

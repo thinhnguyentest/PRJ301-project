@@ -24,7 +24,7 @@
                         <div class="signup-form">
                             <h2 class="form-title">Sign up</h2>
 
-                            <form method="" action="" class="register-form"
+                            <form method="POST" action="register" class="register-form"
                                   id="register-form">
                                 <div class="form-group">
                                     <label for="name"><i
@@ -40,21 +40,13 @@
                                         type="password" name="pass" id="pass" placeholder="Password" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                    <input type="password" name="re_pass" id="re_pass"
-                                           placeholder="Repeat your password" />
-                                </div>
-                                <div class="form-group">
                                     <label for="contact"><i class="zmdi zmdi-lock-outline"></i></label>
-                                    <input type="text" name="contact" id="contact"
-                                           placeholder="Contact no" />
+                                    <input type="text" name="phone" id="contact"
+                                           placeholder="Phone number" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="checkbox" name="agree-term" id="agree-term"
-                                           class="agree-term" /> <label for="agree-term"
-                                           class="label-agree-term"><span><span></span></span>I
-                                        agree all statements in <a href="#" class="term-service">Terms
-                                            of service</a></label>
+                                    <label style="color: red" for="status" class="label-agree-term">
+                                        <span><span></span></span><%= request.getAttribute("status")==null?"":request.getAttribute("status") %></label>
                                 </div>
                                 <div class="form-group form-button">
                                     <input type="submit" name="signup" id="signup"

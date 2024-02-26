@@ -10,13 +10,59 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /*
  * @author tuanngp
  */
 public class BookDAO {
+        public static boolean addBook(Book b) {
+        String QUERY = "INSERT INTO Books (Title, Genre, Description, Quantity, Price, AuthorId, PublisherId) " +
+                        "VALUES (?,?,?,?,?,?,?)";
+        try(Connection conn = DBcontext.getConnection()) {
+            try(PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setString(1, b.getTitle());
+                pst.setString(2, b.getGenre());
+                pst.setString(3, b.getDescription());
+                pst.setInt(4, b.getQuantity());
+                pst.setFloat(5, b.getPrice());
+                pst.setInt(6, b.getAuthor().getId());
+                pst.setInt(7, b.getPublisher().getPublisherId());
+                return pst.execute();
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+        
+    public static boolean addAuthor(Author author) {
+        String QUERY = "INSERT INTO Authors (Name, Birthday, Bio) " +
+                        "VALUES (?,?,?)";
+        try(Connection conn = DBcontext.getConnection()) {
+            try(PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setString(1, author.getName());
+                pst.setDate(2, author.getBirthday());
+                pst.setString(3, author.getBio());
+                return pst.execute();
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    
+    public static boolean addPublisher(Publisher p) {
+        String QUERY = "INSERT INTO Publishers (Name, DateEstablished) " +
+                        "VALUES (?,?)";
+        try(Connection conn = DBcontext.getConnection()) {
+            try(PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setString(1, p.getPublisherName());
+                pst.setDate(2, p.getDateEstablished());
+                return pst.execute();
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
 
     public static ArrayList<Book> listBook() {
         ArrayList<Book> list = new ArrayList<>();
@@ -95,9 +141,6 @@ public class BookDAO {
         }
         return publisher;
     }
-    
-    
-    
 
     public static ArrayList<Book> searchBook(String Column, String data) {
         String SEARCH = "SELECT * FROM [Books] WHERE "+ Column +" LIKE ?";

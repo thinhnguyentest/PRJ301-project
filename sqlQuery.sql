@@ -1,5 +1,5 @@
---CREATE DATABASE BookOrders;
---USE BookOrders;
+CREATE DATABASE BookOrders;
+USE BookOrders;
 
 CREATE TABLE Authors (
     AuthorId INT IDENTITY PRIMARY KEY,
@@ -33,21 +33,16 @@ CREATE TABLE ImageStoring (
     FOREIGN KEY (BookId) REFERENCES Books(BookId)
 );
 
-CREATE TABLE Roles (
-    RoleId INT PRIMARY KEY,
-    [Name] NVARCHAR(255) NOT NULL
-);
-
 CREATE TABLE Users (
-    UserId INT IDENTITY(1,1)PRIMARY KEY,
-    Username VARCHAR(255) UNIQUE NOT NULL,
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    Username VARCHAR(255) NOT NULL,
     [Password] VARCHAR(255) NOT NULL,
-    Email VARCHAR(255) UNIQUE,
-    Phone VARCHAR(255) UNIQUE,
+	[Name] NVARCHAR(255),
+    Email VARCHAR(255) NOT NULL,
+    Phone VARCHAR(255),
     [Address] VARCHAR(255),
-    RoleId INT,
+    [Role] VARCHAR(50),
     IsActive BIT,
-    FOREIGN KEY (RoleId) REFERENCES Roles(RoleId)
 );
 
 CREATE TABLE Discounts (
@@ -58,17 +53,6 @@ CREATE TABLE Discounts (
     Quantity INT,
     StartDate DATE DEFAULT GETDATE(),
     EndDate DATE
-);
-
-CREATE TABLE Carts (
-    CartId INT IDENTITY PRIMARY KEY,
-    UserId INT,
-    BookId INT,
-    Quantity INT,
-    DiscountId INT,
-    FOREIGN KEY (UserId) REFERENCES Users(UserId),
-    FOREIGN KEY (BookId) REFERENCES Books(BookId),
-    FOREIGN KEY (DiscountId) REFERENCES Discounts(DiscountId)
 );
 
 CREATE TABLE ShippingMethods (
@@ -132,25 +116,15 @@ VALUES
 (2, '/images/book2.jpg'),
 (3, '/images/book3.jpg');
 
-INSERT INTO Roles (RoleId, [Name])
+INSERT INTO Users (Username, [Password], [Name], Email, Phone, [Address], [Role], IsActive)
 VALUES
-(1, 'Admin'),
-(2, 'User');
-
-INSERT INTO Users (Username, [Password], Email, Phone, [Address], RoleId, IsActive)
-VALUES
-('User1', 'password123', 'user1@example.com', '123-456-7890', 'Address1', 2, 1),
-('Admin1', 'adminpass456', 'admin@example.com', '987-654-3210', 'AdminAddress', 1, 1);
+('User1', 'password123', 'User name', 'user1@example.com', '123-456-7890', 'Address1', 'user', 1),
+('Admin1', 'adminpass456', 'Admin name', 'admin@example.com', '987-654-3210', 'AdminAddress', 'admin', 1);
 
 INSERT INTO Discounts (DiscountCode, DiscountAmount, DiscountPercent, Quantity, StartDate, EndDate)
 VALUES
 ('DISCOUNT1', 5.00, NULL, 10, '2024-01-01', '2024-02-01'),
 ('DISCOUNT2', NULL, 15, 20, '2024-02-15', '2024-03-15');
-
-INSERT INTO Carts (UserId, BookId, Quantity, DiscountId)
-VALUES
-(1, 1, 2, 1),
-(2, 3, 1, 2);
 
 INSERT INTO ShippingMethods ([Name], Cost)
 VALUES

@@ -1,6 +1,8 @@
 
 package entity.Account;
 
+import dao.AccountDAO;
+
 /*
  * @author tuanngp
  */
@@ -10,14 +12,13 @@ public class UserInfo extends Account{
     public UserInfo() {
     }
 
-    public UserInfo(String name, String email, String phone, String address) {
-        this.name = name;
+    public UserInfo(String email, String phone, String username, String password) {
+        super(username, password);
         this.email = email;
         this.phone = phone;
-        this.address = address;
     }
-
-    public UserInfo( int id, String username, String password, String name, String email, String phone, String address,  String role, boolean isActive) {
+    
+    public UserInfo(int id, String username, String password, String name, String email, String phone, String address,  String role, boolean isActive) {
         super(id, username, password, role, isActive);
         this.name = name;
         this.email = email;
@@ -62,5 +63,7 @@ public class UserInfo extends Account{
         return super.toString() + "\nUserInfo{" + "name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address + '}';
     }
 
-    
+    public boolean registerUser() {
+        return AccountDAO.registerUser(this);
+    }
 }

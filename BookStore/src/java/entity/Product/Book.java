@@ -104,7 +104,10 @@ public class Book {
     public String toString() {
         return "Book{" + "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + ", author=" + author + ", publisher=" + publisher + ", images=" + images + '}';
     }
-
+    
+    public boolean addBook() {
+        return BookDAO.addBook(this);
+    }
     
     
 }
