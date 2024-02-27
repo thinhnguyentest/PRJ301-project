@@ -166,6 +166,32 @@ public class BookDAO {
         }
         return list;
     }
+    public static Book getBookById(int id) {
+        String sql = "SELECT * FROM Books WHERE BookId = ?";
+        Book book = null;
+
+        try (Connection conn = DBcontext.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                book = new Book();
+                book.setId(rs.getInt("BookId"));
+                book.setTitle(rs.getString("Title"));
+                book.setGenre(rs.getString("Genre"));
+                // set các trường còn lại
+
+                book.setAuthor(getAuthor(rs.getInt("AuthorId")));
+                book.setPublisher(getPublisher(rs.getInt("PublisherId")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return book;
+    }
     public static void main(String[] args) {
 //        listBook().forEach(p -> System.out.println(p));
         searchBook("Genre", "mys").forEach(p -> System.out.println(p));
