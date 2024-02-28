@@ -11,7 +11,7 @@
               href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
         <!-- Main css -->
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="account_assets/css/style.css">
     </head>
     <body>
 
@@ -56,7 +56,7 @@
                         </div>
                         <div class="signup-image">
                             <figure>
-                                <img src="images/signup-image.jpg" alt="sing up image">
+                                <img src="account_assets/images/signup-image.jpg" alt="sing up image">
                             </figure>
                             <a href="login.jsp" class="signup-image-link">I am already
                                 member</a>
