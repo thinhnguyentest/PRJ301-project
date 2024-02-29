@@ -3,11 +3,8 @@ package dao;
 
 import context.DBcontext;
 import entity.Order.Cart;
-import entity.Product.Author;
-import entity.Product.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 
 /*
  * @author tuanngp
@@ -18,7 +15,7 @@ public class OrderDAO {
                         "VALUES (?,?,?)";
         try(Connection conn = DBcontext.getConnection()) {
             try(PreparedStatement pst = conn.prepareStatement(QUERY)) {
-                pst.setInt(1, cart.getUserInfo().getId());
+                pst.setInt(1, cart.getUser().getId());
                 pst.setInt(2, cart.getBook().getId());
                 pst.setInt(2, cart.getQuantity());
                 return pst.execute();

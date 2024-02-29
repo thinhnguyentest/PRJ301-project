@@ -1,9 +1,10 @@
 package entity.Product;
 
 import dao.BookDAO;
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Publisher {
+public class Publisher implements Serializable{
     private int PublisherId;
     private String PublisherName;
     private Date DateEstablished;

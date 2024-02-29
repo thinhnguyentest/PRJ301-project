@@ -1,7 +1,7 @@
 
 package entity.Order;
 
-import entity.Account.UserInfo;
+import entity.Account.User;
 import entity.Product.Book;
 
 /*
@@ -9,14 +9,14 @@ import entity.Product.Book;
  */
 public class Cart {
     private int cartId;
-    private UserInfo userInfo;
+    private User userInfo;
     private Book book;
     private int quantity;
 
     public Cart() {
     }
 
-    public Cart(int cartId, UserInfo userInfo, Book book, int quantity) {
+    public Cart(int cartId, User userInfo, Book book, int quantity) {
         this.cartId = cartId;
         this.userInfo = userInfo;
         this.book = book;
@@ -31,11 +31,11 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    public UserInfo getUserInfo() {
+    public User getUser() {
         return userInfo;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
+    public void setUser(User userInfo) {
         this.userInfo = userInfo;
     }
 

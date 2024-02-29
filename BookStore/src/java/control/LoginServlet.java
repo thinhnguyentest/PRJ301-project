@@ -2,7 +2,7 @@
 package control;
 
 import dao.AccountDAO;
-import entity.Account.UserInfo;
+import entity.Account.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 //            request.getRequestDispatcher("login.jsp").forward(request, response);
 //        }
         if (checkLogin(username, password)) {
-            session.setAttribute("login", AccountDAO.searchUserInfo(username));
+            session.setAttribute("login", AccountDAO.searchUser(username));
             request.getRequestDispatcher("home").forward(request, response);
         } else {
             request.setAttribute("status", "Thông tin đăng nhập không chính xác.");
@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
     }
     
     public boolean checkLogin(String username, String password) {
-        UserInfo u = AccountDAO.searchUserInfo(username);
+        User u = AccountDAO.searchUser(username);
         if (u==null) {
             return false;
         }

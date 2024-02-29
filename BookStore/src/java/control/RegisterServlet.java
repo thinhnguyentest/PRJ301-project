@@ -1,7 +1,7 @@
 
 package control;
 
-import entity.Account.UserInfo;
+import entity.Account.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -31,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
         String pass = request.getParameter("pass");
         String phone = request.getParameter("phone");
 
-        UserInfo u = new UserInfo(email, phone, name, pass);
+        User u = new User(email, phone, name, pass);
         boolean status = u.registerUser();
         if (status) {
             response.sendRedirect("login.jsp");

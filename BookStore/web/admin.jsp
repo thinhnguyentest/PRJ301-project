@@ -1,7 +1,7 @@
 <%-- 
     Document   : admin
     Created on : 29-02-2024, 10:00:51
-    Author     : PC
+    Author     : tuanngp
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,7 +43,7 @@
     <footer>
         <p>&copy; 2024 Trang web bán sách</p>   
     </footer>
+    
 </body>
-
 </html>
 

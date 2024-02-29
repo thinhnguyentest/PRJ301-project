@@ -1,3 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -6,13 +12,16 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 15px 0;
     text-align: center;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    padding: 8px 0;
 }
 
 nav ul {
     list-style: none;
-    margin-top: 15px;
+    /*margin-top: 15px;*/
 }
 
 nav ul li {
@@ -73,6 +82,10 @@ footer {
     width: 100%;
 }
 
+#users {
+    padding-top: 120px
+}
+
 #userForm {
     /*display: none;*/
     max-width: 400px;
@@ -113,13 +126,6 @@ footer {
 
 #userForm button:hover {
     background-color: #45a049;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
 }
 
 form {

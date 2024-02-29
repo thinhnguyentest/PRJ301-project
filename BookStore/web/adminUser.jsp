@@ -1,10 +1,11 @@
 <%-- 
     Document   : adminUser
     Created on : 29-02-2024, 10:35:55
-    Author     : PC
+    Author     : tuanngp
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,24 +33,43 @@
                 </thead>
                 <tbody>
                     <!-- Hiển thị dữ liệu người dùng từ máy chủ -->
-                    <tr>
-                        <td>1</td>
-                        <td>username1</td>
-                        <td>********</td>
-                        <td>Người dùng A</td>
-                        <td>userA@example.com</td>
-                        <td>123456789</td>
-                        <td>Địa chỉ A</td>
-                        <td>Quản trị viên</td>
-                        <td>Hoạt động</td>
-                        <td>
-                            <button onclick="editUser(1)">Sửa</button>
-                            <button onclick="deleteUser(1)">Xóa</button>
-                        </td>
-                    </tr>
+                    <c:forEach var="user" items="${listusers}">
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.username}</td>
+                            <td>${user.password}</td>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.address}</td>
+                            <td>${user.role}</td>
+                            <td>${user.isActive}</td>
+                            <td>
+                                <button onclick="editUser(1)">Sửa</button>
+                                <button onclick="deleteUser(1)">Xóa</button>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     <!-- Thêm các dòng khác tương tự cho các người dùng khác -->
                 </tbody>
             </table>
+            <c:if test="${totalPagesUser > 1}">
+                <div>
+                    <c:forEach var="i" begin="1" end="${totalPagesUser}">
+                        <c:choose>
+                            <c:when test="${i == currentPageUser}">
+                                <input name="pageUser" value="${i}" hidden="">
+                                <span>${i}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="?pageUser=${i}">${i}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </div>
+            </c:if>
+
+
 
             <!-- Biểu mẫu thêm/sửa người dùng -->
             <div id="userForm" style="display: none;">
@@ -91,30 +111,30 @@
                 </form>
             </div>
         </section>
+        <script>
+            // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
+            function showUserForm() {
+                document.getElementById("userForm").style.display = "block";
+            }
+
+            function cancelUserForm() {
+                document.getElementById("userForm").style.display = "none";
+            }
+
+            function saveUser() {
+                // Xử lý lưu thông tin Người dùng
+                cancelUserForm();
+            }
+
+            function editUser(userId) {
+                // Xử lý sửa thông tin Người dùng
+                showUserForm();
+            }
+
+            function deleteUser(userId) {
+                // Xử lý xóa Người dùng
+                // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
+            }
+        </script>
     </body>
 </html>
-<script>
-    // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
-    function showUserForm() {
-        document.getElementById("userForm").style.display = "block";
-    }
-
-    function cancelUserForm() {
-        document.getElementById("userForm").style.display = "none";
-    }
-
-    function saveUser() {
-        // Xử lý lưu thông tin Người dùng
-        cancelUserForm();
-    }
-
-    function editUser(userId) {
-        // Xử lý sửa thông tin Người dùng
-        showUserForm();
-    }
-
-    function deleteUser(userId) {
-        // Xử lý xóa Người dùng
-        // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
-    }
-</script>
