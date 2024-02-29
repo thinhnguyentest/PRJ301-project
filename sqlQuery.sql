@@ -1,4 +1,4 @@
-CREATE DATABASE BookOrders;
+﻿CREATE DATABASE BookOrders;
 USE BookOrders;
 
 CREATE TABLE Authors (
@@ -92,29 +92,65 @@ CREATE TABLE Payments (
     FOREIGN KEY (OrderId) REFERENCES Orders(OrderId)
 );
 
+
+
+-- Thêm dữ liệu cho Authors
 INSERT INTO Authors ([Name], BirthDate, Bio)
-VALUES
-('Author1', '1990-01-01', 'Bio for Author1'),
-('Author2', '1985-02-15', 'Bio for Author2'),
-('Author3', '1978-07-20', 'Bio for Author3');
+VALUES 
+    (N'Paulo Coelho', '1939-01-01', N'Paulo Coelho sinh năm 1947 tại Rio de Janeiro (Brazil) trong một gia đình trung lưu. Năm 1970, ông bỏ dở việc học để lên đường du lịch qua nhiều nơi thuộc châu Mỹ, châu u và Bắc Phi trước khi trở về Brazil và kết hôn với vợ, họa sĩ Christina Oiticica. Sau chuyến hành hương năm 1986, Coelho quyết định từ bỏ sự nghiệp sáng tác lời ca khúc đang rất thành công để quay lại theo đuổi giấc mơ văn chương thời trẻ. Nhà giả kim (1988) đã đưa ông trở thành tên tuổi được biết đến trên toàn thế giới.'),
+    (N'FRANCES HODGSON BURNETT', NULL, N'Author of The Little Princess'),
+    (N'HARUKI MURAKAMI', NULL, N'Japanese author of Norwegian Wood'),
+    (N'HIGASHINO KEIGO', NULL, N'Japanese author known for The Devotion of Suspect X'),
+    (N'JOSÉ MAURO DE VASCONCELOS', NULL, N'Brazilian author of My Sweet Orange Tree'),
+    (N'NIGEL WARBURTON', NULL, N'Author of A Little History of Philosophy'),
+    (N'DIANA WYNNE JONES', NULL, N'British author of fantasy novels including Howl''s Moving Castle'),
+    (N'JANE AUSTEN', NULL, N'English novelist known for Pride and Prejudice'),
+    (N'KAWABATA YASUNARI', NULL, N'Đẹp và buồn');
 
+-- Thêm dữ liệu cho Publishers
 INSERT INTO Publishers (PublisherId, Name, DateEstablished)
-VALUES
-(1, 'Publisher1', '2000-01-01'),
-(2, 'Publisher2', '1995-03-10'),
-(3, 'Publisher3', '1988-11-05');
+VALUES 
+    (1, N'AlphaBook', '2023-01-01'),
+    (2, N'NXB Kim Đồng', '2022-05-10'),
+    (3, N'NXB Trẻ', '2024-12-15'),
+    (4, N'Hội Nhà Văn', '2020-03-10');
 
+-- Thêm dữ liệu cho Books
 INSERT INTO Books (Title, Genre, [Description], Quantity, Price, AuthorId, PublisherId)
-VALUES
-('Book1', 'Fiction', 'Description for Book1', 50, 29.99, 1, 1),
-('Book2', 'Mystery', 'Description for Book2', 30, 19.99, 2, 2),
-('Book3', 'Science Fiction', 'Description for Book3', 40, 24.99, 3, 3);
+VALUES 
+    (N'Nhà Giả Kim', 'Mystery', N'Tất cả những trải nghiệm trong chuyến phiêu du theo đuổi vận mệnh của mình đã giúp Santiago thấu hiểu được ý nghĩa sâu xa nhất của hạnh phúc, hòa hợp với vũ trụ và con người. ', 30, 67000, 1, 4),
+    (N'Hippie – Những kẻ lãng du', 'Mystery', N'Hippie – Những kẻ lãng du đưa ta đến với những con người hoàn toàn xa lạ, với những mục đích khác nhau nhưng cùng hướng đến vùng đất xa xôi Nepal trên con đường mòn hippie huyền thoại.', 30, 127000, 1, 4),
+    (N'ALEPH', 'Mystery', N'Thông tin chi tiết sản phẩm đang được cập nhật', 30, 84000, 1, 4),
+    (N'Công chúa nhỏ', 'Fiction', N'Description for Công chúa nhỏ', 100, 45000, 2, 4),
+    (N'Phía sau nghi can X', 'Mystery', N'Description for Phía sau nghi can X', 80, 110000, 4, 2),
+    (N'Những chuyện lạ ở Tokyo', 'Fiction', N'Description for Những chuyện lạ ở Tokyo', 120, 78000, 3, 3),
+    (N'Điều kì diệu của tiệm tạp hóa Namiya', 'Fantasy', N'Description for Điều kì diệu của tiệm tạp hóa Namiya', 90, 97000, 4, 4),
+    (N'Cây cam ngọt của tôi', 'Fiction', N'Description for Cây cam ngọt của tôi', 110, 47000, 5, 3),
+    (N'Kafka bên bờ biển', 'Fiction', N'Description for Kafka bên bờ biển', 70, 85000, 3, 1),
+    (N'Rừng Nauy', 'Non-Fiction', N'Description for Rừng Nauy', 85, 132000, 3, 3),
+    (N'Lược sử Triết học', 'Non-Fiction', N'Description for Lược sử Triết học', 95, 155000, 6, 1),
+    (N'Kiêu hãnh và định kiến', 'Fiction', N'Description for Kiêu hãnh và định kiến', 75, 79000, 8, 2),
+    (N'Lâu đài trên mây', 'Fantasy', N'Description for Lâu đài trên mây', 100, 91000, 7, 3),
+    (N'Đẹp và buồn', 'Fiction', N'Description for Đẹp và buồn', 110, 112000, 9, 1);
+
 
 INSERT INTO ImageStoring (BookId, FilePath)
 VALUES
-(1, '/images/book1.jpg'),
-(2, '/images/book2.jpg'),
-(3, '/images/book3.jpg');
+(1, '/images/nhagiakim.jpg'),
+(2, '/images/kelangdu.jpg'),
+(3, '/images/aleph.jpg'),
+(4, '/images/congchuanho.jpg'),
+(5, '/images/nghicanx.jpg'),
+(6, '/images/nhungchuyenlaotokyo.jpg'),
+(8, '/images/caycamngotcuatoi.jpg'),
+(7, '/images/namiya.jpg'),
+(9, '/images/kafkabenbobien.jpg'),
+(10, '/images/rungnauy.jpg'),
+(11, '/images/luocsutriethoc.jpg'),
+(12, '/images/kieuhanhvadinhkien.jpg'),
+(13, '/images/laudaitrenmay.jpg'),
+(14, '/images/depvabuon.jpg');
+
 
 INSERT INTO Users (Username, [Password], [Name], Email, Phone, [Address], [Role], IsActive)
 VALUES
