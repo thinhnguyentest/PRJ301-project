@@ -116,5 +116,8 @@ public class User implements Serializable {
         return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address + ", role=" + role + ", isActive=" + isActive + '}';
     }
     
+    public boolean updateUser() {
+        return AccountDAO.updateUser(this);
+    }
     
 }

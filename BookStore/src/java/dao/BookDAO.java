@@ -144,7 +144,7 @@ public class BookDAO {
         return publisher;
     }
 
-    public static ArrayList<Book> searchBook(String Column, String data) {
+    public static ArrayList<Book> searchBook(String Column, Object data) {
         String SEARCH = "SELECT * FROM [Books] WHERE " + Column + " LIKE ?";
         ArrayList<Book> list = new ArrayList<>();
         try ( Connection conn = DBcontext.getConnection()) {
@@ -207,6 +207,25 @@ public class BookDAO {
         } catch (Exception e) {
         }
         return count;
+    }
+    
+    public static boolean update(Book b) {
+        String QUERY = "UPDATE Books SET Title=?, Genre=?, Description=?, Quantity=?, Price=?, AuthorId=?, PublisherId=? WHERE BookId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setString(1, b.getTitle());
+                pst.setString(2, b.getGenre());
+                pst.setString(3, b.getDescription());
+                pst.setInt(4, b.getQuantity());
+                pst.setFloat(5, b.getPrice());
+                pst.setInt(6, b.getAuthor().getId());
+                pst.setInt(7, b.getPublisher().getPublisherId());
+                pst.setInt(8, b.getId());
+                return pst.execute();
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     public static void main(String[] args) {
