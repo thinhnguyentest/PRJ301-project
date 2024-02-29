@@ -11,10 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="account_assets/css/admin.css"/>
     </head>
     <body>
         <section id="users">
-            <button onclick="showUserForm()">Thêm Người dùng</button>
             <h2>Danh sách Người dùng</h2>
             <table>
                 <thead>
@@ -54,7 +54,7 @@
                 </tbody>
             </table>
             <c:if test="${totalPagesUser > 1}">
-                <div>
+                <div class="pagination">
                     <c:forEach var="i" begin="1" end="${totalPagesUser}">
                         <c:choose>
                             <c:when test="${i == currentPageUser}">
@@ -69,18 +69,16 @@
                 </div>
             </c:if>
 
-
-
             <!-- Biểu mẫu thêm/sửa người dùng -->
             <div id="userForm" style="display: none;">
                 <h3>Biểu mẫu Người dùng</h3>
-                <form id="userForm">
+                <form action="update" method="get">
                     <!-- Thêm các trường và nút cần thiết -->
                     <label for="userId">ID:</label>
                     <input type="text" id="userId" name="userId" readonly><br>
 
                     <label for="username">Tên đăng nhập:</label>
-                    <input type="text" id="username" name="username" required><br>
+                    <input type="text" id="username" name="username" readonly><br>
 
                     <label for="password">Mật khẩu:</label>
                     <input type="password" id="password" name="password" required><br>

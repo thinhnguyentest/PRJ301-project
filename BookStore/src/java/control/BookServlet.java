@@ -1,5 +1,6 @@
 package control;
 
+import dao.BookDAO;
 import entity.Product.Author;
 import entity.Product.Book;
 import entity.Product.Publisher;
@@ -33,22 +34,37 @@ public class BookServlet extends HttpServlet {
             String establishedDate = request.getParameter("establishedDate");
 
             // Get Book Information
+            int bookId = Integer.parseInt(request.getParameter("bookId"));
             String bookTitle = request.getParameter("bookTitle");
             String genre = request.getParameter("genre");
             String description = request.getParameter("description");
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             float price = Float.parseFloat(request.getParameter("price"));
-
+            
             Author author = new Author(authorName, Date.valueOf(birthday), bio);
-            author.addAuthor();
-            
             Publisher publisher = new Publisher(publisherName, Date.valueOf(establishedDate));
-            publisher.addPublisher();
-            
             Book book = new Book(bookTitle, genre, description, quantity, price, author, publisher);
-            book.addBook();
-            response.getWriter().println("Data received successfully!");
-        } catch (IOException | NumberFormatException e) {
+            
+            String action = request.getParameter("action");
+            switch (action) {
+                case "add":
+//                    author.addAuthor();
+//                    publisher.addPublisher();
+//                    book.addBook();
+                    break;
+//                
+                case "update":
+//                    Book b = BookDAO.searchBook("BookId", bookId).get(0);
+//                b = new Book(bookTitle, genre, description, quantity, price, author, publisher);
+//                b.updateBook();
+                    break;
+                case "delete":
+                    break;
+                default:
+                    break;
+            }
+
+        } catch (NumberFormatException e) {
             e.printStackTrace();
             response.getWriter().println("Error processing the data.");
         }

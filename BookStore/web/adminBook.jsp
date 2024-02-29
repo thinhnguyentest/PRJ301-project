@@ -11,10 +11,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="account_assets/css/admin.css"/>
+
     </head>
 
     <body>
         <section id="books">
+            <!-- Thêm một trường ẩn để lưu giá trị action -->
+            <input type="hidden" id="action" value="">
             <button onclick="showBookForm()">Thêm sách</button>
             <h2>Danh sách sách</h2>
             <table>
@@ -38,24 +42,25 @@
                         <tr>
                             <td>${book.id}</td>
                             <td>${book.author.name}</td>
-                            <td>${book.author.name}</td>
+                            <td>${book.publisher.publisherName}</td>
                             <td>${book.title}</td>
                             <td>${book.genre}</td>
                             <td>${book.description}</td>
                             <td>${book.quantity}</td>
                             <td>${book.price}</td>
+                            
                             <td><img src="book_image.jpg" alt="Book Image"></td>
                             <td>
+                                <c:set var="bookEdit" value="${book}"></c:set>
                                 <button onclick="editBook(1)">Sửa</button>
                                 <button onclick="deleteBook(1)">Xóa</button>
                             </td>
                         </tr>
                     </c:forEach>
-                    <!-- Thêm các dòng khác tương tự cho các sách khác -->
                 </tbody>
             </table>
             <c:if test="${totalPagesBook > 1}">
-                <div>
+                <div class="pagination">
                     <c:forEach var="i" begin="1" end="${totalPagesBook}">
                         <c:choose>
                             <c:when test="${i == currentPageBook}">
@@ -72,7 +77,7 @@
             <!-- Biểu mẫu thêm/sửa sách -->
             <div id="bookForm" style="display: none;">
                 <h3>Biểu mẫu Sách</h3>
-                <form id="bookForm" action="book">
+                <form action="book" method="post">
                     <!-- Thêm các trường và nút cần thiết -->
                     <fieldset>
                         <legend>Author Information</legend>
@@ -80,7 +85,7 @@
                         <input type="text" id="authorName" name="authorName" required><br>
 
                         <label for="birthday">Birth Date:</label>
-                        <input type="date" id="birthDate" name="birthDate" required><br>
+                        <input type="date" id="birthday" name="birthday" required><br>
 
                         <label for="bio">Bio:</label>
                         <textarea id="bio" name="bio" rows="4" cols="50" required></textarea><br>
@@ -120,30 +125,5 @@
                 </form>
             </div>
         </section>
-        <script>
-            // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
-            function showBookForm() {
-                document.getElementById("bookForm").style.display = "block";
-            }
-
-            function cancelBookForm() {
-                document.getElementById("bookForm").style.display = "none";
-            }
-
-            function saveBook() {
-                // Xử lý lưu thông tin Người dùng
-                cancelBookForm();
-            }
-
-            function editBook(bookId) {
-                // Xử lý sửa thông tin Người dùng
-                showBookForm();
-            }
-
-            function deleteBook(bookId) {
-                // Xử lý xóa Người dùng
-                // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
-            }
-        </script>
     </body>
 </html>

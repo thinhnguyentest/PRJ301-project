@@ -121,4 +121,7 @@ public class Book implements Serializable{
         return BookDAO.addBook(this);
     }
 
+    public boolean updateBook() {
+        return BookDAO.update(this);
+    }
 }

@@ -121,6 +121,28 @@ public class AccountDAO {
         }
         return count;
     }
+    
+    public static boolean updateUser(User user) {
+    String QUERY = "UPDATE Users SET Username=?, [Password]=?,Name=?, Email=?, Phone=?, [Address]=?, [Role]=?, IsActive=? WHERE UserID=?";
+    try(Connection conn = DBcontext.getConnection()) {
+        try(PreparedStatement pst = conn.prepareStatement(QUERY)) {
+            pst.setString(1, user.getUsername());
+            pst.setString(2, user.getPassword());
+            pst.setString(3, user.getName());
+            pst.setString(4, user.getEmail());
+            pst.setString(5, user.getPhone());
+            pst.setString(6, user.getAddress());
+            pst.setString(7, user.getRole());
+            pst.setBoolean(8, user.isIsActive());
+            pst.setInt(9, user.getId());
+            int rowsAffected = pst.executeUpdate();
+            return rowsAffected > 0;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
     public static void main(String[] args) {
 //        listUsers().forEach(p -> System.out.println(p));
 //        System.out.println(searchUser("admin1"));

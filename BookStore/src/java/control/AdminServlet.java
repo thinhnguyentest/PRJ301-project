@@ -5,7 +5,6 @@ import dao.AccountDAO;
 import dao.BookDAO;
 import entity.Account.User;
 import entity.Product.Book;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,6 +37,7 @@ public class AdminServlet extends HttpServlet {
         int currentPageUser = (pageParamUser != null) ? Integer.parseInt(pageParamUser) : 1;
         int offsetBook = (currentPageBook - 1) * itemsPerPage;
         int offsetUser = (currentPageUser - 1) * itemsPerPage;
+        
         // Lấy danh sách dữ liệu cho trang hiện tại
         ArrayList<Book> books = BookDAO.getPagging(offsetBook, itemsPerPage);
         ArrayList<User> users = AccountDAO.getPagging(offsetUser, itemsPerPage);
