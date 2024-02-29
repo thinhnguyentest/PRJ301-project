@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="account_assets/css/admin.css"/>
     </head>
     <body>
-        <header>
+        <header style="position: fixed; width: 100%">
             <h1>Quản lý admin</h1>
             <nav>
                 <ul>

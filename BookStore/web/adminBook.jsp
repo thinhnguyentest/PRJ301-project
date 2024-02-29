@@ -14,7 +14,7 @@
 
     <body>
     <section id="books">
-        <button onclick="showUserForm()">Thêm sách</button>
+        <button onclick="showBookForm()">Thêm sách</button>
         <h2>Danh sách sách</h2>
         <table>
             <thead>
@@ -55,7 +55,7 @@
         <!-- Biểu mẫu thêm/sửa sách -->
         <div id="bookForm" style="display: none;">
             <h3>Biểu mẫu Sách</h3>
-            <form id="bookForm">
+            <form id="bookForm" action="book">
                 <!-- Thêm các trường và nút cần thiết -->
                 <fieldset>
                 <legend>Author Information</legend>
@@ -82,9 +82,6 @@
             <!-- Book Information -->
             <fieldset>
                 <legend>Book Information</legend>
-                <label for="bookTitle">Title:</label>
-                <input type="text" id="bookTitle" name="bookTitle" required><br>
-
                 <label for="genre">Genre:</label>
                 <input type="text" id="genre" name="genre" required><br>
 
@@ -123,12 +120,12 @@
         cancelBookForm();
     }
 
-    function editBook(userId) {
+    function editBook() {
         // Xử lý sửa thông tin Người dùng
         showUserForm();
     }
 
-    function deleteBook(userId) {
+    function deleteBook() {
         // Xử lý xóa Người dùng
         // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
     }
