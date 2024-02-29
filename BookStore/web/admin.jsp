@@ -8,108 +8,117 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang quản lý admin</title>
-    <!-- Bổ sung các tệp CSS và JavaScript ở đây -->
-</head>
-<style>
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trang quản lý admin</title>
+        <!-- Bổ sung các tệp CSS và JavaScript ở đây -->
+        <link rel="stylesheet" href="account_assets/css/admin.css"/>
+    </head>
+    <body>
+        <header>
+            <h1>Quản lý admin</h1>
+            <nav>
+                <ul>
+                    <li><a href="#users">Người dùng</a></li>
+                    <li><a href="#books">Sách</a></li>
+                    <li><a href="#transactions">Giao dịch</a></li>
+                </ul>
+            </nav>
+        </header>
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 15px 0;
-    text-align: center;
-}
-
-nav ul {
-    list-style: none;
-    margin-top: 15px;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: #ffd700;
-}
-
-section {
-    background-color: #fff;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    color: #333;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #333;
-    color: #fff;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-</style>
-<body>
-    <header>
-        <h1>Quản lý admin</h1>
-        <nav>
-            <ul>
-                <li><a href="#users">Người dùng</a></li>
-                <li><a href="#books">Sách</a></li>
-                <li><a href="#transactions">Giao dịch</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="users">
-        <h2>Quản lý Người dùng</h2>
-        <!-- Đặt bảng hoặc danh sách người dùng ở đây -->
-    </section>
-
+    <!--Quan li user-->    
+    <jsp:include page="adminUser.jsp"></jsp:include>
+    <!--end-->
     <section id="books">
-        <h2>Quản lý Sách</h2>
-        <!-- Đặt bảng hoặc danh sách sách ở đây -->
+        <h2>Danh sách sách</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tác giả</th>
+                    <th>Nhà xuất bản</th>
+                    <th>Tiêu đề</th>
+                    <th>Thể loại</th>
+                    <th>Mô tả</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Hình ảnh</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Hiển thị dữ liệu sách từ máy chủ -->
+                <tr>
+                    <td>1</td>
+                    <td>Tên tác giả</td>
+                    <td>Tên nhà xuất bản</td>
+                    <td>Tiêu đề sách</td>
+                    <td>Thể loại sách</td>
+                    <td>Mô tả sách</td>
+                    <td>10</td>
+                    <td>$19.99</td>
+                    <td><img src="book_image.jpg" alt="Book Image"></td>
+                    <td>
+                        <button onclick="editBook(1)">Sửa</button>
+                        <button onclick="deleteBook(1)">Xóa</button>
+                    </td>
+                </tr>
+                <!-- Thêm các dòng khác tương tự cho các sách khác -->
+            </tbody>
+        </table>
+
+        <!-- Biểu mẫu thêm/sửa sách -->
+        <div id="bookForm" style="display: none;">
+            <h3>Biểu mẫu Sách</h3>
+            <form id="bookForm">
+                <!-- Thêm các trường và nút cần thiết -->
+                <fieldset>
+                    <legend>Author Information</legend>
+                    <label for="authorName">Name:</label>
+                    <input type="text" id="authorName" name="authorName" required><br>
+
+                    <label for="birthday">Birth Date:</label>
+                    <input type="date" id="birthDate" name="birthDate" required><br>
+
+                    <label for="bio">Bio:</label>
+                    <textarea id="bio" name="bio" rows="4" cols="50" required></textarea><br>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Publisher Information</legend>
+                    <label for="publisherName">Name:</label>
+                    <input type="text" id="publisherName" name="publisherName" required><br>
+
+                    <label for="establishedDate">Date Established:</label>
+                    <input type="date" id="establishedDate" name="establishedDate" required><br>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Book Information</legend>
+                    <label for="bookTitle">Title:</label>
+                    <input type="text" id="bookTitle" name="bookTitle" required><br>
+
+                    <label for="genre">Genre:</label>
+                    <input type="text" id="genre" name="genre" required><br>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" required><br>
+
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" step="0.01" required><br>
+
+                    <label for="image">Select Image :</label>
+                    <input type="file" name="image" id="image" required>
+                </fieldset>
+
+                <button type="button" onclick="saveBook()">Lưu</button>
+                <button type="button" onclick="cancelBookForm()">Hủy</button>
+            </form>
+        </div>
     </section>
 
     <section id="transactions">
@@ -118,7 +127,7 @@ footer {
     </section>
 
     <footer>
-        <p>&copy; 2024 Trang web bán sách</p>
+        <p>&copy; 2024 Trang web bán sách</p>   
     </footer>
 </body>
 
