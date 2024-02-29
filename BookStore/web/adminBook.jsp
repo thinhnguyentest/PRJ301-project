@@ -34,16 +34,16 @@
                 </thead>
                 <tbody>
                     <!-- Hiển thị dữ liệu sách từ máy chủ -->
-                    <c:forEach var="book" items="${requestScope.books}">
+                    <c:forEach var="book" items="${requestScope.listbooks}">
                         <tr>
-                            <td><c:out value="${book.id}"></c:out></td>
-                            <td><c:out value="${book.author.name}"></c:out></td>
-                            <td><c:out value="${book.publisher.name}"></c:out></td>
-                            <td>Tiêu đề sách</td>
-                            <td>Thể loại sách</td>
-                            <td>Mô tả sách</td>
-                            <td>10</td>
-                            <td>$19.99</td>
+                            <td>${book.id}</td>
+                            <td>${book.author.name}</td>
+                            <td>${book.author.name}</td>
+                            <td>${book.title}</td>
+                            <td>${book.genre}</td>
+                            <td>${book.description}</td>
+                            <td>${book.quantity}</td>
+                            <td>${book.price}</td>
                             <td><img src="book_image.jpg" alt="Book Image"></td>
                             <td>
                                 <button onclick="editBook(1)">Sửa</button>
@@ -60,9 +60,10 @@
                         <c:choose>
                             <c:when test="${i == currentPageBook}">
                                 <span>${i}</span>
+                                <input name="pageBook" value="${i}" hidden="">
                             </c:when>
                             <c:otherwise>
-                                <a href="?page=${i}">${i}</a>
+                                <a href="?pageBook=${i}">${i}</a>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>

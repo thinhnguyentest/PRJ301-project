@@ -33,43 +33,44 @@
                 </thead>
                 <tbody>
                     <!-- Hiển thị dữ liệu người dùng từ máy chủ -->
-                    <c:forEach var="user" begin="1" end="5">
-                    <tr>
-                        <td>${user}</td>
-                        <td>username1</td>
-                        <td>********</td>
-                        <td>Người dùng A</td>
-                        <td>userA@example.com</td>
-                        <td>123456789</td>
-                        <td>Địa chỉ A</td>
-                        <td>Quản trị viên</td>
-                        <td>Hoạt động</td>
-                        <td>
-                            <button onclick="editUser(1)">Sửa</button>
-                            <button onclick="deleteUser(1)">Xóa</button>
-                        </td>
-                    </tr>
+                    <c:forEach var="user" items="${listusers}">
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.username}</td>
+                            <td>${user.password}</td>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.address}</td>
+                            <td>${user.role}</td>
+                            <td>${user.isActive}</td>
+                            <td>
+                                <button onclick="editUser(1)">Sửa</button>
+                                <button onclick="deleteUser(1)">Xóa</button>
+                            </td>
+                        </tr>
                     </c:forEach>
                     <!-- Thêm các dòng khác tương tự cho các người dùng khác -->
                 </tbody>
             </table>
-            <c:if test="${totalPages > 1}">
+            <c:if test="${totalPagesUser > 1}">
                 <div>
-                    <c:forEach var="i" begin="1" end="${totalPages}">
+                    <c:forEach var="i" begin="1" end="${totalPagesUser}">
                         <c:choose>
-                            <c:when test="${i == currentPage}">
+                            <c:when test="${i == currentPageUser}">
+                                <input name="pageUser" value="${i}" hidden="">
                                 <span>${i}</span>
                             </c:when>
                             <c:otherwise>
-                                <a href="?page=${i}">${i}</a>
+                                <a href="?pageUser=${i}">${i}</a>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </div>
             </c:if>
-            
-            
-            
+
+
+
             <!-- Biểu mẫu thêm/sửa người dùng -->
             <div id="userForm" style="display: none;">
                 <h3>Biểu mẫu Người dùng</h3>

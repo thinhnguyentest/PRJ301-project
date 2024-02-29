@@ -24,24 +24,35 @@ public class AdminServlet extends HttpServlet {
         int itemsPerPage = 10;
 
         // Tính tổng số trang
-        int totalItems = AccountDAO.totalUser();
-        int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
-
+        int totalBooks = BookDAO.totalBook();
+        int totalPagesBook = (int) Math.ceil((double) totalBooks / itemsPerPage);
+        
+        int totalUsers = AccountDAO.totalUser();
+        int totalPagesUser = (int) Math.ceil((double) totalUsers / itemsPerPage);
+        
         // Lấy trang hiện tại từ tham số yêu cầu
-        String pageParam = request.getParameter("pageUser");
-        int currentPage = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
-
+        String pageParamBook = request.getParameter("pageBook");
+        String pageParamUser = request.getParameter("pageUser");
+        
+        int currentPageBook = (pageParamBook != null) ? Integer.parseInt(pageParamBook) : 1;
+        int currentPageUser = (pageParamUser != null) ? Integer.parseInt(pageParamUser) : 1;
+        int offsetBook = (currentPageBook - 1) * itemsPerPage;
+        int offsetUser = (currentPageUser - 1) * itemsPerPage;
         // Lấy danh sách dữ liệu cho trang hiện tại
-        ArrayList<Book> dataList = BookDAO.getPagging(totalItems, itemsPerPage);
+        ArrayList<Book> books = BookDAO.getPagging(offsetBook, itemsPerPage);
+        ArrayList<User> users = AccountDAO.getPagging(offsetUser, itemsPerPage);
 
         // Set thuộc tính cho JSP
-        request.setAttribute("books", dataList);
-        request.setAttribute("totalPagesBook", totalPages);
-        request.setAttribute("currentPageBook", currentPage);
-
+        request.setAttribute("listbooks", books);
+        request.setAttribute("totalPagesBook", totalPagesBook);
+        request.setAttribute("currentPageBook", currentPageBook);
+        
+        request.setAttribute("listusers", users);
+        request.setAttribute("totalPagesUser", totalPagesUser);
+        request.setAttribute("currentPageUser", currentPageUser);
         // Chuyển hướng sang trang JSP
         request.getRequestDispatcher("/admin.jsp").forward(request, response);
-    } 
+    }
 
     public static void main(String[] args) {
         BookDAO.getPagging(1, 10).forEach(p -> System.out.println(p));
