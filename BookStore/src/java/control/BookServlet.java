@@ -16,8 +16,8 @@ import java.sql.Date;
  *
  * @author PC
  */
-@WebServlet(name = "AddBookServlet", urlPatterns = {"/addbook"})
-public class AddBookServlet extends HttpServlet {
+@WebServlet(name = "AddBookServlet", urlPatterns = {"/book"})
+public class BookServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

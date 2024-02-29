@@ -1,7 +1,7 @@
 <%-- 
     Document   : admin
     Created on : 29-02-2024, 10:00:51
-    Author     : PC
+    Author     : tuanngp
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="account_assets/css/admin.css"/>
     </head>
     <body>
-        <header style="position: fixed; width: 100%">
+        <header>
             <h1>Quản lý admin</h1>
             <nav>
                 <ul>
@@ -43,7 +43,7 @@
     <footer>
         <p>&copy; 2024 Trang web bán sách</p>   
     </footer>
+    
 </body>
-
 </html>
 

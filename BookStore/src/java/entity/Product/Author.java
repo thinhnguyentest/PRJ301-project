@@ -5,11 +5,12 @@
 package entity.Product;
 
 import dao.BookDAO;
+import java.io.Serializable;
 import java.sql.Date;
 
 
 
-public class Author {
+public class Author implements Serializable{
     private int id;
     private String name;
     private Date birthday;

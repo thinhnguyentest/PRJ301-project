@@ -1,10 +1,11 @@
 <%-- 
     Document   : adminUser
     Created on : 29-02-2024, 10:35:55
-    Author     : PC
+    Author     : tuanngp
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,8 +33,9 @@
                 </thead>
                 <tbody>
                     <!-- Hiển thị dữ liệu người dùng từ máy chủ -->
+                    <c:forEach var="user" begin="1" end="5">
                     <tr>
-                        <td>1</td>
+                        <td>${user}</td>
                         <td>username1</td>
                         <td>********</td>
                         <td>Người dùng A</td>
@@ -47,10 +49,27 @@
                             <button onclick="deleteUser(1)">Xóa</button>
                         </td>
                     </tr>
+                    </c:forEach>
                     <!-- Thêm các dòng khác tương tự cho các người dùng khác -->
                 </tbody>
             </table>
-
+            <c:if test="${totalPages > 1}">
+                <div>
+                    <c:forEach var="i" begin="1" end="${totalPages}">
+                        <c:choose>
+                            <c:when test="${i == currentPage}">
+                                <span>${i}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="?page=${i}">${i}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </div>
+            </c:if>
+            
+            
+            
             <!-- Biểu mẫu thêm/sửa người dùng -->
             <div id="userForm" style="display: none;">
                 <h3>Biểu mẫu Người dùng</h3>
@@ -91,30 +110,30 @@
                 </form>
             </div>
         </section>
+        <script>
+            // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
+            function showUserForm() {
+                document.getElementById("userForm").style.display = "block";
+            }
+
+            function cancelUserForm() {
+                document.getElementById("userForm").style.display = "none";
+            }
+
+            function saveUser() {
+                // Xử lý lưu thông tin Người dùng
+                cancelUserForm();
+            }
+
+            function editUser(userId) {
+                // Xử lý sửa thông tin Người dùng
+                showUserForm();
+            }
+
+            function deleteUser(userId) {
+                // Xử lý xóa Người dùng
+                // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
+            }
+        </script>
     </body>
 </html>
-<script>
-    // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
-    function showUserForm() {
-        document.getElementById("userForm").style.display = "block";
-    }
-
-    function cancelUserForm() {
-        document.getElementById("userForm").style.display = "none";
-    }
-
-    function saveUser() {
-        // Xử lý lưu thông tin Người dùng
-        cancelUserForm();
-    }
-
-    function editUser(userId) {
-        // Xử lý sửa thông tin Người dùng
-        showUserForm();
-    }
-
-    function deleteUser(userId) {
-        // Xử lý xóa Người dùng
-        // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
-    }
-</script>
