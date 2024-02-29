@@ -34,11 +34,11 @@
                 </thead>
                 <tbody>
                     <!-- Hiển thị dữ liệu sách từ máy chủ -->
-                    <c:forEach var="book" begin="1" end="5">
+                    <c:forEach var="book" items="${requestScope.books}">
                         <tr>
-                            <td>${book}</td>
-                            <td>Tên tác giả</td>
-                            <td>Tên nhà xuất bản</td>
+                            <td><c:out value="${book.id}"></c:out></td>
+                            <td><c:out value="${book.author.name}"></c:out></td>
+                            <td><c:out value="${book.publisher.name}"></c:out></td>
                             <td>Tiêu đề sách</td>
                             <td>Thể loại sách</td>
                             <td>Mô tả sách</td>
@@ -54,11 +54,11 @@
                     <!-- Thêm các dòng khác tương tự cho các sách khác -->
                 </tbody>
             </table>
-            <c:if test="${totalPages > 1}">
+            <c:if test="${totalPagesBook > 1}">
                 <div>
-                    <c:forEach var="i" begin="1" end="${totalPages}">
+                    <c:forEach var="i" begin="1" end="${totalPagesBook}">
                         <c:choose>
-                            <c:when test="${i == currentPage}">
+                            <c:when test="${i == currentPageBook}">
                                 <span>${i}</span>
                             </c:when>
                             <c:otherwise>

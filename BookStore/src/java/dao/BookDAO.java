@@ -171,7 +171,7 @@ public class BookDAO {
 
     public static ArrayList<Book> getPagging(int offset, int itemsPerPage) {
         String QUERY = "SELECT * FROM Books "
-                + "ORDER BY UserId OFFSET " + offset + " ROWS FETCH NEXT " + itemsPerPage + " ROWS ONLY";
+                + "ORDER BY BookId OFFSET " + offset + " ROWS FETCH NEXT " + itemsPerPage + " ROWS ONLY";
         ArrayList<Book> list = new ArrayList<>();
         try ( Connection conn = DBcontext.getConnection()) {
             try ( PreparedStatement preparedStatement = conn.prepareStatement(QUERY)) {

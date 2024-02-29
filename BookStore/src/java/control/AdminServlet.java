@@ -2,7 +2,9 @@
 package control;
 
 import dao.AccountDAO;
+import dao.BookDAO;
 import entity.Account.User;
+import entity.Product.Book;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -30,15 +32,18 @@ public class AdminServlet extends HttpServlet {
         int currentPage = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
 
         // Lấy danh sách dữ liệu cho trang hiện tại
-        ArrayList<User> dataList = AccountDAO.getPagging(totalItems, itemsPerPage);
+        ArrayList<Book> dataList = BookDAO.getPagging(totalItems, itemsPerPage);
 
         // Set thuộc tính cho JSP
-        request.setAttribute("users", dataList);
-        request.setAttribute("totalPagesUser", totalPages);
-        request.setAttribute("currentPageUser", currentPage);
+        request.setAttribute("books", dataList);
+        request.setAttribute("totalPagesBook", totalPages);
+        request.setAttribute("currentPageBook", currentPage);
 
         // Chuyển hướng sang trang JSP
         request.getRequestDispatcher("/admin.jsp").forward(request, response);
     } 
 
+    public static void main(String[] args) {
+        BookDAO.getPagging(1, 10).forEach(p -> System.out.println(p));
+    }
 }
