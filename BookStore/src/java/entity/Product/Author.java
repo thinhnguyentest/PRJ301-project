@@ -18,6 +18,12 @@ public class Author {
     public Author() {
     }
 
+    public Author(String name, Date birthday, String bio) {
+        this.name = name;
+        this.birthday = birthday;
+        this.bio = bio;
+    }
+
     public Author(int id, String name, Date birthday, String bio) {
         this.id = id;
         this.name = name;
