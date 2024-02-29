@@ -105,7 +105,16 @@ VALUES
     (N'NIGEL WARBURTON', NULL, N'Author of A Little History of Philosophy'),
     (N'DIANA WYNNE JONES', NULL, N'British author of fantasy novels including Howl''s Moving Castle'),
     (N'JANE AUSTEN', NULL, N'English novelist known for Pride and Prejudice'),
-    (N'KAWABATA YASUNARI', NULL, N'Đẹp và buồn');
+    (N'KAWABATA YASUNARI', NULL, N'Đẹp và buồn'),
+	(N'VŨ BẰNG', NULL, N'Đang cập nhật'),
+    (N'ĐĂNG HOÀNG GIANG', NULL, N'Đang cập nhật'),
+    (N'NEIL GAIMAN', NULL, N'Đang cập nhật'),
+    (N'LƯU TỪ HÂN', NULL, N'Đang cập nhật'),
+    (N'DALE CARNEGIE', NULL, N'Đang cập nhật'),
+    (N'CARL SAGAN', NULL, N'Đang cập nhật'),
+    (N'KHALED HOSSEINI', NULL, N'Đang cập nhật'),
+    (N'CARL GUSTAV JUNG', NULL, N'Đang cập nhật'),
+    (N'SIGMUND FREUD', NULL, N'Đang cập nhật');
 
 -- Thêm dữ liệu cho Publishers
 INSERT INTO Publishers (PublisherId, Name, DateEstablished)
@@ -113,7 +122,10 @@ VALUES
     (1, N'AlphaBook', '2023-01-01'),
     (2, N'NXB Kim Đồng', '2022-05-10'),
     (3, N'NXB Trẻ', '2024-12-15'),
-    (4, N'Hội Nhà Văn', '2020-03-10');
+    (4, N'Hội Nhà Văn', '2020-03-10'),
+	(5, N'Hà Nội', '2022-03-10'),
+	(6, N'Phụ Nữ', '2021-03-10'),
+	(7, N'Thế Giới', '2020-03-10');
 
 -- Thêm dữ liệu cho Books
 INSERT INTO Books (Title, Genre, [Description], Quantity, Price, AuthorId, PublisherId)
@@ -131,25 +143,49 @@ VALUES
     (N'Lược sử Triết học', 'Non-Fiction', N'Description for Lược sử Triết học', 95, 155000, 6, 1),
     (N'Kiêu hãnh và định kiến', 'Fiction', N'Description for Kiêu hãnh và định kiến', 75, 79000, 8, 2),
     (N'Lâu đài trên mây', 'Fantasy', N'Description for Lâu đài trên mây', 100, 91000, 7, 3),
-    (N'Đẹp và buồn', 'Fiction', N'Description for Đẹp và buồn', 110, 112000, 9, 1);
+    (N'Đẹp và buồn', 'Fiction', N'Description for Đẹp và buồn', 110, 112000, 9, 1),
+	(N'MIẾNG NGON HÀ NỘI', 'Cooking', N'Miếng Ngon Hà Nội là một cuốn sách về ẩm thực Việt Nam.', 50, 45000, 10, 5),
+    (N'ĐẠI DƯƠNG ĐEN', 'Adventure', N'Cuộc phiêu lưu đầy thách thức giữa đại dương bao la và không gian huyền bí.', 30, 65000, 11, 4),
+    (N'BẠCH DẠ HÀNH', 'Fiction', N'Truyện về tình yêu, mạo hiểm, và sức mạnh của tình bạn trong thời kỳ chiến tranh.', 40, 55000, 4, 6),
+    (N'ĐIỀM LÀNH', 'Mystery', N'Cuộc truy lùng tội phạm và giải mã bí ẩn xung quanh những sự kiện kỳ lạ.', 60, 78000, 12, 7),
+    (N'TAM THỂ 2 - KHU RỪNG ĐEN TỐI', 'Fantasy', N'Bắt đầu từ nơi cuốn sách đầu tiên kết thúc, hành trình tiếp tục vào khu rừng đen tối.', 25, 110000, 13, 7),
+    (N'TAM THỂ', 'Fantasy', N'Trận chiến giữa các phe phái để bảo vệ hay chiếm lấy sức mạnh Tam Thể.', 35, 100000, 13, 1),
+    (N'TAM THỂ 3 - TỬ THẦN SỐNG MÃI', 'Fantasy', N'Phần kết của loạt truyện Tam Thể, với sự hấp dẫn và bất ngờ đầy kịch tính.', 20, 115000, 13, 2),
+    (N'ĐẮC NHÂN TÂM', 'Self-Help', N'Sách nổi tiếng về cách tương tác xã hội và phát triển bản thân.', 80, 30000, 14, 7),
+    (N'VŨ TRỤ', 'Science', N'Khám phá vũ trụ qua góc nhìn khoa học và phiêu lưu.', 45, 88000, 15, 7),
+    (N'NGƯỜI ĐUA DIỀU', 'Biography', N'Câu chuyện có thật về sự nghiệp và cuộc đời của một người đua diều nổi tiếng.', 55, 52000, 16, 7),
+    (N'CON NGƯỜI VÀ BIỂU TƯỢNG', 'Philosophy', N'Nghiên cứu về ý thức con người và tầm ảnh hưởng của biểu tượng trong xã hội.', 40, 42000, 17, 7),
+    (N'NGHIÊN CỨU PHÂN TÂM HỌC', 'Psychology', N'Cuộc thám hiểm sâu sắc vào lĩnh vực phân tâm học và tâm lý học hành vi.', 30, 48000, 18, 7);
 
 
 INSERT INTO ImageStoring (BookId, FilePath)
 VALUES
-(1, '/images/nhagiakim.jpg'),
-(2, '/images/kelangdu.jpg'),
-(3, '/images/aleph.jpg'),
-(4, '/images/congchuanho.jpg'),
-(5, '/images/nghicanx.jpg'),
-(6, '/images/nhungchuyenlaotokyo.jpg'),
-(8, '/images/caycamngotcuatoi.jpg'),
-(7, '/images/namiya.jpg'),
-(9, '/images/kafkabenbobien.jpg'),
-(10, '/images/rungnauy.jpg'),
-(11, '/images/luocsutriethoc.jpg'),
-(12, '/images/kieuhanhvadinhkien.jpg'),
-(13, '/images/laudaitrenmay.jpg'),
-(14, '/images/depvabuon.jpg');
+(1, 'nhagiakim.jpg'),
+(2, 'kelangdu.jpg'),
+(3, 'aleph.jpg'),
+(4, 'congchuanho.jpg'),
+(5, 'nghicanx.jpg'),
+(6, 'nhungchuyenlaotokyo.jpg'),
+(8, 'caycamngotcuatoi.jpg'),
+(7, 'namiya.jpg'),
+(9, 'kafkabenbobien.jpg'),
+(10, 'rungnauy.jpg'),
+(11, 'luocsutriethoc.jpg'),
+(12, 'kieuhanhvadinhkien.jpg'),
+(13, 'laudaitrenmay.jpg'),
+(14, 'depvabuon.jpg'),
+(15, 'miengngonhanoi.jpg'),
+(16, 'daiduongden.jpg'),
+(17, 'bachdahanh.jpg'),
+(18, 'diemlanh.jpg'),
+(19, 'tamthe2.jpg'),
+(20, 'tamthe1.jpg'),
+(21, 'tamthe3.jpg'),
+(22, 'dacnhantam.jpg'),
+(23, 'vutru.jpg'),
+(24, 'nguoiduadieu.jpg'),
+(25, 'connguoivabieutuong.jpg'),
+(26, 'nghiencuuphantamhoc.jpg');
 
 
 INSERT INTO Users (Username, [Password], [Name], Email, Phone, [Address], [Role], IsActive)
