@@ -13,6 +13,7 @@
     </head>
     <body>
         <section id="users">
+            <button onclick="showUserForm()">Thêm Người dùng</button>
             <h2>Danh sách Người dùng</h2>
             <table>
                 <thead>
