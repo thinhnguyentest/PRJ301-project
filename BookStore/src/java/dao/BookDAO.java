@@ -46,8 +46,8 @@ public class BookDAO {
                 return pst.execute();
             }
         } catch (Exception e) {
+            return false;
         }
-        return false;
     }
     
     public static boolean addPublisher(Publisher p) {
@@ -60,8 +60,8 @@ public class BookDAO {
                 return pst.execute();
             }
         } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
     public static ArrayList<Book> listBook() {
@@ -167,8 +167,8 @@ public class BookDAO {
         return list;
     }
     public static void main(String[] args) {
-//        listBook().forEach(p -> System.out.println(p));
-        searchBook("Genre", "mys").forEach(p -> System.out.println(p));
+        listBook().forEach(p -> System.out.println(p));
+//        searchBook("Genre", "mys").forEach(p -> System.out.println(p));
 //        System.out.println(getAuthor(1));
     }
 }

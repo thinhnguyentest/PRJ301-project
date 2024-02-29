@@ -1,5 +1,6 @@
 package entity.Product;
 
+import dao.BookDAO;
 import java.sql.Date;
 
 public class Publisher {
@@ -8,6 +9,11 @@ public class Publisher {
     private Date DateEstablished;
 
     public Publisher() {
+    }
+
+    public Publisher(String PublisherName, Date DateEstablished) {
+        this.PublisherName = PublisherName;
+        this.DateEstablished = DateEstablished;
     }
 
     public Publisher(int PublisherId, String PublisherName, Date DateEstablished) {
@@ -43,5 +49,9 @@ public class Publisher {
     @Override
     public String toString() {
         return "Publisher{" + "PublisherId=" + PublisherId + ", PublisherName=" + PublisherName + ", DateEstablished=" + DateEstablished + '}';
+    }
+    
+    public boolean addPublisher(){
+        return BookDAO.addPublisher(this);
     }
 }

@@ -1,4 +1,3 @@
-
 package entity.Product;
 
 import dao.BookDAO;
@@ -6,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
+
     private int id;
     private String title, genre, description;
     private int quantity;
@@ -13,7 +13,18 @@ public class Book {
     private Author author;
     private Publisher publisher;
     private List<String> images = new ArrayList<>();
+
     public Book() {
+    }
+
+    public Book(String title, String genre, String description, int quantity, float price, Author author, Publisher publisher) {
+        this.title = title;
+        this.genre = genre;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.author = author;
+        this.publisher = publisher;
     }
 
     public Book(int id, String title, String genre, String description, int quantity, float price, int AuthorId, int PublisherId) {
@@ -104,10 +115,9 @@ public class Book {
     public String toString() {
         return "Book{" + "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + ", author=" + author + ", publisher=" + publisher + ", images=" + images + '}';
     }
-    
+
     public boolean addBook() {
         return BookDAO.addBook(this);
     }
-    
-    
+
 }
