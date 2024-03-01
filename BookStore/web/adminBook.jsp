@@ -18,7 +18,7 @@
     <body>
         <section id="books">
             <!-- Thêm một trường ẩn để lưu giá trị action -->
-            <input type="hidden" id="action">
+            
             <button onclick="showBookForm()">Thêm sách</button>
             <h2>Danh sách sách</h2>
             <table>
@@ -53,9 +53,11 @@
                                     <a href="#bookForm"><button onclick="editBook(${book.id})">Sửa</button></a>
                                     <button onclick="deleteBook(${book.id})">Xóa</button>
                                 
+                                    <input type="text" id="authorId_${book.id}" value="${book.author.id}" hidden>
                                     <input type="text" id="authorName_${book.id}" value="${book.author.name}" hidden>
                                     <input type="text" id="authorBirthday_${book.id}" value="${book.author.birthday}" hidden>
                                     <input type="text" id="authorBio_${book.id}" value="${book.author.bio}" hidden>
+                                    <input type="text" id="publisherId_${book.id}" value="${book.publisher.publisherId}" hidden>
                                     <input type="text" id="publisherName_${book.id}" value="${book.publisher.publisherName}" hidden>
                                     <input type="text" id="establishedDate_${book.id}" value="${book.publisher.dateEstablished}" hidden>
                                     <input type="text" id="bookId_${book.id}" value="${book.id}" hidden>
@@ -88,10 +90,15 @@
             <!-- Biểu mẫu thêm/sửa sách -->
             <div id="bookForm" style="display: none;">
                 <h3>Biểu mẫu Sách</h3>
-                <form action="book" method="post">
+                <input type="text" id="action" name="action">
+                <form action="book" >
                     <!--Author Information-->
                     <fieldset>
                         <legend>Author Information</legend>
+                        
+                        <label for="authorName">Id: </label>
+                        <input type="text" id="authorId" name="authorId" required><br>
+                        
                         <label for="authorName">Name:</label>
                         <input type="text" id="authorName" name="authorName" required><br>
 
@@ -105,6 +112,10 @@
                     <!-- Publisher Information -->
                     <fieldset>
                         <legend>Publisher Information</legend>
+                        
+                        <label for="publisherName">Id:</label>
+                        <input type="text" id="publisherId" name="publisherId" required><br>
+                        
                         <label for="publisherName">Name:</label>
                         <input type="text" id="publisherName" name="publisherName" required><br>
 
@@ -116,7 +127,10 @@
                     <fieldset>
                         <legend>Book Information</legend>
                         <label for="id">Id: </label>
-                        <input type="text" id="id" name="id" required disabled=""><br>
+                        <input type="text" id="bookId" name="bookId" required disabled=""><br>
+                        
+                        <label for="bookTitle">Title: </label>
+                        <input type="text" id="bookTitle" name="bookTitle" required><br>
                         
                         <label for="genre">Genre:</label>
                         <input type="text" id="genre" name="genre" required><br>
@@ -134,7 +148,7 @@
                         <input type="file" name="image" id="image" required>
                     </fieldset>
 
-                    <button type="button" onclick="saveBook()">Lưu</button>
+                    <button type="button" onclick="parentNode.submit()">Lưu</button>
                     <button type="button" onclick="cancelBookForm()">Hủy</button>
                 </form>
             </div>

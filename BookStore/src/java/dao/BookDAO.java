@@ -200,8 +200,8 @@ public class BookDAO {
 //    ----------------------------------------------------------------------------------------------------
 
     
-    public static boolean update(Book b) {
-        String QUERY = "UPDATE Books SET Title=?, Genre=?, Description=?, Quantity=?, Price=?, AuthorId=?, PublisherId=? WHERE BookId=?";
+    public static boolean updateBook(Book b) {
+        String QUERY = "UPDATE Books SET Title=N'(?), Genre=N'(?), Description=N'(?), Quantity=?, Price=? WHERE BookId=?";
         try ( Connection conn = DBcontext.getConnection()) {
             try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
                 pst.setString(1, b.getTitle());
@@ -209,9 +209,36 @@ public class BookDAO {
                 pst.setString(3, b.getDescription());
                 pst.setInt(4, b.getQuantity());
                 pst.setFloat(5, b.getPrice());
-                pst.setInt(6, b.getAuthor().getId());
-                pst.setInt(7, b.getPublisher().getPublisherId());
-                pst.setInt(8, b.getId());
+                pst.setInt(6, b.getId());
+                return pst.execute();
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+    
+    public static boolean updateAuthor(Author author) {
+        String QUERY = "UPDATE Author SET [Name]=N'(?), Birthday=?, Bio=N'(?) WHERE AuthorId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setString(1, author.getName());
+                pst.setDate(2, author.getBirthday());
+                pst.setString(3, author.getBio());
+                pst.setInt(4, author.getId());
+                return pst.execute();
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+    
+    public static boolean updatePublisher(Publisher b) {
+        String QUERY = "UPDATE Books SET Name=?, DateEstablished=? WHERE PublisherId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setString(1, b.getPublisherName());
+                pst.setDate(2, b.getDateEstablished());
+                pst.setInt(3, b.getPublisherId());
                 return pst.execute();
             }
         } catch (SQLException e) {
@@ -304,7 +331,7 @@ public class BookDAO {
     
 
     public static void main(String[] args) {
-//        listBook().forEach(p -> System.out.println(p));
+        listBook().forEach(p -> System.out.println(p));
 //        searchBook("Genre", "mys").forEach(p -> System.out.println(p));
 
 //        System.out.println(getAuthor(1));

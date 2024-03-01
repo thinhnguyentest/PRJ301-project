@@ -26,7 +26,7 @@
                 </ul>
             </nav>
         </header>
-
+        <h5>%{requestScope.error}</h5>
     <!--Quan li user-->    
     <jsp:include page="adminUser.jsp"></jsp:include>
     <!--end-->
