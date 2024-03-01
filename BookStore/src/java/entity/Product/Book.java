@@ -104,7 +104,7 @@ public class Book implements Serializable{
         this.publisher = publisher;
     }
 
-    public String getImage() {
+    public String getImages() {
         return images.get(0);
     }
 

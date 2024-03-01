@@ -138,7 +138,7 @@
                 transform: translate(-50%, -50%);
                 width: 100%;
             }
-            
+
             .buy-button {
                 background-color: #4CAF50;
                 color: white;
@@ -166,14 +166,14 @@
                         <div class="list_categories">
                             <h2>ALL CATEGORIES</h2>
                             <ul>
-                                <a href="allbook.jsp"><li>All Book</li></a>
-                                <a href="allbook.jsp"><li>Best Saler</li></a>
+                                <a href="allBook.jsp"><li>All Book</li></a>
+                                <a href="allBook.jsp"><li>Best Saler</li></a>
                                 <a href="tv.html"><li>New Arrivals</li></a>
-                                <a href="allbook.jsp"><li>Decolonization</li></a>
-                                <a href="allbook.jsp"><li>Fiction</li></a>
-                                <a href="allbook.jsp"><li>Poetry</li></a>
-                                <a href="allbook.jsp"><li>Comic & Graphic Novel</li></a>
-                                <a href="allbook.jsp"><li>Language</li></a>
+                                <a href="allBook.jsp"><li>Decolonization</li></a>
+                                <a href="allBook.jsp"><li>Fiction</li></a>
+                                <a href="allBook.jsp"><li>Poetry</li></a>
+                                <a href="allBook.jsp"><li>Comic & Graphic Novel</li></a>
+                                <a href="allBook.jsp"><li>Language</li></a>
                             </ul>
                         </div>                            
                     </div>
@@ -183,10 +183,10 @@
                             <h2>AUTHOR</h2>
                             <ul>
                                 <li class="checkbox-container">
-                                <span>
-                                <input type="checkbox" id="author1Checkbox" name="myCheckbox">
-                                <label for="author1Checkbox">author 1</label>
-                                </span></li>
+                                    <span>
+                                        <input type="checkbox" id="author1Checkbox" name="myCheckbox">
+                                        <label for="author1Checkbox">author 1</label>
+                                    </span></li>
                             </ul>
                         </div>                            
                     </div>
@@ -196,10 +196,10 @@
                             <h2>PRICE RANGE</h2>
                             <ul>
                                 <a href="#">
-                                <li class="checkbox-container"><span>
-                                <input type="checkbox" id="author9Checkbox" name="myCheckbox">
-                                <label for="author9Checkbox">author 1</label>
-                                </span></li></a>
+                                    <li class="checkbox-container"><span>
+                                            <input type="checkbox" id="author9Checkbox" name="myCheckbox">
+                                            <label for="author9Checkbox">author 1</label>
+                                        </span></li></a>
                             </ul>
                         </div>                            
                     </div>
@@ -208,11 +208,18 @@
                         <div class="list_categories">
                             <h2>FORMAT</h2>
                             <ul>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author17Checkbox" name="myCheckbox"><label for="author17Checkbox">author 1</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author18Checkbox" name="myCheckbox"><label for="author18Checkbox">author 2</label>
-                                    </span></li></a>
-
+                                <li class="checkbox-container">
+                                    <span>
+                                        <input type="checkbox" id="author17Checkbox" name="myCheckbox">
+                                        <label for="author17Checkbox">author 1</label>
+                                    </span>
+                                </li>
+                                <li class="checkbox-container">
+                                    <span>
+                                        <input type="checkbox" id="author18Checkbox" name="myCheckbox">
+                                        <label for="author18Checkbox">author 2</label>
+                                    </span>
+                                </li>
                             </ul>
                         </div>                            
                     </div>
@@ -230,7 +237,7 @@
                             <div class="book-container">
                                 <h2>${book.title}</h2>
                                 <div class="image-container">
-                                    <img class="book-image" src="${pageContext.request.contextPath}/images/${book.images[0]}" alt="${book.title} Image" width="200">
+                                    <img class="book-image" src="${pageContext.request.contextPath}/assets/book-img/${book.images}" alt="${book.title} Image" width="200">
                                     <div class="overlay">
                                         <div class="overlay-content">
                                             <a href="cart?action=buy&id=${book.id}" class="buy-button">Buy</a>
