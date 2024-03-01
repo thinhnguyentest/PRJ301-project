@@ -18,7 +18,7 @@
     <body>
         <section id="books">
             <!-- Thêm một trường ẩn để lưu giá trị action -->
-            <input type="hidden" id="action" value="">
+            <input type="hidden" id="action">
             <button onclick="showBookForm()">Thêm sách</button>
             <h2>Danh sách sách</h2>
             <table>
@@ -48,18 +48,23 @@
                             <td>${book.description}</td>
                             <td>${book.quantity}</td>
                             <td>${book.price}</td>
-
                             <td><img src="assets/images/book/${book.image}" alt="Book Image" style="width: 120px"></td>
                             <td>
-                                <form action="UpdateBook" style="box-shadow: none">
-                                    <input type="text" name="id" value="${book.id}" hidden="">
                                     <a href="#bookForm"><button onclick="editBook(${book.id})">Sửa</button></a>
-                                </form>
-                                <form action="UpdateBook" style="box-shadow: none">
-                                    <input type="text" name="id" value="${book.id}" hidden="">
                                     <button onclick="deleteBook(${book.id})">Xóa</button>
-                                </form>
                                 
+                                    <input type="text" id="authorName_${book.id}" value="${book.author.name}" hidden>
+                                    <input type="text" id="authorBirthday_${book.id}" value="${book.author.birthday}" hidden>
+                                    <input type="text" id="authorBio_${book.id}" value="${book.author.bio}" hidden>
+                                    <input type="text" id="publisherName_${book.id}" value="${book.publisher.publisherName}" hidden>
+                                    <input type="text" id="establishedDate_${book.id}" value="${book.publisher.dateEstablished}" hidden>
+                                    <input type="text" id="bookId_${book.id}" value="${book.id}" hidden>
+                                    <input type="text" id="bookTitle_${book.id}" value="${book.title}" hidden>
+                                    <input type="text" id="genre_${book.id}" value="${book.genre}" hidden>
+                                    <input type="text" id="description_${book.id}" value="${book.description}" hidden>
+                                    <input type="text" id="quantity_${book.id}" value="${book.quantity}" hidden> 
+                                    <input type="text" id="price_${book.id}" value="${book.price}" hidden>
+                                    <input type="text" id="image_${book.id}" value="${book.image}" hidden>
                             </td>
                         </tr>
                     </c:forEach>
@@ -88,9 +93,9 @@
                     <fieldset>
                         <legend>Author Information</legend>
                         <label for="authorName">Name:</label>
-                        <input type="text" id="authorName" name="authorName" value="" required><br>
+                        <input type="text" id="authorName" name="authorName" required><br>
 
-                        <label for="birthday">Birth Date:</label>
+                        <label for="birthday">Birthday:</label>
                         <input type="date" id="birthday" name="birthday" required><br>
 
                         <label for="bio">Bio:</label>
@@ -110,6 +115,9 @@
                     <!-- Book Information -->
                     <fieldset>
                         <legend>Book Information</legend>
+                        <label for="id">Id: </label>
+                        <input type="text" id="id" name="id" required disabled=""><br>
+                        
                         <label for="genre">Genre:</label>
                         <input type="text" id="genre" name="genre" required><br>
 
@@ -117,10 +125,10 @@
                         <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
 
                         <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" required><br>
+                        <input type="text" id="quantity" name="quantity" required><br>
 
                         <label for="price">Price:</label>
-                        <input type="number" id="price" name="price" step="0.01" required><br>
+                        <input type="text" id="price" name="price" step="0.01" required><br>
 
                         <label for="image">Select Image :</label>
                         <input type="file" name="image" id="image" required>

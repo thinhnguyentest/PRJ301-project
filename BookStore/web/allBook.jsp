@@ -182,22 +182,11 @@
                         <div class="list_categories">
                             <h2>AUTHOR</h2>
                             <ul>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author1Checkbox" name="myCheckbox"><label for="author1Checkbox">author 1</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author2Checkbox" name="myCheckbox"><label for="author2Checkbox">author 2</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author3Checkbox" name="myCheckbox"><label for="author3Checkbox">author 3</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author4Checkbox" name="myCheckbox"><label for="author4Checkbox">author 4</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author5Checkbox" name="myCheckbox"><label for="author5Checkbox">author 5</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author6Checkbox" name="myCheckbox"><label for="author6Checkbox">author 6</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author7Checkbox" name="myCheckbox"><label for="author7Checkbox">author 7</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author8Checkbox" name="myCheckbox"><label for="author8Checkbox">author 8</label>
-                                    </span></li></a>
+                                <li class="checkbox-container">
+                                <span>
+                                <input type="checkbox" id="author1Checkbox" name="myCheckbox">
+                                <label for="author1Checkbox">author 1</label>
+                                </span></li>
                             </ul>
                         </div>                            
                     </div>
@@ -206,22 +195,11 @@
                         <div class="Price_categories">
                             <h2>PRICE RANGE</h2>
                             <ul>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author9Checkbox" name="myCheckbox"><label for="author9Checkbox">author 1</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author10Checkbox" name="myCheckbox"><label for="author10Checkbox">author 2</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author11Checkbox" name="myCheckbox"><label for="author11Checkbox">author 3</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author12Checkbox" name="myCheckbox"><label for="author12Checkbox">author 4</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author13Checkbox" name="myCheckbox"><label for="author13Checkbox">author 5</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author14Checkbox" name="myCheckbox"><label for="author14Checkbox">author 6</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author15Checkbox" name="myCheckbox"><label for="author15Checkbox">author 7</label>
-                                    </span></li></a>
-                                <li class="checkbox-container"><span><input type="checkbox" id="author16Checkbox" name="myCheckbox"><label for="author16Checkbox">author 8</label>
-                                    </span></li></a>
+                                <a href="#">
+                                <li class="checkbox-container"><span>
+                                <input type="checkbox" id="author9Checkbox" name="myCheckbox">
+                                <label for="author9Checkbox">author 1</label>
+                                </span></li></a>
                             </ul>
                         </div>                            
                     </div>

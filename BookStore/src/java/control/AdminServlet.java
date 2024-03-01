@@ -41,12 +41,17 @@ public class AdminServlet extends HttpServlet {
 
         // Pass the data to the JSP page for rendering
         request.setAttribute("books", books);
-        request.setAttribute("users", users);
-        request.setAttribute("totalPagesBook", totalPagesBook);
-        request.setAttribute("totalPagesUser", totalPagesUser);
         request.setAttribute("currentPageBook", currentPageBook);
+        request.setAttribute("totalPagesBook", totalPagesBook);
+        
+        request.setAttribute("users", users);
+        request.setAttribute("totalPagesUser", totalPagesUser);    
         request.setAttribute("currentPageUser", currentPageUser);
 
         request.getRequestDispatcher("/admin.jsp").forward(request, response);
+    }
+    
+    public static void main(String[] args) {
+        BookDAO.getPagging(1, 10).forEach(p -> System.out.println(p));
     }
 }
