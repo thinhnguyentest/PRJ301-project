@@ -17,37 +17,34 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet(name="LoginServlet", urlPatterns={"/login"})
 public class LoginServlet extends HttpServlet {
-
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-                String username = request.getParameter("username");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
-        
-//        if (username.length() < 6) {
-//            request.setAttribute("status", "Tên đăng nhập phải từ 6 kí tự trở lên.");
-//            request.getRequestDispatcher("login.jsp").forward(request, response);
-//        }
-//        if (password.length() < 8) {
-//            request.setAttribute("status", "Mật khẩu phải từ 8 kí tự trở lên.");
-//            request.getRequestDispatcher("login.jsp").forward(request, response);
-//        }
-        if (checkLogin(username, password)) {
+
+        validateInput(username, password, request);
+
+        if (AccountDAO.authenticateUser(username, password)) {
             session.setAttribute("login", AccountDAO.searchUser(username));
             request.getRequestDispatcher("home").forward(request, response);
         } else {
-            request.setAttribute("status", "Thông tin đăng nhập không chính xác.");
+            setErrorStatus("Thông tin đăng nhập không chính xác.", request);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
-    
-    public boolean checkLogin(String username, String password) {
-        User u = AccountDAO.searchUser(username);
-        if (u==null) {
-            return false;
+
+    private void validateInput(String username, String password, HttpServletRequest request) {
+        if (username == null || username.isEmpty() || username.length() < 6) {
+            setErrorStatus("Tên đăng nhập phải từ 6 kí tự trở lên.", request);
         }
-        return u.getPassword().equals(password);
+        if (password == null || password.isEmpty() || password.length() < 8) {
+            setErrorStatus("Mật khẩu phải từ 8 kí tự trở lên.", request);
+        }
     }
-    
+
+    private void setErrorStatus(String message, HttpServletRequest request) {
+        request.setAttribute("status", message);
+    }
 }
+

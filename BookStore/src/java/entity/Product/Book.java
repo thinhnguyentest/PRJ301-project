@@ -104,8 +104,8 @@ public class Book implements Serializable{
         this.publisher = publisher;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImage() {
+        return images.get(0);
     }
 
     public void setImages(List<String> images) {
@@ -114,7 +114,7 @@ public class Book implements Serializable{
 
     @Override
     public String toString() {
-        return "Book{" + "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + ", author=" + author + ", publisher=" + publisher + ", images=" + images + '}';
+        return "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + author + publisher + ", images=" + images + '}';
     }
 
     public boolean addBook() {

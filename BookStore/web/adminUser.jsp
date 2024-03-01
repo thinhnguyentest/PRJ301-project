@@ -33,8 +33,8 @@
                 </thead>
                 <tbody>
                     <!-- Hiển thị dữ liệu người dùng từ máy chủ -->
-                    <c:forEach var="user" items="${listusers}">
-                        <tr>
+                    <c:forEach var="user" items="${users}">
+                        <tr data-user-id="${user.id}" data-user-username="${user.username}" data-user-password="${user.password}" data-user-name="${user.name}" data-user-email="${user.email}" data-user-phone="${user.phone}" data-user-address="${user.address}" data-user-role="${user.role}" data-user-is-active="${user.isActive}">
                             <td>${user.id}</td>
                             <td>${user.username}</td>
                             <td>${user.password}</td>
@@ -43,11 +43,13 @@
                             <td>${user.phone}</td>
                             <td>${user.address}</td>
                             <td>${user.role}</td>
-                            <td>${user.isActive}</td>
+                            <td>${user.isActive?"Hoạt động":"Không hoạt động"}</td>
                             <td>
-                                <button onclick="editUser(1)">Sửa</button>
-                                <button onclick="deleteUser(1)">Xóa</button>
+                                <a href="#userForm"> <button onclick="editUser(${user.id})"> Sửa</button></a>
+                                <button onclick="deleteUser(${user.id})">Xóa</button>
                             </td>
+                                
+                            
                         </tr>
                     </c:forEach>
                     <!-- Thêm các dòng khác tương tự cho các người dùng khác -->
@@ -81,23 +83,25 @@
                     <input type="text" id="username" name="username" readonly><br>
 
                     <label for="password">Mật khẩu:</label>
-                    <input type="password" id="password" name="password" required><br>
+                    <input type="password" id="password" name="password" readonly><br>
 
                     <label for="name">Tên:</label>
-                    <input type="text" id="name" name="name" required><br>
+                    <input type="text" id="name" name="name" readonly><br>
 
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required><br>
+                    <input type="email" id="email" name="email" readonly><br>
 
                     <label for="phone">Điện thoại:</label>
-                    <input type="tel" id="phone" name="phone" required><br>
+                    <input type="tel" id="phone" name="phone" readonly><br>
 
                     <label for="address">Địa chỉ:</label>
-                    <input type="text" id="address" name="address" required><br>
+                    <input type="text" id="address" name="address" readonly><br>
 
-                    <label for="role">Vai trò:</label>
-                    <input type="text" id="role" name="role" required><br>
-
+                    <label for="role">Trạng thái:</label>
+                    <select id="role" name="role">
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select><br>
                     <label for="isActive">Trạng thái:</label>
                     <select id="isActive" name="isActive">
                         <option value="true">Hoạt động</option>
@@ -109,30 +113,6 @@
                 </form>
             </div>
         </section>
-        <script>
-            // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
-            function showUserForm() {
-                document.getElementById("userForm").style.display = "block";
-            }
-
-            function cancelUserForm() {
-                document.getElementById("userForm").style.display = "none";
-            }
-
-            function saveUser() {
-                // Xử lý lưu thông tin Người dùng
-                cancelUserForm();
-            }
-
-            function editUser(userId) {
-                // Xử lý sửa thông tin Người dùng
-                showUserForm();
-            }
-
-            function deleteUser(userId) {
-                // Xử lý xóa Người dùng
-                // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
-            }
-        </script>
+        <script src="account_assets/js/main.js"></script>
     </body>
 </html>
