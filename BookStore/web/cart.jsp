@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Shopping Cart</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/cart.css">
+        <link rel="stylesheet" href="assets/css/cart.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -60,7 +60,7 @@
                     <c:forEach var="cartItem" items="${sessionScope.cart}">
                         <div class="row border-top border-bottom main align-items-center">
                             <div class="col-2">
-                                <img class="img-fluid" src="${pageContext.request.contextPath}/images/${cartItem.book.images[0]}" width="100">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/book-img/${cartItem.book.images}" width="100">
                             </div>
                             <div class="col-3">
                                 <div class="row text-muted">${cartItem.book.title}</div>
