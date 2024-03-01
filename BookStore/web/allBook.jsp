@@ -1,4 +1,7 @@
-
+<%@ page import="entity.Product.Book" %>
+<%@ page import="dao.BookDAO" %>
+<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -103,120 +106,215 @@
             .list_categories a:hover {
                 text-decoration: none;
             }
+            .book-container {
+                position: relative;
+            }
+
+            .image-container {
+                position: relative;
+            }
+
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.7);
+                display: none;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .book-container:hover .overlay {
+                display: flex;
+            }
+
+            .overlay-content {
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+            }
+            
+            .buy-button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 15px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin-top: 10px;
+            }
         </style>
     </head>
     <body>
-        
+
+
         <!--header-begin-->
         <jsp:include page="header.jsp" ></jsp:include>
-        <!--header-end-->
-        
-        <!-- table left start -->
-        <div class="row" style="background-color: #3c0e0e">  
-            <div class="col-lg-4">
-                <!--ALL CATEGORIERS -->
-                <div class="table-left 4">
-                    <div class="list_categories">
-                        <h2>ALL CATEGORIES</h2>
-                        <ul>
-                            <a href="allbook.jsp"><li>All Book</li></a>
-                            <a href="allbook.jsp"><li>Best Saler</li></a>
-                            <a href="tv.html"><li>New Arrivals</li></a>
-                            <a href="allbook.jsp"><li>Decolonization</li></a>
-                            <a href="allbook.jsp"><li>Fiction</li></a>
-                            <a href="allbook.jsp"><li>Poetry</li></a>
-                            <a href="allbook.jsp"><li>Comic & Graphic Novel</li></a>
-                            <a href="allbook.jsp"><li>Language</li></a>
-                        </ul>
-                    </div>                            
-                </div>
-                <!--AUTHOR -->
-                <div class="table-left ">
-                    <div class="list_categories">
-                        <h2>AUTHOR</h2>
-                        <ul>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author1Checkbox" name="myCheckbox"><label for="author1Checkbox">author 1</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author2Checkbox" name="myCheckbox"><label for="author2Checkbox">author 2</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author3Checkbox" name="myCheckbox"><label for="author3Checkbox">author 3</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author4Checkbox" name="myCheckbox"><label for="author4Checkbox">author 4</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author5Checkbox" name="myCheckbox"><label for="author5Checkbox">author 5</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author6Checkbox" name="myCheckbox"><label for="author6Checkbox">author 6</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author7Checkbox" name="myCheckbox"><label for="author7Checkbox">author 7</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author8Checkbox" name="myCheckbox"><label for="author8Checkbox">author 8</label>
-                                </span></li></a>
-                        </ul>
-                    </div>                            
-                </div>
-                <!--ALL CATEGORIERS -->
-                <div class="table-left ">
-                    <div class="Price_categories">
-                        <h2>PRICE RANGE</h2>
-                        <ul>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author9Checkbox" name="myCheckbox"><label for="author9Checkbox">author 1</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author10Checkbox" name="myCheckbox"><label for="author10Checkbox">author 2</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author11Checkbox" name="myCheckbox"><label for="author11Checkbox">author 3</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author12Checkbox" name="myCheckbox"><label for="author12Checkbox">author 4</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author13Checkbox" name="myCheckbox"><label for="author13Checkbox">author 5</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author14Checkbox" name="myCheckbox"><label for="author14Checkbox">author 6</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author15Checkbox" name="myCheckbox"><label for="author15Checkbox">author 7</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author16Checkbox" name="myCheckbox"><label for="author16Checkbox">author 8</label>
-                                </span></li></a>
-                        </ul>
-                    </div>                            
-                </div>
-                <!--ALL CATEGORIERS -->
-                <div class="table-left ">
-                    <div class="list_categories">
-                        <h2>FORMAT</h2>
-                        <ul>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author17Checkbox" name="myCheckbox"><label for="author17Checkbox">author 1</label>
-                                </span></li></a>
-                            <li class="checkbox-container"><span><input type="checkbox" id="author18Checkbox" name="myCheckbox"><label for="author18Checkbox">author 2</label>
-                                </span></li></a>
+            <!--header-end-->
 
+            <!-- table left start -->
+            <div class="row" style="background-color: #3c0e0e" >  
+                <div class="col-lg-4">
+                    <!--ALL CATEGORIERS -->
+                    <div class="table-left 4">
+                        <div class="list_categories">
+                            <h2>ALL CATEGORIES</h2>
+                            <ul>
+                                <a href="allbook.jsp"><li>All Book</li></a>
+                                <a href="allbook.jsp"><li>Best Saler</li></a>
+                                <a href="tv.html"><li>New Arrivals</li></a>
+                                <a href="allbook.jsp"><li>Decolonization</li></a>
+                                <a href="allbook.jsp"><li>Fiction</li></a>
+                                <a href="allbook.jsp"><li>Poetry</li></a>
+                                <a href="allbook.jsp"><li>Comic & Graphic Novel</li></a>
+                                <a href="allbook.jsp"><li>Language</li></a>
+                            </ul>
+                        </div>                            
+                    </div>
+                    <!--AUTHOR -->
+                    <div class="table-left ">
+                        <div class="list_categories">
+                            <h2>AUTHOR</h2>
+                            <ul>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author1Checkbox" name="myCheckbox"><label for="author1Checkbox">author 1</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author2Checkbox" name="myCheckbox"><label for="author2Checkbox">author 2</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author3Checkbox" name="myCheckbox"><label for="author3Checkbox">author 3</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author4Checkbox" name="myCheckbox"><label for="author4Checkbox">author 4</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author5Checkbox" name="myCheckbox"><label for="author5Checkbox">author 5</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author6Checkbox" name="myCheckbox"><label for="author6Checkbox">author 6</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author7Checkbox" name="myCheckbox"><label for="author7Checkbox">author 7</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author8Checkbox" name="myCheckbox"><label for="author8Checkbox">author 8</label>
+                                    </span></li></a>
+                            </ul>
+                        </div>                            
+                    </div>
+                    <!--ALL CATEGORIERS -->
+                    <div class="table-left ">
+                        <div class="Price_categories">
+                            <h2>PRICE RANGE</h2>
+                            <ul>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author9Checkbox" name="myCheckbox"><label for="author9Checkbox">author 1</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author10Checkbox" name="myCheckbox"><label for="author10Checkbox">author 2</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author11Checkbox" name="myCheckbox"><label for="author11Checkbox">author 3</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author12Checkbox" name="myCheckbox"><label for="author12Checkbox">author 4</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author13Checkbox" name="myCheckbox"><label for="author13Checkbox">author 5</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author14Checkbox" name="myCheckbox"><label for="author14Checkbox">author 6</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author15Checkbox" name="myCheckbox"><label for="author15Checkbox">author 7</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author16Checkbox" name="myCheckbox"><label for="author16Checkbox">author 8</label>
+                                    </span></li></a>
+                            </ul>
+                        </div>                            
+                    </div>
+                    <!--ALL CATEGORIERS -->
+                    <div class="table-left ">
+                        <div class="list_categories">
+                            <h2>FORMAT</h2>
+                            <ul>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author17Checkbox" name="myCheckbox"><label for="author17Checkbox">author 1</label>
+                                    </span></li></a>
+                                <li class="checkbox-container"><span><input type="checkbox" id="author18Checkbox" name="myCheckbox"><label for="author18Checkbox">author 2</label>
+                                    </span></li></a>
+
+                            </ul>
+                        </div>                            
+                    </div>
+                </div >
+            <c:set var="books" value="${requestScope.books}" />
+            <c:set var="count" value="0" />
+            <c:set var="totalPages" value="${BookDAO.getNumberPage()}" />
+            <c:set var="currentPage" value="${requestScope.indexPage}" />
+            <div class="col-lg-8" style="background-color: #FFF">
+                <!-- Inside the table where you display books -->
+                <div class="row">
+                    <c:forEach var="book" items="${books}">
+                        <div class="col-lg-4">
+                            <!-- Display book details here -->
+                            <div class="book-container">
+                                <h2>${book.title}</h2>
+                                <div class="image-container">
+                                    <img class="book-image" src="${pageContext.request.contextPath}/images/${book.images[0]}" alt="${book.title} Image" width="200">
+                                    <div class="overlay">
+                                        <div class="overlay-content">
+                                            <a href="cart?action=buy&id=${book.id}" class="buy-button">Buy</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Price: ${book.price} VND</p>
+                                <!-- Add more book details as needed -->
+                            </div>
+                        </div>
+
+                        <c:set var="count" value="${count + 1}" />
+
+                        <c:if test="${count % 3 == 0}">
+                        </div><div class="row">
+                        </c:if>
+                    </c:forEach>
+                </div>
+
+                <!-- Pagination -->
+                <div style="display: flex; justify-content: center; margin: 20px;">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <c:forEach var="i" begin="1" end="${totalPages}">
+                                <li class="page-item ${currentPage==i?"active":""}">
+                                    <a class="page-link"  href="product?page=${i}">${i}</a>
+                                </li>
+                            </c:forEach>
+                            </li>
                         </ul>
-                    </div>                            
+                    </nav>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <!-- copyright section start -->
-        <jsp:include page="footer.jsp" ></jsp:include>
-        <!-- copyright section end -->
-        
-        
-        <!-- Javascript files-->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/jquery-3.0.0.min.js"></script>
-        <!-- sidebar -->
-        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script src="js/custom.js"></script>
-        <!-- javascript --> 
-        <script src="js/owl.carousel.js"></script>
-        <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-        <script>
-            $('#datepicker').datepicker({
-                uiLibrary: 'bootstrap4'
-            });
-        </script>
+    <!-- copyright section start -->
+    <jsp:include page="footer.jsp" ></jsp:include>
+    <!-- copyright section end -->
 
-    </body>
+
+
+
+    <!-- Javascript files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <!-- sidebar -->
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!-- javascript --> 
+    <script src="js/owl.carousel.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
+
+</body>
 </html>
