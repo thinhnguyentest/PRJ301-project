@@ -64,6 +64,14 @@ public class AccountDAO {
         return user;
     }
     
+    public static boolean authenticateUser(String username, String password) {
+    User user = AccountDAO.searchUser(username);
+    if (user == null) {
+        return false;
+    }
+    return user.getPassword().equals(password);
+}
+    
     public static boolean registerUser(User u) {
         String QUERY = "INSERT INTO Users ([Username], [Password], [Email], [Phone], [Role], IsActive) " +
                         "VALUES (?,?,?,?,'User',1)";

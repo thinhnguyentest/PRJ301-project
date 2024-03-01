@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                     <!-- Hiển thị dữ liệu người dùng từ máy chủ -->
-                    <c:forEach var="user" items="${listusers}">
+                    <c:forEach var="user" items="${users}">
                         <tr>
                             <td>${user.id}</td>
                             <td>${user.username}</td>
@@ -43,7 +43,7 @@
                             <td>${user.phone}</td>
                             <td>${user.address}</td>
                             <td>${user.role}</td>
-                            <td>${user.isActive}</td>
+                            <td>${user.isActive?"Hoạt động":"Không hoạt động"}</td>
                             <td>
                                 <button onclick="editUser(1)">Sửa</button>
                                 <button onclick="deleteUser(1)">Xóa</button>
@@ -109,30 +109,6 @@
                 </form>
             </div>
         </section>
-        <script>
-            // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
-            function showUserForm() {
-                document.getElementById("userForm").style.display = "block";
-            }
-
-            function cancelUserForm() {
-                document.getElementById("userForm").style.display = "none";
-            }
-
-            function saveUser() {
-                // Xử lý lưu thông tin Người dùng
-                cancelUserForm();
-            }
-
-            function editUser(userId) {
-                // Xử lý sửa thông tin Người dùng
-                showUserForm();
-            }
-
-            function deleteUser(userId) {
-                // Xử lý xóa Người dùng
-                // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
-            }
-        </script>
+        <script src="account_assets/js/main.js"></script>
     </body>
 </html>

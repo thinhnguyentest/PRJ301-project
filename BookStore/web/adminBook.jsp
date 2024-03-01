@@ -3,7 +3,7 @@
     Created on : 29-02-2024, 10:40:08
     Author     : tuanngp
 --%>
-
+<%@ page isELIgnored ="false" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
@@ -38,7 +38,7 @@
                 </thead>
                 <tbody>
                     <!-- Hiển thị dữ liệu sách từ máy chủ -->
-                    <c:forEach var="book" items="${requestScope.listbooks}">
+                    <c:forEach var="book" items="${requestScope.books}">
                         <tr>
                             <td>${book.id}</td>
                             <td>${book.author.name}</td>
@@ -48,12 +48,18 @@
                             <td>${book.description}</td>
                             <td>${book.quantity}</td>
                             <td>${book.price}</td>
-                            
-                            <td><img src="book_image.jpg" alt="Book Image"></td>
+
+                            <td><img src="assets/images/book/${book.image}" alt="Book Image" style="width: 120px"></td>
                             <td>
-                                <c:set var="bookEdit" value="${book}"></c:set>
-                                <button onclick="editBook(1)">Sửa</button>
-                                <button onclick="deleteBook(1)">Xóa</button>
+                                <form action="UpdateBook" style="box-shadow: none">
+                                    <input type="text" name="id" value="${book.id}" hidden="">
+                                    <a href="#bookForm"><button onclick="editBook(${book.id})">Sửa</button></a>
+                                </form>
+                                <form action="UpdateBook" style="box-shadow: none">
+                                    <input type="text" name="id" value="${book.id}" hidden="">
+                                    <button onclick="deleteBook(${book.id})">Xóa</button>
+                                </form>
+                                
                             </td>
                         </tr>
                     </c:forEach>
@@ -78,11 +84,11 @@
             <div id="bookForm" style="display: none;">
                 <h3>Biểu mẫu Sách</h3>
                 <form action="book" method="post">
-                    <!-- Thêm các trường và nút cần thiết -->
+                    <!--Author Information-->
                     <fieldset>
                         <legend>Author Information</legend>
                         <label for="authorName">Name:</label>
-                        <input type="text" id="authorName" name="authorName" required><br>
+                        <input type="text" id="authorName" name="authorName" value="" required><br>
 
                         <label for="birthday">Birth Date:</label>
                         <input type="date" id="birthday" name="birthday" required><br>
@@ -126,4 +132,6 @@
             </div>
         </section>
     </body>
+    <script src="account_assets/js/main.js">
+    </script>
 </html>

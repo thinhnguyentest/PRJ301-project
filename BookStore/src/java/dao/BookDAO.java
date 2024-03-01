@@ -1,7 +1,6 @@
 package dao;
 
 import context.DBcontext;
-import entity.Account.User;
 import entity.Product.Author;
 import entity.Product.Book;
 import entity.Product.Publisher;
