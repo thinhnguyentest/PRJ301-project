@@ -46,7 +46,7 @@
         </script>
     </head>
     <body>
-
+        
         <div class="" > 
             <div class="row">
                 <div class="col">
@@ -66,7 +66,7 @@
                         <c:forEach var="cartItem" items="${sessionScope.cart}">
                             <div class="row border-top border-bottom main align-items-center">
                                 <div class="col-2">
-                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/images/book/${cartItem.book.image}" width="100">
+                                    <img class="img-fluid" src="${cartItem.book.image}" width="100">
                                 </div>
                                 <div class="col-3">
                                     <div class="row text-muted">${cartItem.book.title}</div>
