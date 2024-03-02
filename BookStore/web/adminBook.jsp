@@ -17,9 +17,7 @@
 
     <body>
         <section id="books">
-            <!-- Thêm một trường ẩn để lưu giá trị action -->
-            
-            <button onclick="showBookForm()">Thêm sách</button>
+            <a href="#bookForm"><button onclick="addBook()">Thêm sách</button></a>
             <h2>Danh sách sách</h2>
             <table>
                 <thead>
@@ -52,7 +50,6 @@
                             <td>
                                     <a href="#bookForm"><button onclick="editBook(${book.id})">Sửa</button></a>
                                     <button onclick="deleteBook(${book.id})">Xóa</button>
-                                
                                     <input type="text" id="authorId_${book.id}" value="${book.author.id}" hidden>
                                     <input type="text" id="authorName_${book.id}" value="${book.author.name}" hidden>
                                     <input type="text" id="authorBirthday_${book.id}" value="${book.author.birthday}" hidden>
@@ -90,14 +87,14 @@
             <!-- Biểu mẫu thêm/sửa sách -->
             <div id="bookForm" style="display: none;">
                 <h3>Biểu mẫu Sách</h3>
-                <input type="text" id="action" name="action">
-                <form action="book" >
+                <form action="bookAdmin">
+                    <input type="text" name="action" id="action" >
                     <!--Author Information-->
                     <fieldset>
                         <legend>Author Information</legend>
                         
-                        <label for="authorName">Id: </label>
-                        <input type="text" id="authorId" name="authorId" required><br>
+                        <label for="authorId">Id: </label>
+                        <input type="text" id="authorId" name="authorId" readonly=""><br>
                         
                         <label for="authorName">Name:</label>
                         <input type="text" id="authorName" name="authorName" required><br>
@@ -114,7 +111,7 @@
                         <legend>Publisher Information</legend>
                         
                         <label for="publisherName">Id:</label>
-                        <input type="text" id="publisherId" name="publisherId" required><br>
+                        <input type="text" id="publisherId" name="publisherId" readonly=""><br>
                         
                         <label for="publisherName">Name:</label>
                         <input type="text" id="publisherName" name="publisherName" required><br>
@@ -127,7 +124,7 @@
                     <fieldset>
                         <legend>Book Information</legend>
                         <label for="id">Id: </label>
-                        <input type="text" id="bookId" name="bookId" required disabled=""><br>
+                        <input type="text" id="bookId" name="bookId" required readonly=""><br>
                         
                         <label for="bookTitle">Title: </label>
                         <input type="text" id="bookTitle" name="bookTitle" required><br>
@@ -142,7 +139,7 @@
                         <input type="text" id="quantity" name="quantity" required><br>
 
                         <label for="price">Price:</label>
-                        <input type="text" id="price" name="price" step="0.01" required><br>
+                        <input type="text" id="price" name="price" step="5000" required><br>
 
                         <label for="image">Select Image :</label>
                         <input type="file" name="image" id="image" required>

@@ -26,8 +26,14 @@ public class LoginServlet extends HttpServlet {
         validateInput(username, password, request);
 
         if (AccountDAO.authenticateUser(username, password)) {
-            session.setAttribute("login", AccountDAO.searchUser(username));
-            request.getRequestDispatcher("home").forward(request, response);
+            User u = AccountDAO.searchUser(username);
+            session.setAttribute("accountActive", u);
+            if (u.getRole().equals("admin")) {
+                request.getRequestDispatcher("admin").forward(request, response);
+            } else {
+                request.getRequestDispatcher("home").forward(request, response);
+            }
+            
         } else {
             setErrorStatus("Thông tin đăng nhập không chính xác.", request);
             request.getRequestDispatcher("login.jsp").forward(request, response);

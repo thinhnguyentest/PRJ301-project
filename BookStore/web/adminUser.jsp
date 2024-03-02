@@ -45,11 +45,11 @@
                             <td>${user.role}</td>
                             <td>${user.isActive?"Hoạt động":"Không hoạt động"}</td>
                             <td>
-                                <a href="#userForm"> <button onclick="editUser(${user.id})"> Sửa</button></a>
+                                <a href="#userForm"><button onclick="editBook(${user.id})">Sửa</button></a>
                                 <button onclick="deleteUser(${user.id})">Xóa</button>
                             </td>
-                                
-                            
+
+
                         </tr>
                     </c:forEach>
                     <!-- Thêm các dòng khác tương tự cho các người dùng khác -->

@@ -9,7 +9,7 @@
     <head>
         <!-- site metas -->
         <title>All books</title>
-        <!-------------------------------------------------------------------------------->
+         <!-------------------------------------------------------------------------------->
         <!-- bootstrap css -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <!-- style css -->
