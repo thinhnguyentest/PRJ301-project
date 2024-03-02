@@ -1,4 +1,40 @@
 // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
+function showUserForm() {
+    document.getElementById("userForm").style.display = "block";
+}
+
+function cancelUserForm() {
+    document.getElementById("userForm").style.display = "none";
+}
+
+function editUser(userId) {
+    var row = document.querySelector(`[data-user-id="${userId}"]`);
+    document.getElementById("action").value = "update";
+    
+    var id = row.dataset.userId;
+    var username = row.dataset.userUsername;
+    var password = row.dataset.userPassword;
+    var name = row.dataset.userName;
+    var email = row.dataset.userEmail;
+    var phone = row.dataset.userPhone;
+    var address = row.dataset.userAddress;
+    var role = row.dataset.userRole;
+    var isActive = row.dataset.userIsActive;    
+
+    document.getElementById("userId").value = id ;
+    document.getElementById("username").value = username;
+    document.getElementById("password").value = password;
+    document.getElementById("name").value = name;
+    document.getElementById("email").value = email;
+    document.getElementById("phone").value = phone;
+    document.getElementById("address").value = address;
+    document.getElementById("role").value = role;
+    document.getElementById("isActive").value = isActive;
+    
+    console.log(username, password, name, email, phone, address, role, isActive);
+    showUserForm();
+}
+
 function addBook() {
     resetBookForm();
     document.getElementById("action").value = "add";
@@ -32,15 +68,6 @@ function editBook(bookId) {
     document.getElementById("bookForm").style.display = "block";
 }
 
-// Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
-function showUserForm() {
-    document.getElementById("userForm").style.display = "block";
-}
-
-function cancelUserForm() {
-    document.getElementById("userForm").style.display = "none";
-}
-
 function resetBookForm() {
     document.getElementById("authorId").value = "";
     document.getElementById("authorName").value = "";
@@ -60,37 +87,3 @@ function resetBookForm() {
     document.getElementById("image").innerHTML = "";
 }
 
-function editUser(userId) {
-    var row = document.querySelector(`[data-user-id="${userId}"]`);
-    document.getElementById("action").value = "update";
-    
-    var id = row.dataset.UserId;
-    var username = row.dataset.userUsername;
-    var password = row.dataset.userPassword;
-    var name = row.dataset.userName;
-    var email = row.dataset.userEmail;
-    var phone = row.dataset.userPhone;
-    var address = row.dataset.userAddress;
-    var role = row.dataset.userRole;
-    var isActive = row.dataset.userIsActive;    
-    // ... repeat for other data attributes
-
-    document.getElementById("userId").value = id ;
-    document.getElementById("username").value = username;
-    document.getElementById("password").value = password;
-    document.getElementById("name").value = name;
-    document.getElementById("email").value = email;
-    document.getElementById("phone").value = phone;
-    document.getElementById("address").value = address;
-    document.getElementById("role").value = role;
-    document.getElementById("isActive").value = isActive;
-    
-    console.log(username, password, name, email, phone, address, role, isActive);
-    showUserForm();
-}
-
-
-function deleteUser(userId) {
-    // Xử lý xóa Người dùng
-    // Gọi API hoặc xử lý dữ liệu theo nhu cầu của bạn
-}

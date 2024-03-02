@@ -8,8 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="account_assets/css/admin.css"/>
+        <title>User manager</title>
     </head>
     <body>
         <section id="users">
@@ -32,7 +31,15 @@
                 <tbody>
                     <!-- Hiển thị dữ liệu người dùng từ máy chủ -->
                     <c:forEach var="user" items="${users}">
-                        <tr data-user-id="${user.id}" data-user-username="${user.username}" data-user-password="${user.password}" data-user-name="${user.name}" data-user-email="${user.email}" data-user-phone="${user.phone}" data-user-address="${user.address}" data-user-role="${user.role}" data-user-is-active="${user.isActive}">
+                        <tr data-user-id="${user.id}" 
+                            data-user-username="${user.username}" 
+                            data-user-password="${user.password}" 
+                            data-user-name="${user.name}" 
+                            data-user-email="${user.email}" 
+                            data-user-phone="${user.phone}" 
+                            data-user-address="${user.address}" 
+                            data-user-role="${user.role}" 
+                            data-user-is-active="${user.isActive}">
                             <td>${user.id}</td>
                             <td>${user.username}</td>
                             <td>${user.password}</td>
@@ -43,8 +50,10 @@
                             <td>${user.role}</td>
                             <td>${user.isActive?"Hoạt động":"Không hoạt động"}</td>
                             <td>
-                                <a href="#userForm"><button onclick="editBook(${user.id})">Sửa</button></a>
-                                <form action="userAdmin">
+                                <a href="#userForm" style="padding: 20px;">
+                                    <button onclick="editUser(${user.id})">Sửa</button>
+                                </a>
+                                <form action="userAdmin" style="box-shadow: none">
                                     <input type="text" name="action" value="delete" hidden>
                                     <input type="text" name="userId" value="${user.id}" hidden><br>
                                     <button onclick="parentNode.submit()">Xóa</button>
@@ -70,51 +79,53 @@
                     </c:forEach>
                 </div>
             </c:if>
-            <c:forEach var="user" items="${requestScope.userList}">
+
+            <!-- Biểu mẫu thêm/sửa người dùng -->
+            <div id="userForm" style="display: none">
                 <form action="userAdmin">
-                    <input type="text" name="action" id="action" >
+                    <input type="text" name="action" value="update" hidden>
                     <fieldset>
                         <legend>User Information</legend>
-                        <label for="id">Id: </label>
-                        <input type="text" id="userId" name="userId" required readonly=""><br>
-                        
-                        <label for="username">Username: </label>
-                        <input type="text" id="userTitle" name="userTitle" required><br>
-                        
-                        <label for="genre">Password: </label>
-                        <input type="text" id="genre" name="genre" required><br>
-                        <label for="genre">Name:  </label>
-                        <input type="text" id="genre" name="genre" required><br>
-                        <label for="genre">Email: </label>
-                        <input type="text" id="genre" name="genre" required><br>
-                        <label for="genre">Phone: </label>
-                        <input type="text" id="genre" name="genre" required><br>
-                        <label for="genre">Address: </label>
-                        <input type="text" id="genre" name="genre" required><br>
-                        <label for="genre">Role: </label>
-                        <input type="text" id="genre" name="genre" required><br>
-                        <label for="genre">Is Active: </label>
-                        <input type="text" id="genre" name="genre" required><br>
+                        <label for="userId">ID:</label>
+                        <input type="text" id="userId" name="userId" readonly><br>
 
+                        <label for="username">Tên đăng nhập:</label>
+                        <input type="text" id="username" name="username" readonly><br>
+
+                        <label for="password">Mật khẩu:</label>
+                        <input type="password" id="password" name="password" readonly><br>
+
+                        <label for="name">Tên:</label>
+                        <input type="text" id="name" name="name" readonly><br>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" readonly><br>
+
+                        <label for="phone">Điện thoại:</label>
+                        <input type="tel" id="phone" name="phone" readonly><br>
+
+                        <label for="address">Địa chỉ:</label>
+                        <input type="text" id="address" name="address" readonly><br>
+
+                        <label for="role">Chức vụ:</label>
+                        <select id="role" name="role">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select><br>
+
+                        <label for="isActive">Trạng thái:</label>
+                        <select id="isActive" name="isActive">
+                            <option value="true">Hoạt động</option>
+                            <option value="false">Không hoạt động</option>
+                        </select>
                     </fieldset>
 
                     <button type="button" onclick="parentNode.submit()">Lưu</button>
-                    <button type="button" onclick="cancelBookForm()">Hủy</button>
-                    <input type="hidden" name="id" value="${user.id}">
-                    <input type="hidden" name="name" value="${user.username}">
-                    <input type="hidden" name="email" value="${user.password}">
-                    <input type="hidden" name="phone" value="${user.name}">
-                    <input type="hidden" name="address" value="${user.email}">
-                    <input type="hidden" name="role" value="${user.phone}">         
-                    <!-- Các trường dữ liệu bổ sung -->
-                    <input type="hidden" name="additionalField1" value="$${user.address}">
-                    <input type="hidden" name="additionalField2" value="${user.role}">
-                    <input type="hidden" name="isActive" value="${user.isActive ? 'Yes' : 'No'}">
-                    <a href="#" onclick="parentNode.submit();">Update</a>
+                    <button type="button" onclick="cancelUserForm()">Hủy</button>
                 </form>
-            </c:forEach>
-        </tbody>
-    </table>
-</body>
+            </div>
+        </section>
+    </body>
+    <script src="account_assets/js/main.js"></script>
 </html>
 

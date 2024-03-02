@@ -1,6 +1,8 @@
 
 package control;
 
+import dao.AccountDAO;
+import entity.Account.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,24 +15,31 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author PC
  */
-@WebServlet(name="UserServlet", urlPatterns={"/user"})
+@WebServlet(name="UserServlet", urlPatterns={"/userAdmin"})
 public class UserAdminServlet extends HttpServlet {
    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserServlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserServlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String msg = "";
+        try {
+            String action = request.getParameter("action");
+            User user = getUserFromRequest(request);
+            
+            switch (action) {
+                case "update":
+                    msg = AccountDAO.updateUser(user) ? "Cập nhật thông tin người dùng thành công!" : "Đã xảy ra lỗi, cập nhật thông tin thất bại!";
+                    break;
+                case "delete":
+                    msg = AccountDAO.deleteUser(user) ? "Xóa ID: "+ user.getId() + " thành công!" : "Xóa thất bại!";
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid action: " + action);
+            }
+        } catch (IllegalArgumentException e) {
+        } finally {
+            request.setAttribute("statusAdmin", msg);
+            request.getRequestDispatcher("admin#users").forward(request, response);
         }
     }
 
@@ -44,5 +53,22 @@ public class UserAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
+    }
+    
+    private User getUserFromRequest(HttpServletRequest request) {
+        try {
+            int id = Integer.parseInt(request.getParameter("userId"));
+            String user = request.getParameter("username");
+            String password = request.getParameter("password");
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            String role = request.getParameter("role");
+            boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
+            return new User(id, name, password, name, email, phone, address, role, isActive);
+        } catch (NumberFormatException e) {
+        }
+        return null;
     }
 }

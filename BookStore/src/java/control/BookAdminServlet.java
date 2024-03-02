@@ -18,8 +18,7 @@ public class BookAdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+
         String msg = "";
         try {
             String action = request.getParameter("action");
@@ -63,7 +62,6 @@ public class BookAdminServlet extends HttpServlet {
         } catch (IllegalArgumentException e) {
         } finally {
             request.setAttribute("statusAdmin", msg);
-//            out.print(msg);
             request.getRequestDispatcher("admin#books").forward(request, response);
         }
     }
