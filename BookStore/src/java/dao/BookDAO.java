@@ -104,20 +104,19 @@ public class BookDAO {
         return list;
     }
 
-    public static List<String> getImages(int id) {
-        List<String> list = new ArrayList<>();
+    public static String getImages(int id) {
         String QUERY = "SELECT * FROM ImageStoring WHERE BookId=?";
         try ( Connection conn = DBcontext.getConnection()) {
             try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
                 pst.setInt(1, id);
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
-                    list.add(rs.getString("FilePath"));
+                    return (rs.getString("FilePath"));
                 }
             }
         } catch (Exception e) {
         }
-        return list;
+        return "";
     }
 
     public static Author getAuthor(int id) {

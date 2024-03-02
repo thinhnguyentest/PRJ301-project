@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            <h1>Quản lý admin</h1>
+            <h1><a href="admin">Quản lý admin</a></h1>
             <nav>
                 <ul>
                     <li><a href="#users">Người dùng</a></li>

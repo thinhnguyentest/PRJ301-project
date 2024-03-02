@@ -46,6 +46,8 @@
                             <td>${book.description}</td>
                             <td>${book.quantity}</td>
                             <td>${book.price}</td>
+                            <td><img src="assets/images/book/${book.image}" alt="Book Image" style="width: 120px"></td>
+
                             <td>
                                 <a href="#bookForm" style="padding: 20px;"><button onclick="editBook(${book.id})">Sửa</button></a>
                                     <form action="bookAdmin" style="box-shadow: none">
@@ -91,7 +93,7 @@
             <!-- Biểu mẫu thêm/sửa sách -->
             <div id="bookForm" style="display: none;">
                 <h3>Biểu mẫu Sách</h3>
-                <form action="bookAdmin">
+                <form action="bookAdmin" enctype="multipart/form-data">
                     <input type="text" name="action" id="action" >
                     <!--Author Information-->
                     <fieldset>

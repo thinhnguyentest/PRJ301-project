@@ -38,13 +38,12 @@ public class BookAdminServlet extends HttpServlet {
 //            
 //            out.println(author.addAuthor());
 //            out.println(publisher.addPublisher());
-//            out.println(book.addBook());
+//            out.println(book);
             String action = request.getParameter("action");
 
             switch (action) {
                 case "add":
-                    msg = addImage(request) ? "Thêm sách thành công" : "Đã xảy ra lỗi, thêm sách thất bại!";
-                    addImage(request);
+                    msg = add(book, author, publisher) && addImage(request, book) ? "Thêm sách thành công" : "Đã xảy ra lỗi, thêm sách thất bại!";
                     break;
                 case "update":
                     msg = update(book, author, publisher) ? "Cập nhật thông tin sách thành công!" : "Đã xảy ra lỗi, cập nhật thông tin sách thất bại!";
@@ -114,26 +113,30 @@ public class BookAdminServlet extends HttpServlet {
         return author.update() && publisher.update() && b.update();
     }
 
-    private boolean addImage(HttpServletRequest request) throws ServletException, IOException {
+    private boolean addImage(HttpServletRequest request, Book book) throws ServletException, IOException {
+        System.out.println("In do post method of Add Image servlet.");
         Part file = request.getPart("image");
 
-        String imageFileName = file.getSubmittedFileName();
+        String imageFileName = file.getSubmittedFileName();  // get selected image file name
         System.out.println("Selected Image File Name : " + imageFileName);
 
         String uploadPath = "D:/PRJ301-project/BookStore/web/assets/images/book/" + imageFileName;
         System.out.println("Upload Path : " + uploadPath);
 
         // Uploading our selected image into the images folder
-        try ( FileOutputStream fos = new FileOutputStream(uploadPath)) {
+        try {
+            FileOutputStream fos = new FileOutputStream(uploadPath);
             InputStream is = file.getInputStream();
 
             byte[] data = new byte[is.available()];
             is.read(data);
             fos.write(data);
-        } catch (IOException e) {
+            fos.close();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return BookDAO.addImage(imageFileName);
+        return BookDAO.addImage(book.getImage());
     }
     
     public static void main(String[] args) {
