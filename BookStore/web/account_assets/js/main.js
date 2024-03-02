@@ -25,7 +25,7 @@ function editBook(bookId) {
     document.getElementById("description").innerHTML = document.getElementById("description_"+ bookId).value;
     document.getElementById("quantity").value = document.getElementById("quantity_"+ bookId).value;
     document.getElementById("price").value = document.getElementById("price_"+ bookId).value;
-    document.getElementById("image").innerHTML = document.getElementById("image_"+ bookId).value;
+    document.getElementById("image").value = document.getElementById("image_"+ bookId).value;
 
     // Display the bookForm
     document.getElementById("action").value = "update";

@@ -46,13 +46,15 @@
                             <td>${book.description}</td>
                             <td>${book.quantity}</td>
                             <td>${book.price}</td>
-                            <td><img src="assets/images/book/${book.image}" alt="Book Image" style="width: 120px"></td>
+                            <td><img src="${book.image}" alt="Book Image" style="width: 120px"></td>
 
                             <td>
                                 <a href="#bookForm" style="padding: 20px;"><button onclick="editBook(${book.id})">Sửa</button></a>
                                     <form action="bookAdmin" style="box-shadow: none">
                                         <input type="text" name="action" value="delete" hidden>
                                         <input type="text" name="bookId" value="${book.id}" hidden><br>
+                                        <input type="text" name="authorId" value="${book.author.id}" hidden><br>
+                                        <input type="text" name="publisherId" value="${book.publisher.publisherId}" hidden><br>
                                         <button onclick="parentNode.submit()">Xóa</button>
                                     </form>
                                     
@@ -148,7 +150,7 @@
                         <input type="text" id="price" name="price" step="5000" required><br>
 
                         <label for="image">Select Image :</label>
-                        <input type="file" name="image" id="image" required>
+                        <input type="text" name="image" id="image" required>
                     </fieldset>
 
                     <button type="button" onclick="parentNode.submit()">Lưu</button>

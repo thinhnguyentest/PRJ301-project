@@ -166,14 +166,14 @@
                         <div class="list_categories">
                             <h2>ALL CATEGORIES</h2>
                             <ul>
-                                <a href="allBook.jsp"><li>All Book</li></a>
-                                <a href="allBook.jsp"><li>Best Saler</li></a>
-                                <a href="tv.html"><li>New Arrivals</li></a>
-                                <a href="allBook.jsp"><li>Decolonization</li></a>
-                                <a href="allBook.jsp"><li>Fiction</li></a>
-                                <a href="allBook.jsp"><li>Poetry</li></a>
-                                <a href="allBook.jsp"><li>Comic & Graphic Novel</li></a>
-                                <a href="allBook.jsp"><li>Language</li></a>
+                                <li><a href="allBook.jsp">All Book</a></li>
+                                <li><a href="allBook.jsp">Best Saler</a></li>
+                                <li><a href="allBook.jsp">New Arrivals</a></li>
+                                <li><a href="allBook.jsp">Decolonization</a></li>
+                                <li><a href="allBook.jsp">Fiction</a></li>
+                                <li><a href="allBook.jsp">Poetry</a></li>
+                                <li><a href="allBook.jsp">Comic & Graphic Novel</a></li>
+                                <li><a href="allBook.jsp">Language</a></li>
                             </ul>
                         </div>                            
                     </div>
@@ -195,11 +195,12 @@
                         <div class="Price_categories">
                             <h2>PRICE RANGE</h2>
                             <ul>
-                                <a href="#">
-                                    <li class="checkbox-container"><span>
+                                
+                                    <li class="checkbox-container">
+                                            <a href="#"><span>
                                             <input type="checkbox" id="author9Checkbox" name="myCheckbox">
                                             <label for="author9Checkbox">author 1</label>
-                                        </span></li></a>
+                                        </span></a></li>
                             </ul>
                         </div>                            
                     </div>
@@ -237,7 +238,7 @@
                             <div class="book-container">
                                 <h2>${book.title}</h2>
                                 <div class="image-container">
-                                    <img class="book-image" src="${pageContext.request.contextPath}/assets/book-img/${book.image}" alt="${book.title} Image" width="200">
+                                    <img class="book-image" src="${book.image}" alt="${book.title} Image" width="200">
                                     <div class="overlay">
                                         <div class="overlay-content">
                                             <a href="cart?action=buy&id=${book.id}" class="buy-button">Buy</a>

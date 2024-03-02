@@ -17,6 +17,12 @@ import java.util.List;
  * @author tuanngp
  */
 public class BookDAO {
+        public static void main(String[] args) {
+        Book b = new Book();
+        b.setTitle("Hầm Trữ Đông");
+        b.setGenre("Văn học , Truyện Trinh Thám - Kiếm Hiệp");
+        b.setDescription("");
+    }
 
     public static boolean addBook(Book b) {
         String QUERY = "INSERT INTO Books (Title, Genre, Description, Quantity, Price, AuthorId, PublisherId) "
@@ -278,6 +284,18 @@ public class BookDAO {
         }
         return false;
     }
+    public static boolean updateImage(Book b) {
+        String QUERY = "UPDATE ImageStoring SET FilePath=? WHERE BookId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setString(1, b.getImage());
+                pst.setInt(2, b.getId());
+                return pst.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
 
     public static boolean updateAuthor(Author author) {
         String QUERY = "UPDATE Authors SET [Name]=?, Birthday=?, Bio=? WHERE AuthorId=?";
@@ -308,9 +326,31 @@ public class BookDAO {
         return false;
     }
 //    -----------------------------------------------------------------------------------------------------
-        
+    public static boolean deleteAuthor(Author author) {        
+        String SQL = "DELETE FROM Authors WHERE AuthorId=?";
+        try(Connection conn = DBcontext.getConnection()) {
+            try(PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+                preparedStatement.setInt(1, author.getId());
+                return preparedStatement.executeUpdate()>0;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    public static boolean deletePublisher(Publisher publisher) {        
+        String SQL = "DELETE FROM Publishers WHERE PublisherId=?";
+        try(Connection conn = DBcontext.getConnection()) {
+            try(PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+                preparedStatement.setInt(1, publisher.getPublisherId());
+                return preparedStatement.executeUpdate()>0;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
     public static boolean deleteBook(Book b) {
         deleteImage(b);
+        
         String SQL = "DELETE FROM Books WHERE BookId=?";
         try(Connection conn = DBcontext.getConnection()) {
             try(PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
@@ -414,16 +454,6 @@ public class BookDAO {
             e.printStackTrace();
         }
         return list;
-    }
-
-    public static void main(String[] args) {
-//        listBook().forEach(p -> System.out.println(p));
-//        searchBook("Genre", "mys").forEach(p -> System.out.println(p));
-//        Book b = new Book();
-//        b.setId(2);
-//        System.out.println(getPublisherIdLastest());
-//System.out.println(addImage("moitinhdau.png"));
-//        System.out.println(addPublisher(new Publisher("tuan", Date.valueOf("2023-01-01"))));
     }
 
 }

@@ -12,6 +12,10 @@ public class Publisher implements Serializable{
     public Publisher() {
     }
 
+    public Publisher(int PublisherId) {
+        this.PublisherId = PublisherId;
+    }
+
     public Publisher(String PublisherName, Date DateEstablished) {
         this.PublisherName = PublisherName;
         this.DateEstablished = DateEstablished;
@@ -58,5 +62,9 @@ public class Publisher implements Serializable{
     
     public boolean update() {
         return BookDAO.updatePublisher(this);
+    }
+    
+    public boolean delete() {
+        return BookDAO.deletePublisher(this);
     }
 }

@@ -1,6 +1,5 @@
 package control;
 
-import dao.BookDAO;
 import entity.Product.Author;
 import entity.Product.Book;
 import entity.Product.Publisher;
@@ -9,10 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 
@@ -26,32 +22,40 @@ public class BookAdminServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String msg = "";
         try {
-            // Get Author Information
-            Author author = getAuthorFromRequest(request);
-
-            // Get Publisher Information
-            Publisher publisher = getPublisherFromRequest(request);
-
-            // Get Book Information
-            Book book = getBookFromRequest(request, author, publisher);
-
-//            
-//            out.println(author.addAuthor());
-//            out.println(publisher.addPublisher());
-//            out.println(book);
             String action = request.getParameter("action");
+            Author author = null;
+            Publisher publisher = null;
+            Book book = null;
+            if (!action.equals("delete")) {
+                // Get Author Information
+                author = getAuthorFromRequest(request);
+
+                // Get Publisher Information
+                publisher = getPublisherFromRequest(request);
+
+                // Get Book Information
+                book = getBookFromRequest(request, author, publisher);
+            }
 
             switch (action) {
                 case "add":
-                    msg = add(book, author, publisher) && addImage(request, book) ? "Thêm sách thành công" : "Đã xảy ra lỗi, thêm sách thất bại!";
+                    msg = add(book, author, publisher) ? "Thêm sách thành công" : "Đã xảy ra lỗi, thêm sách thất bại!";
                     break;
                 case "update":
                     msg = update(book, author, publisher) ? "Cập nhật thông tin sách thành công!" : "Đã xảy ra lỗi, cập nhật thông tin sách thất bại!";
                     break;
                 case "delete":
-                    Book b = new Book();
-                    b.setId(Integer.parseInt(request.getParameter("bookId")));
-                    msg = BookDAO.deleteBook(b)?"Xóa thành công!":"Xóa thất bại!";
+                    int authorId = Integer.parseInt(request.getParameter("authorId"));
+                    int bookId = Integer.parseInt(request.getParameter("bookId"));
+                    int publisherId = Integer.parseInt(request.getParameter("publisherId"));
+
+                    Book deleteBook = new Book(bookId);
+                    Author deleteAuthor = new Author(authorId);
+                    Publisher deletePublisher = new Publisher(publisherId);
+
+                    boolean deleteSucess = deleteAuthor.delete() && deletePublisher.delete() && deleteBook.delete();
+
+                    msg = deleteSucess ? "Xóa thành công!" : "Xóa thất bại!";
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid action: " + action);
@@ -60,13 +64,13 @@ public class BookAdminServlet extends HttpServlet {
         } finally {
             request.setAttribute("statusAdmin", msg);
 //            out.print(msg);
-            request.getRequestDispatcher("admin").forward(request, response);
+            request.getRequestDispatcher("admin#books").forward(request, response);
         }
     }
 
     private Author getAuthorFromRequest(HttpServletRequest request) {
         try {
-            String idStr = request.getParameter("authorId").isEmpty()?"0":request.getParameter("authorId");
+            String idStr = request.getParameter("authorId").isEmpty() ? "0" : request.getParameter("authorId");
             int id = Integer.parseInt(idStr);
             String authorName = request.getParameter("authorName");
             String birthday = request.getParameter("birthday");
@@ -79,7 +83,7 @@ public class BookAdminServlet extends HttpServlet {
 
     private Publisher getPublisherFromRequest(HttpServletRequest request) {
         try {
-            String idStr = request.getParameter("publisherId").isEmpty()?"0":request.getParameter("publisherId");
+            String idStr = request.getParameter("publisherId").isEmpty() ? "0" : request.getParameter("publisherId");
             int id = Integer.parseInt(idStr);
             String publisherName = request.getParameter("publisherName");
             String establishedDate = request.getParameter("establishedDate");
@@ -91,7 +95,7 @@ public class BookAdminServlet extends HttpServlet {
 
     private Book getBookFromRequest(HttpServletRequest request, Author author, Publisher publisher) {
         try {
-            String idStr = request.getParameter("bookId").isEmpty()?"0":request.getParameter("bookId");
+            String idStr = request.getParameter("bookId").isEmpty() ? "0" : request.getParameter("bookId");
             int bookId = Integer.parseInt(idStr);
             String bookTitle = request.getParameter("bookTitle");
             String genre = request.getParameter("genre");
@@ -106,41 +110,15 @@ public class BookAdminServlet extends HttpServlet {
     }
 
     private boolean add(Book book, Author author, Publisher publisher) throws ServletException, IOException {
-        return author.addAuthor() && publisher.addPublisher() && book.addBook();
+        return author != null && author.addAuthor() && publisher != null && publisher.addPublisher() && book != null && book.addBook();
     }
 
     private boolean update(Book b, Author author, Publisher publisher) {
-        return author.update() && publisher.update() && b.update();
+        return author != null && author.update() && publisher != null && publisher.update() && b != null && b.update();
     }
 
-    private boolean addImage(HttpServletRequest request, Book book) throws ServletException, IOException {
-        System.out.println("In do post method of Add Image servlet.");
-        Part file = request.getPart("image");
-
-        String imageFileName = file.getSubmittedFileName();  // get selected image file name
-        System.out.println("Selected Image File Name : " + imageFileName);
-
-        String uploadPath = "D:/PRJ301-project/BookStore/web/assets/images/book/" + imageFileName;
-        System.out.println("Upload Path : " + uploadPath);
-
-        // Uploading our selected image into the images folder
-        try {
-            FileOutputStream fos = new FileOutputStream(uploadPath);
-            InputStream is = file.getInputStream();
-
-            byte[] data = new byte[is.available()];
-            is.read(data);
-            fos.write(data);
-            fos.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return BookDAO.addImage(book.getImage());
-    }
-    
     public static void main(String[] args) {
         System.out.println(System.getProperty("user.dir"));
     }
-    
+
 }

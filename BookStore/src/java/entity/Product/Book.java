@@ -18,6 +18,10 @@ public class Book implements Serializable{
     public Book() {
     }
 
+    public Book(int id) {
+        this.id = id;
+    }
+
     public Book(String title, String genre, String description, int quantity, float price, Author author, Publisher publisher) {
         this.title = title;
         this.genre = genre;
@@ -129,15 +133,15 @@ public class Book implements Serializable{
         return "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + author + publisher + ", images=" + image + '}';
     }
     
-    public boolean addImage() {
-        return BookDAO.addImage(this.getImage());
-    }
-
     public boolean addBook() {
-        return BookDAO.addBook(this);
+        return BookDAO.addBook(this) && BookDAO.addImage(this.getImage());
     }
 
     public boolean update() {
-        return BookDAO.updateBook(this);
+        return BookDAO.updateBook(this) && BookDAO.updateImage(this);
+    }
+    
+    public boolean delete() {
+        return BookDAO.deleteBook(this);
     }
 }
