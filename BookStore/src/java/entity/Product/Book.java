@@ -130,7 +130,7 @@ public class Book implements Serializable{
     }
     
     public boolean addImage() {
-        return BookDAO.addImage(this);
+        return BookDAO.addImage(this.getImage());
     }
 
     public boolean addBook() {

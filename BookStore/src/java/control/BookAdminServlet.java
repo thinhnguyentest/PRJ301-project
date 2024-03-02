@@ -1,5 +1,6 @@
 package control;
 
+import dao.BookDAO;
 import entity.Product.Author;
 import entity.Product.Book;
 import entity.Product.Publisher;
@@ -13,11 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.sql.Date;
-import java.util.Enumeration;
-import java.util.Properties;
-import javafx.scene.shape.Path;
 
 @WebServlet(name = "BookAdminServlet", urlPatterns = {"/bookAdmin"})
 public class BookAdminServlet extends HttpServlet {
@@ -38,18 +35,24 @@ public class BookAdminServlet extends HttpServlet {
             // Get Book Information
             Book book = getBookFromRequest(request, author, publisher);
 
+//            
+//            out.println(author.addAuthor());
+//            out.println(publisher.addPublisher());
+//            out.println(book.addBook());
             String action = request.getParameter("action");
 
             switch (action) {
                 case "add":
-                    msg = add(book, author, publisher) ? "Thêm sách thành công" : "Đã xảy ra lỗi, thêm sách thất bại!";
-//                    addImage(request, book);
+                    msg = addImage(request) ? "Thêm sách thành công" : "Đã xảy ra lỗi, thêm sách thất bại!";
+                    addImage(request);
                     break;
                 case "update":
                     msg = update(book, author, publisher) ? "Cập nhật thông tin sách thành công!" : "Đã xảy ra lỗi, cập nhật thông tin sách thất bại!";
                     break;
                 case "delete":
-
+                    Book b = new Book();
+                    b.setId(Integer.parseInt(request.getParameter("bookId")));
+                    msg = BookDAO.deleteBook(b)?"Xóa thành công!":"Xóa thất bại!";
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid action: " + action);
@@ -60,12 +63,12 @@ public class BookAdminServlet extends HttpServlet {
 //            out.print(msg);
             request.getRequestDispatcher("admin").forward(request, response);
         }
-
     }
 
     private Author getAuthorFromRequest(HttpServletRequest request) {
         try {
-            int id = Integer.parseInt(request.getParameter("authorId"));
+            String idStr = request.getParameter("authorId").isEmpty()?"0":request.getParameter("authorId");
+            int id = Integer.parseInt(idStr);
             String authorName = request.getParameter("authorName");
             String birthday = request.getParameter("birthday");
             String bio = request.getParameter("bio");
@@ -77,7 +80,8 @@ public class BookAdminServlet extends HttpServlet {
 
     private Publisher getPublisherFromRequest(HttpServletRequest request) {
         try {
-            int id = Integer.parseInt(request.getParameter("publisherId"));
+            String idStr = request.getParameter("publisherId").isEmpty()?"0":request.getParameter("publisherId");
+            int id = Integer.parseInt(idStr);
             String publisherName = request.getParameter("publisherName");
             String establishedDate = request.getParameter("establishedDate");
             return new Publisher(id, publisherName, establishedDate.isEmpty() ? Date.valueOf("1900-01-01") : Date.valueOf(establishedDate));
@@ -88,7 +92,8 @@ public class BookAdminServlet extends HttpServlet {
 
     private Book getBookFromRequest(HttpServletRequest request, Author author, Publisher publisher) {
         try {
-            int bookId = Integer.parseInt(request.getParameter("bookId"));
+            String idStr = request.getParameter("bookId").isEmpty()?"0":request.getParameter("bookId");
+            int bookId = Integer.parseInt(idStr);
             String bookTitle = request.getParameter("bookTitle");
             String genre = request.getParameter("genre");
             String description = request.getParameter("description");
@@ -109,13 +114,13 @@ public class BookAdminServlet extends HttpServlet {
         return author.update() && publisher.update() && b.update();
     }
 
-    private boolean addImage(HttpServletRequest request, Book book) throws ServletException, IOException {
+    private boolean addImage(HttpServletRequest request) throws ServletException, IOException {
         Part file = request.getPart("image");
-        String projectPath = System.getProperty("user.dir");
+
         String imageFileName = file.getSubmittedFileName();
         System.out.println("Selected Image File Name : " + imageFileName);
 
-        String uploadPath = projectPath + "/web/assets/images/book/" + imageFileName;
+        String uploadPath = "D:/PRJ301-project/BookStore/web/assets/images/book/" + imageFileName;
         System.out.println("Upload Path : " + uploadPath);
 
         // Uploading our selected image into the images folder
@@ -128,6 +133,11 @@ public class BookAdminServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return book.addImage();
+        return BookDAO.addImage(imageFileName);
     }
+    
+    public static void main(String[] args) {
+        System.out.println(System.getProperty("user.dir"));
+    }
+    
 }

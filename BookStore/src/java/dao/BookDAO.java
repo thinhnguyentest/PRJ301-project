@@ -5,6 +5,7 @@ import entity.Product.Author;
 import entity.Product.Book;
 import entity.Product.Publisher;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,9 +28,9 @@ public class BookDAO {
                 pst.setString(3, b.getDescription());
                 pst.setInt(4, b.getQuantity());
                 pst.setFloat(5, b.getPrice());
-                pst.setInt(6, b.getAuthor().getId());
-                pst.setInt(7, b.getPublisher().getPublisherId());
-                return pst.execute();
+                pst.setInt(6, getAuthorIdLastest());
+                pst.setInt(7, getPublisherIdLastest());
+                return pst.executeUpdate()>0;
             }
         } catch (Exception e) {
         }
@@ -44,7 +45,7 @@ public class BookDAO {
                 pst.setString(1, author.getName());
                 pst.setDate(2, author.getBirthday());
                 pst.setString(3, author.getBio());
-                return pst.execute();
+                return pst.executeUpdate()>0;
             }
         } catch (Exception e) {
         }
@@ -58,21 +59,21 @@ public class BookDAO {
             try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
                 pst.setString(1, p.getPublisherName());
                 pst.setDate(2, p.getDateEstablished());
-                return pst.execute();
+                return pst.executeUpdate()>0;
             }
         } catch (Exception e) {
         }
         return false;
     }
     
-    public static boolean addImage(Book b) {
+    public static boolean addImage(String image) {
         String QUERY = "INSERT INTO ImageStoring (BookId, FilePath) "
                 + "VALUES (?,?)";
         try ( Connection conn = DBcontext.getConnection()) {
             try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
-                pst.setInt(1, b.getId());
-                pst.setString(2, b.getImage());
-                return pst.execute();
+                pst.setInt(1, getBookIdLastest());
+                pst.setString(2, image);
+                return pst.executeUpdate()>0;
             }
         } catch (Exception e) {
         }
@@ -138,6 +139,55 @@ public class BookDAO {
         }
         return author;
     }
+    
+    public static int getAuthorIdLastest() {
+        String QUERY = "SELECT TOP 1 AuthorId\n" +
+                        "FROM Authors\n" +
+                        "ORDER BY AuthorId DESC;";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+    
+    public static int getPublisherIdLastest() {
+        String QUERY = "SELECT TOP 1 PublisherId\n" +
+                        "FROM Publishers\n" +
+                        "ORDER BY PublisherId DESC;";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+    
+    public static int getBookIdLastest() {
+        String QUERY = "SELECT TOP 1 BookId\n" +
+                        "FROM Books\n" +
+                        "ORDER BY BookId DESC;";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+    
 
     public static Publisher getPublisher(int id) {
         String QUERY = "SELECT * FROM Authors WHERE AuthorId=?";
@@ -258,7 +308,33 @@ public class BookDAO {
         }
         return false;
     }
-
+//    -----------------------------------------------------------------------------------------------------
+        
+    public static boolean deleteBook(Book b) {
+        deleteImage(b);
+        String SQL = "DELETE FROM Books WHERE BookId=?";
+        try(Connection conn = DBcontext.getConnection()) {
+            try(PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+                preparedStatement.setInt(1, b.getId());
+                return preparedStatement.executeUpdate()>0;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    
+        public static boolean deleteImage(Book b) {
+        String SQL = "DELETE FROM ImageStoring WHERE BookId=?";
+        try(Connection conn = DBcontext.getConnection()) {
+            try(PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+                preparedStatement.setInt(1, b.getId());
+                return preparedStatement.executeUpdate()>0;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    
 //    PAGING-----------------------------------------------------------------------------------------------
     public static int getNumberPage() {
         int count = 0;
@@ -342,10 +418,13 @@ public class BookDAO {
     }
 
     public static void main(String[] args) {
-        listBook().forEach(p -> System.out.println(p));
+//        listBook().forEach(p -> System.out.println(p));
 //        searchBook("Genre", "mys").forEach(p -> System.out.println(p));
-
-//        System.out.println(getAuthor(1));
+//        Book b = new Book();
+//        b.setId(2);
+//        System.out.println(getPublisherIdLastest());
+//System.out.println(addImage("moitinhdau.png"));
+//        System.out.println(addPublisher(new Publisher("tuan", Date.valueOf("2023-01-01"))));
     }
 
 }

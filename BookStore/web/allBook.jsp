@@ -237,7 +237,7 @@
                             <div class="book-container">
                                 <h2>${book.title}</h2>
                                 <div class="image-container">
-                                    <img class="book-image" src="${pageContext.request.contextPath}/assets/book-img/${book.images}" alt="${book.title} Image" width="200">
+                                    <img class="book-image" src="${pageContext.request.contextPath}/assets/book-img/${book.image}" alt="${book.title} Image" width="200">
                                     <div class="overlay">
                                         <div class="overlay-content">
                                             <a href="cart?action=buy&id=${book.id}" class="buy-button">Buy</a>

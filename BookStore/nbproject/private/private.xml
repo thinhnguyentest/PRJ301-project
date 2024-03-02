@@ -5,7 +5,7 @@
         <group>
             <file>file:/D:/PRJ301-project/BookStore/src/java/control/BookAdminServlet.java</file>
             <file>file:/D:/PRJ301-project/BookStore/src/java/dao/BookDAO.java</file>
-            <file>file:/D:/PRJ301-project/BookStore/web/admin.jsp</file>
+            <file>file:/D:/PRJ301-project/BookStore/web/adminUser.jsp</file>
             <file>file:/D:/PRJ301-project/BookStore/web/adminBook.jsp</file>
         </group>
     </open-files>

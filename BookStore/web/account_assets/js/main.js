@@ -32,11 +32,6 @@ function editBook(bookId) {
     document.getElementById("bookForm").style.display = "block";
 }
 
-function deleteBook() {
-    // Xử lý xóa Người dùng
-    document.getElementById("action").value = "delete";
-}
-
 // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
 function showUserForm() {
     document.getElementById("userForm").style.display = "block";

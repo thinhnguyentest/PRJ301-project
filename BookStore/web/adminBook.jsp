@@ -46,10 +46,14 @@
                             <td>${book.description}</td>
                             <td>${book.quantity}</td>
                             <td>${book.price}</td>
-                            <td><img src="assets/images/book/${book.image}" alt="Book Image" style="width: 120px"></td>
                             <td>
-                                    <a href="#bookForm"><button onclick="editBook(${book.id})">Sửa</button></a>
-                                    <button onclick="deleteBook(${book.id})">Xóa</button>
+                                <a href="#bookForm" style="padding: 20px;"><button onclick="editBook(${book.id})">Sửa</button></a>
+                                    <form action="bookAdmin" style="box-shadow: none">
+                                        <input type="text" name="action" value="delete" hidden>
+                                        <input type="text" name="bookId" value="${book.id}" hidden><br>
+                                        <button onclick="parentNode.submit()">Xóa</button>
+                                    </form>
+                                    
                                     <input type="text" id="authorId_${book.id}" value="${book.author.id}" hidden>
                                     <input type="text" id="authorName_${book.id}" value="${book.author.name}" hidden>
                                     <input type="text" id="authorBirthday_${book.id}" value="${book.author.birthday}" hidden>
@@ -78,7 +82,7 @@
                                 <input name="pageBook" value="${i}" hidden="">
                             </c:when>
                             <c:otherwise>
-                                <a href="?pageBook=${i}">${i}</a>
+                                <a href="?pageBook=${i}#books">${i}</a>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
