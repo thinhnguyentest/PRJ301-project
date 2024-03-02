@@ -121,7 +121,7 @@
                     </fieldset>
 
                     <button type="button" onclick="parentNode.submit()">Lưu</button>
-                    <button type="button" onclick="cancelUserForm()">Hủy</button>
+                    <a href="#users"><button type="button" onclick="cancelUserForm()">Hủy</button></a>
                 </form>
             </div>
         </section>

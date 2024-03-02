@@ -155,7 +155,7 @@
                     </fieldset>
 
                     <button type="button" onclick="parentNode.submit()">Lưu</button>
-                    <button type="button" onclick="cancelBookForm()">Hủy</button>
+                    <a href="books"><button type="button" onclick="cancelBookForm()">Hủy</button></a>
                 </form>
             </div>
         </section>

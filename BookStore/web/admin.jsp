@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            <h1 class="header-text" style="text-decoration: none;color: #fff;font-weight: bold;transition: color 0.3s ease;"><a href="admin" >Quản lý admin</a></h1>
+            <h1 style="margin: 12px"><a href="admin" style="text-decoration: none;color: #fff;font-weight: bold;transition: color 0.3s ease;">Quản lý admin</a></h1>
             <nav>
                 <ul>
                     <li><a href="#users">Người dùng</a></li>
