@@ -209,7 +209,6 @@ public class BookDAO {
 
         return book;
     }
-<<<<<<< HEAD
     public static List<Book> getNewBooks(int top) {
         List<Book> list = new ArrayList<>();
         String QUERY = "SELECT TOP (?) * FROM Books ORDER BY BookId DESC";
@@ -260,8 +259,6 @@ public class BookDAO {
     }
       
 
-=======
->>>>>>> 1f9a138cdc060e31c4573c8a75f05ba1c38875e9
 //    ----------------------------------------------------------------------------------------------------
 
     public static boolean updateBook(Book b) {
