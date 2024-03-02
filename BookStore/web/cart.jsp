@@ -37,7 +37,7 @@
                         var price = parseFloat($(this).find(".quantity").data("price"));
                         total += quantity * price;
                     });
-                    $(".total-price").text(total.toFixed(2) + " VND");
+                    $(".total-price").text(total.toFixed(0) + " VND");
                 }
 
                 // Initial update when the page loads
@@ -47,79 +47,94 @@
     </head>
     <body>
 
-        <div class="card">
+        <div class="" > 
             <div class="row">
-                <div class="col-md-8 cart">
-                    <div class="title">
-                        <div class="row">
-                            <div class="col"><h4><b>SHOPPING CART</b></h4></div>
-                            <div class="col align-self-center text-right text-muted">${sessionScope.cart.size()} items</div>
-                        </div>
-                    </div>
-
-                    <c:forEach var="cartItem" items="${sessionScope.cart}">
-                        <div class="row border-top border-bottom main align-items-center">
-                            <div class="col-2">
-                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/book-img/${cartItem.book.images}" width="100">
-                            </div>
-                            <div class="col-3">
-                                <div class="row text-muted">${cartItem.book.title}</div>
-
-                            </div>
-                            <div class="col-3 quantity-container">
-                                <a href="#" class="quantity-btn decrease">-</a>
-                                <input type="text" class="quantity" style="width: 30px; text-align: center;" value="${cartItem.quantity}" data-price="${cartItem.book.price}">
-                                <a href="#" class="quantity-btn increase">+</a>
-                            </div>
-                            <div class="col-2 total">
-                                ${cartItem.book.price} VND
-                            </div>
-                            <div class="col-2">
-                                <form action="${pageContext.request.contextPath}/cart">
-                                    <input type="hidden" name="id" value="${cartItem.book.id}">
-                                    <input type="hidden" name="action" value="remove">
-                                    <button type="submit" class="remove-btn">Xóa</button>
-                                </form>
-                            </div>
-                        </div>
-                    </c:forEach>
-
-
-                    <div class="back-to-shop">
-                        <a href="${pageContext.request.contextPath}/index.jsp">&leftarrow;</a>
-                        <span class="text-muted">Back to shop</span>
-                    </div>
-                </div>
-
-                <div class="col-md-4 summary">
-                    <div><h5><b>Summary</b></h5></div>
-                    <hr>
-                    <div class="row">
-                        <div class="col" style="padding-left: 0;">ITEMS ${sessionScope.cart.size()}</div>
-                        <div class="col text-right"> ${total }</div>
-                    </div>
-
-                    <form>
-                        <!--                        <p>SHIPPING</p>
-                                                <select>
-                                                    <option class="text-muted">Giao hàng tiêu chuẩn - 30000 VND</option>
-                                                    <option class="text-muted">Giao hàng nhanh - 45000 VND</option>
-                                                </select>-->
-
-                        <p>GIVE CODE</p>
-                        <input id="code" placeholder="Enter your code">
-                    </form>
-
-                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                        <div class="col">TOTAL PRICE</div>
-                        <div class="col text-right total-price">0 VND</div>
-                    </div>
-
-                    <a href="${pageContext.request.contextPath}/checkout" class="btn btn-primary">CHECKOUT</a>
+                <div class="col">
+                    <jsp:include page="header.jsp"></jsp:include>
                 </div>
             </div>
-        </div>
+                <div class="card ">
+                    <div class="row">
+                        <div class="col-md-8 cart">
+                            <div class="title">
+                                <div class="row">
+                                    <div class="col"><h4><b>SHOPPING CART</b></h4></div>
+                                    <div class="col align-self-center text-right text-muted">${sessionScope.cart.size()} items</div>
+                            </div>
+                        </div>
 
+                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                            <div class="row border-top border-bottom main align-items-center">
+                                <div class="col-2">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/images/book/${cartItem.book.image}" width="100">
+                                </div>
+                                <div class="col-3">
+                                    <div class="row text-muted">${cartItem.book.title}</div>
+
+                                </div>
+                                <div class="col-3 quantity-container">
+                                    <a href="#" class="quantity-btn decrease">-</a>
+                                    <input type="text" class="quantity" style="width: 30px; text-align: center;" value="${cartItem.quantity}" data-price="${cartItem.book.price}">
+                                    <a href="#" class="quantity-btn increase">+</a>
+                                </div>
+                                <div class="col-2 total">
+                                    ${cartItem.book.price} VND
+                                </div>
+                                <div class="col-2">
+                                    <form action="${pageContext.request.contextPath}/cart">
+                                        <input type="hidden" name="id" value="${cartItem.book.id}">
+                                        <input type="hidden" name="action" value="remove">
+                                        <button type="submit" class="remove-btn">Xóa</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </c:forEach>
+
+
+                        <div class="back-to-shop">
+                            <a href="${pageContext.request.contextPath}/index.jsp">&leftarrow;</a>
+                            <span class="text-muted">Back to shop</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 summary">
+                        <div><h5><b>Summary</b></h5></div>
+                        <hr>
+                        <div class="row">
+                            <div class="col" style="padding-left: 0;">ITEMS ${sessionScope.cart.size()}</div>
+                            <div class="col text-right"> ${total }</div>
+                        </div>
+
+                        <form>
+                            <!--                        <p>SHIPPING</p>
+                                                    <select>
+                                                        <option class="text-muted">Giao hàng tiêu chuẩn - 30000 VND</option>
+                                                        <option class="text-muted">Giao hàng nhanh - 45000 VND</option>
+                                                    </select>-->
+
+                            <p>GIVE CODE</p>
+                            <input id="code" placeholder="Enter your code">
+                        </form>
+
+                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="col">TOTAL PRICE</div>
+                            <div class="col text-right total-price">0 VND</div>
+                        </div>
+
+                        <a href="${pageContext.request.contextPath}/checkout" class="btn btn-primary">CHECKOUT</a>
+                    </div>
+                </div>
+                <!-- Footer Content -->
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <jsp:include page="footer.jsp"></jsp:include>
+                </div>
+            </div>
+
+        </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 

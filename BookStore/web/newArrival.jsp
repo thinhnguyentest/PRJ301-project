@@ -234,8 +234,6 @@
                 </div >
             <c:set var="books" value="${requestScope.books}" />
             <c:set var="count" value="0" />
-            <c:set var="totalPages" value="${requestScope.totalPage}" />
-            <c:set var="currentPage" value="${requestScope.indexPage}" />
             <div class="col-lg-8" style="background-color: #FFF">
                 <!-- Inside the table where you display books -->
                 <div class="row">
@@ -269,21 +267,6 @@
                         </div><div class="row">
                         </c:if>
                     </c:forEach>
-                </div>
-
-                <!-- Pagination -->
-                <div style="display: flex; justify-content: center; margin: 20px;">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <c:forEach var="i" begin="1" end="${totalPages}">
-                                <li class="page-item ${currentPage==i?"active":""}">
-                                    <a class="page-link"  href="product?page=${i}">${i}</a>
-                                </li>
-                            </c:forEach>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>

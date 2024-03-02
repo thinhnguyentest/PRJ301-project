@@ -4,7 +4,9 @@
  */
 
 package control;
-
+import dao.BookDAO;
+import dao.BookDAO;
+import entity.Product.Book;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author quangminh
  */
-@WebServlet(name="ProductDetailServlet", urlPatterns={"/ProductDetailServlet"})
+@WebServlet(name="ProductDetailServlet", urlPatterns={"/detail"})
 public class ProductDetailServlet extends HttpServlet {
    
     /** 
@@ -30,6 +32,9 @@ public class ProductDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String bookId= request.getParameter("bookId");
+        Book book = BookDAO.getBookById(Integer.parseInt(bookId));
+        request.setAttribute("book", book);
         try (PrintWriter out = response.getWriter()) {
              request.getRequestDispatcher("bookDetail.jsp").forward(request, response);
         }

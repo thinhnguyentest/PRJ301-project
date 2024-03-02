@@ -4,15 +4,16 @@
     Author     : PC
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        
-        
-        
+
+
+
         <!-------------------------------------------------------------------------------->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <!-- style css -->
@@ -31,7 +32,24 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <!-------------------------------------------------------------------------------->
+        <style>
+            .cart-overlay {
+                position: absolute;
+                top: 0;
+                right: 0;
 
+                width: 25px;
+                height: 25px;
+
+                background: red;
+                color: #fff;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+            }
+        </style>
     </head>
     <body>
         <header class="header_section">
@@ -62,10 +80,10 @@
                             <a class="nav-link single-line col-lg-6 " id="menu_text" href="index.html">ALL CATEGORIES</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link single-line" href="movies.html">All BOOKS</a>
+                            <a class="nav-link single-line" href="product">All BOOKS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link single-line" href="movies.html">NEW ARRIVALS</a>
+                            <a class="nav-link single-line" href="product?action=newArrival">NEW ARRIVALS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link single-line" href="tv.html">FAQ</a>
@@ -84,7 +102,20 @@
                     <div class="search_icon"><a href="registration.jsp"><img src="assets/images/eye-icon.png"><span class="padding_left_15">Register</span></a></div>
                     <div class="search_icon"><a href="login.jsp"><img src="assets/images/user-icon.png"><span class="padding_left_15">login</span></a></div>
                     <div class="search_icon"><a href="#"><img src="assets/images/search-icon.png"><span class="padding_left_15">Search...</span></a></div>
-                    <div class="search_icon"><a href="#"><img class="image_cart" src="assets/images/image-cart_90604.png"><span class="padding_left_15">Cart</span></a></div>
+                    <div class="search_icon">
+                        <a href="cart">
+                            <img class="image_cart" src="assets/images/image-cart_90604.png">
+                            <c:if test="${not empty sessionScope.cart}"> 
+                                <div class="cart-overlay">
+
+                                    ${sessionScope.cart.size()}  
+
+                                </div>
+                            </c:if>
+                            <span class="padding_left_15">Cart</span>
+                        </a> 
+                    </div>
+
                 </div>
             </nav>
         </header>

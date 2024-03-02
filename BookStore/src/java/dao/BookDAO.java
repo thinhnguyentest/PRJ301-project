@@ -126,7 +126,7 @@ public class BookDAO {
     }
 
     public static Publisher getPublisher(int id) {
-        String QUERY = "SELECT * FROM Authors WHERE AuthorId=?";
+        String QUERY = "SELECT * FROM Publishers WHERE PublisherId=?";
         Publisher publisher = new Publisher();
         try (Connection conn = DBcontext.getConnection()) {
             try (PreparedStatement pst = conn.prepareStatement(QUERY)) {
@@ -195,6 +195,55 @@ public class BookDAO {
 
         return book;
     }
+    public static List<Book> getNewBooks(int top) {
+        List<Book> list = new ArrayList<>();
+        String QUERY = "SELECT TOP (?) * FROM Books ORDER BY BookId DESC";
+        try (Connection conn = DBcontext.getConnection()) {
+            try (PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setInt(1, top);
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    list.add(new Book(rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getInt(5),
+                            rs.getFloat(6),
+                            rs.getInt(7),
+                            rs.getInt(8)
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the stack trace for the SQLException
+        }
+        return list;
+    }
+    //function to get best seller books that have been sold the most
+    public static List<Book> getBestSellerBooks() {
+        List<Book> list = new ArrayList<>();
+        String QUERY = "SELECT TOP 10 * FROM Books ORDER BY QuantitySold DESC";
+        try (Connection conn = DBcontext.getConnection()) {
+            try (PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    list.add(new Book(rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getInt(5),
+                            rs.getFloat(6),
+                            rs.getInt(7),
+                            rs.getInt(8)
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the stack trace for the SQLException
+        }
+        return list;
+    }
+      
 
 //    ----------------------------------------------------------------------------------------------------
     public static boolean update(Book b) {

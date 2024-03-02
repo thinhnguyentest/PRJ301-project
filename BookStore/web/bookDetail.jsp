@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,32 +31,32 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
-        <link href="css/prettyPhoto.css" rel="stylesheet">
-        <link href="css/price-range.css" rel="stylesheet">
-        <link href="css/bookDetail.css" rel="stylesheet">  
+        <link href="assets/css/prettyPhoto.css" rel="stylesheet">
+        <link href="assets/css/price-range.css" rel="stylesheet">
+        <link href="assets/css/bookDetail.css" rel="stylesheet">  
         <!-------------------------------------------------------------------------------->
     </head>
     <body>
         <!-- header section start -->
         <jsp:include page="header.jsp" ></jsp:include>
+        <c:set var="book" value="${requestScope.book}"></c:set>
+            <div id="product_detail" class="container">
+                <div class="row">                  
+                    <div class="col-sm-12 padding-right">
+                        <div class="product-details"> 
+                            <div class="row">                          
+                                <div class="col-sm-5">                                                  
 
-        <div id="product_detail" class="container">
-            <div class="row">                  
-                <div class="col-sm-12 padding-right">
-                    <div class="product-details"> 
-                        <div class="row">                          
-                            <div class="col-sm-5">                                                  
-
-                                <div id="carouselExample" class="carousel slide">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="assets/images/img-3.png" class="d-block w-100" alt="...">
+                                    <div id="carouselExample" class="carousel slide">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src="${pageContext.request.contextPath}/assets/images/book/${book.image}" class="d-block w-100" alt="..." width="200">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="assets/images/img-3.png" class="d-block w-100" alt="...">
+                                            <img src="" class="d-block w-100" alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="assets/images/img-3.png" class="d-block w-100" alt="...">
+                                            <img src="" class="d-block w-100" alt="...">
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -79,30 +80,29 @@
 
                             <div class="col-sm-7">
                                 <div class="product-information"><!--/product-information-->                            
-                                    <h2 class="detail_title">Title</h2>                               
-                                    <p>Doraemon</p>
-                                    <h2 class="detail_title">Price</h2>
-                                    <h3 class="detail_title" >Details</h3>
-                                    <p><b>Nhà xuất bản: </b>Publisher Name</p>
-                                    <p><b>Tác giả: </b>Author Name</p>
+                                    <h2 class="detail_title">${book.title}</h2>                               
+                                    <h3>Tác giả: </b>${book.author.name}</h3>
+                                    <h3 class="detail_title">Price: ${book.price} VND</h3>
+                                    <h3>Nhà xuất bản: ${book.publisher.getPublisherName()}</p></h3>
 
                                     <h3 clase "detail_title">Mô tả sản phẩm</h3>
-                                    <p id="short-description">Description of the book goes here.</p>
+                                    <p id="short-description">${book.description}</p>
                                     <a href="#details" data-toggle="tab">Xem thêm...</a>
                                     <br>
                                     <h3>Số lượng: </h3>
-                                    <form id="cart">
+                                    <form id="cart" action="cart" method="get">
                                         <div class="input-group mb-3">
                                             <button class="btn btn-quantity" onclick="quantityChange(-1)" type="button">-</button>
-                                            <input type="text" value="1" id="quantityInput">
+                                            <input type="text" value="1" id="quantityInput" name="quantity"> <!-- Add name attribute for the quantity -->
                                             <button class="btn btn-quantity" onclick="quantityChange(1)" type="button">+</button>
                                         </div>
 
                                         <div class="d-grid gap-2 d-md-block">
-                                            <button class="btn btn-default cart" type="button" id="buy-button" onclick="addToCart(book_id, document.getElementById('quantityInput').value)">
+                                            <button class="btn btn-default cart" type="submit" id="buy-button" name="action" value="buy">
                                                 <i class="fa fa-shopping-cart"></i>
                                                 Thêm vào giỏ
                                             </button>
+                                            <input type="hidden" name="id" value="${book.id}">
                                         </div>
                                     </form>
                                 </div><!--/product-information-->
@@ -113,29 +113,7 @@
             </div>
         </div>  
         <!-- cooming  section end -->
-        <!-- footer  section start -->
-        <div class="footer_section layout_padding">
-            <div class="container">
-                <div class="footer_menu">
-                    <h2 style="color: white;">follow page</h2>
-                </div>
-                <div class="social_icon">
-                    <ul>
-                        <li><a href="#"><img src="assets/images/fb-icon.png"></a></li>
-                        <li><a href="#"><img src="assets/images/twitter-icon.png"></a></li>
-                        <li><a href="#"><img src="assets/images/linkedin-icon.png"></a></li>
-                        <li><a href="#"><img src="assets/images/instagram-icon.png"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- footer  section end -->
-        <!-- copyright section start -->
-        <div class="copyright_section">
-            <div class="container">
-                <div class="copyright_text">Copyright 2019 All Right Reserved By <a href="https://html.design">Free html Templates</a></div>
-            </div>
-        </div>
+        <jsp:include page="footer.jsp"></jsp:include>
         <!-- copyright section end -->
         <!-- Javascript files-->
         <script src="js/jquery.min.js"></script>
@@ -150,9 +128,9 @@
         <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <script>
-                                                $('#datepicker').datepicker({
-                                                    uiLibrary: 'bootstrap4'
-                                                });
+            $('#datepicker').datepicker({
+                uiLibrary: 'bootstrap4'
+            });
         </script>
         <script type="text/javascript">
             var i = 1;
