@@ -72,4 +72,8 @@ public class Author implements Serializable{
     public boolean addAuthor() {
         return BookDAO.addAuthor(this);
     }
+    
+    public boolean update() {
+        return BookDAO.updateAuthor(this);
+    }
 }

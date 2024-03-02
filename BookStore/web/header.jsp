@@ -33,6 +33,7 @@
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <!-------------------------------------------------------------------------------->
         <style>
+<<<<<<< HEAD
             .cart-overlay {
                 position: absolute;
                 top: 0;
@@ -49,12 +50,45 @@
                 justify-content: center;
                 border-radius: 50%;
             }
+=======
+            #dropdown-menu{
+    position: fixed;
+    z-index: 2;
+    background-color: orange;
+}
+
+#dropdown-menu {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: #df9911;
+    z-index: 1;
+}
+.dropdown-toggle{
+    background-color: #df9911;
+}
+
+.dropdown {
+    margin-right: 40px;
+}
+
+.dropdown:hover #dropdown-menu {
+    display: block;
+}
+#search_input_wrapper {
+    display: none;
+}
+
+#search_input_wrapper.show {
+    display: block;
+}
+>>>>>>> 1f9a138cdc060e31c4573c8a75f05ba1c38875e9
         </style>
     </head>
     <body>
         <header class="header_section">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="logo" href="index.html"><img src="assets/images/logo.png"></a>
+                <a class="logo" href="index.jsp"><img src="assets/images/logo.png"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -62,45 +96,63 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="row nav-item active menu">
-                            <a href="#" id="dropdownButton"><button class="navbar-toggler col-lg-6" data-target="#navbarSupportedContent" data-toggle="collapse" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button></a>
-                            <span class="navbar-toggler-icon"></span>
-                            <div id="dropdownContent" class="hidden" hidden="">
-                                <!-- Danh sách các categories -->
-                                <ul>
-                                    <li>All Book</li>
-                                    <li>Best Saler</li>
-                                    <li>New Arrivals</li>
-                                    <li>Decolonization</li>
-                                    <li>Fiction</li>
-                                    <li>Poetry</li>
-                                    <li>Comic & Graphic Novel</li>
-                                    <li>Language</li>
-                                </ul>
-                            </div>
-                            <a class="nav-link single-line col-lg-6 " id="menu_text" href="index.html">ALL CATEGORIES</a>
+                            <div class="dropdown" onmouseover="openDropdown()" onmouseout="closeDropdown()">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false">
+                            CATEGORIES
+                        </button>
+                        <ul id="dropdown-menu">
+                            <li><a href="allBook.jsp"><button class="dropdown-item" type="button">All Book</button></a></li>
+                            <li><a href="login.jsp"><button class="dropdown-item" type="button">Best Saler</button></a></li>
+                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">New Arrivals</button></a></li>
+                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Decolonization</button></a></li>
+                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Fiction</button></a></li>
+                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Poetry</button></a></li>
+                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Comic & Graphic Novel</button></a></li>
+                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Language</button></a></li>
+                        </ul>
+                    </div>
                         </li>
                         <li class="nav-item ">
+<<<<<<< HEAD
                             <a class="nav-link single-line" href="product">All BOOKS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link single-line" href="product?action=newArrival">NEW ARRIVALS</a>
+=======
+                            <a class="nav-link single-line" href="allBook.jsp">All BOOKS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link single-line" href="tv.html">FAQ</a>
+                            <a class="nav-link single-line" href="newArrivals.jsp">NEW ARRIVALS</a>
+>>>>>>> 1f9a138cdc060e31c4573c8a75f05ba1c38875e9
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link single-line" href="celebs.html">CONTACT</a>
+                            <a class="nav-link single-line" href="faq.jsp">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link single-line" href="contact.jsp">CONTACT</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link single-line" href="index.html">ABOUT US</a>
+                            <a class="nav-link single-line" href="aboutus.jsp">ABOUT US</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link single-line" href="index.html">DECOLONIZATION</a>
+                            <a class="nav-link single-line" href="decolonization.jsp">DECOLONIZATION</a>
                         </li>
                     </ul>
-
+                    <div class="search_icon">
+                        <form action="search" >
+                            
+                         </a>
+                        <div id="search_input_wrapper row">
+                            <form action="search" >
+                                <input type="text" id="search_input" placeholder="Search..." onblur="hideSearch()">
+                                <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+                            </form>                        
+                            
+                        </div>
+                     </div>
                     <div class="search_icon"><a href="registration.jsp"><img src="assets/images/eye-icon.png"><span class="padding_left_15">Register</span></a></div>
                     <div class="search_icon"><a href="login.jsp"><img src="assets/images/user-icon.png"><span class="padding_left_15">login</span></a></div>
+<<<<<<< HEAD
                     <div class="search_icon"><a href="#"><img src="assets/images/search-icon.png"><span class="padding_left_15">Search...</span></a></div>
                     <div class="search_icon">
                         <a href="cart">
@@ -116,8 +168,13 @@
                         </a> 
                     </div>
 
+=======
+                    
+                    <div class="search_icon"><a href="#"><img class="image_cart" src="assets/images/image-cart_90604.png"><span class="padding_left_15">Cart</span></a></div>
+>>>>>>> 1f9a138cdc060e31c4573c8a75f05ba1c38875e9
                 </div>
             </nav>
+            <script src="js/scripts.js"></script>
         </header>
     </body>
 </html>

@@ -1,26 +1,26 @@
 // Thêm các hàm xử lý sự kiện tương ứng cho Người dùng
-function showBookForm() {
-    document.getElementById("bookForm").style.display = "block";
+function addBook() {
+    resetBookForm();
     document.getElementById("action").value = "add";
+    document.getElementById("bookForm").style.display = "block";
 }
 
 function cancelBookForm() {
     document.getElementById("bookForm").style.display = "none";
 }
 
-function saveBook() {
-    // Xử lý lưu thông tin Người dùng
-    cancelBookForm();
-}
 function editBook(bookId) {
+    document.getElementById("authorId").value = document.getElementById("authorId_" + bookId).value;
     document.getElementById("authorName").value = document.getElementById("authorName_" + bookId).value;
     document.getElementById("birthday").value = document.getElementById("authorBirthday_"+ bookId).value;
     document.getElementById("bio").innerHTML = document.getElementById("authorBio_"+ bookId).value;
     
+    document.getElementById("publisherId").value = document.getElementById("publisherId_"+ bookId).value;
     document.getElementById("publisherName").value = document.getElementById("publisherName_"+ bookId).value;
     document.getElementById("establishedDate").value = document.getElementById("establishedDate_"+ bookId).value;
     
-    document.getElementById("id").value = document.getElementById("bookId_"+ bookId).value;
+    document.getElementById("bookId").value = document.getElementById("bookId_"+ bookId).value;
+    document.getElementById("bookTitle").value = document.getElementById("bookTitle_"+ bookId).value;
     document.getElementById("genre").value = document.getElementById("genre_"+ bookId).value;
     document.getElementById("description").innerHTML = document.getElementById("description_"+ bookId).value;
     document.getElementById("quantity").value = document.getElementById("quantity_"+ bookId).value;
@@ -28,13 +28,9 @@ function editBook(bookId) {
     document.getElementById("image").innerHTML = document.getElementById("image_"+ bookId).value;
 
     // Display the bookForm
-    document.getElementById("bookForm").style.display = "block";
     document.getElementById("action").value = "update";
+    document.getElementById("bookForm").style.display = "block";
 }
-
-
-
-
 
 function deleteBook() {
     // Xử lý xóa Người dùng
@@ -50,9 +46,23 @@ function cancelUserForm() {
     document.getElementById("userForm").style.display = "none";
 }
 
-function saveUser() {
-    // Xử lý lưu thông tin Người dùng
-    cancelUserForm();
+function resetBookForm() {
+    document.getElementById("authorId").value = "";
+    document.getElementById("authorName").value = "";
+    document.getElementById("birthday").value = "";
+    document.getElementById("bio").innerHTML = "";
+    
+    document.getElementById("publisherId").value = "";
+    document.getElementById("publisherName").value = "";
+    document.getElementById("establishedDate").value = "";
+    
+    document.getElementById("bookId").value = "";
+    document.getElementById("bookTitle").value = "";
+    document.getElementById("genre").value = "";
+    document.getElementById("description").innerHTML = "";
+    document.getElementById("quantity").value = "";
+    document.getElementById("price").value = "";    
+    document.getElementById("image").innerHTML = "";
 }
 
 function editUser(userId) {

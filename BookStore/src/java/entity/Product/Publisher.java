@@ -55,4 +55,8 @@ public class Publisher implements Serializable{
     public boolean addPublisher(){
         return BookDAO.addPublisher(this);
     }
+    
+    public boolean update() {
+        return BookDAO.updatePublisher(this);
+    }
 }

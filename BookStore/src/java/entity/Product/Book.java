@@ -40,6 +40,18 @@ public class Book implements Serializable{
         this.images = BookDAO.getImages(id);
     }
 
+    public Book(int id, String title, String genre, String description, int quantity, float price, Author author, Publisher publisher, String image) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.author = author;
+        this.publisher = publisher;
+        this.images.add(image);
+    }
+
     public int getId() {
         return id;
     }
@@ -104,11 +116,11 @@ public class Book implements Serializable{
         this.publisher = publisher;
     }
 
-    public String getImages() {
+    public String getImage() {
         return images.get(0);
     }
 
-    public void setImages(List<String> images) {
+    public void setImage(List<String> images) {
         this.images = images;
     }
 
@@ -116,12 +128,16 @@ public class Book implements Serializable{
     public String toString() {
         return "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + author + publisher + ", images=" + images + '}';
     }
+    
+    public boolean addImage() {
+        return BookDAO.addImage(this);
+    }
 
     public boolean addBook() {
         return BookDAO.addBook(this);
     }
 
-    public boolean updateBook() {
-        return BookDAO.update(this);
+    public boolean update() {
+        return BookDAO.updateBook(this);
     }
 }

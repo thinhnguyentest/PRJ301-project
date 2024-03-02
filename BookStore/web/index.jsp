@@ -1,3 +1,6 @@
+<%@ page isELIgnored ="false" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,38 +54,20 @@
             <div class="container">
 
                 <div class="movies_section_2 layout_padding " >
-                    <h2 class="letest_text" >BEST SALER</h2>
+                    <h2 class="letest_text" >FICTION</h2>
                     <div class="seemore_bt"><a href="#">See More</a></div>
                     <div class="movies_main">
                         <div class="iamge_movies_main">
-                            <div class="iamge_movies" >
-                                <div class="image_3">
-                                    <img src="assets/images/img-3.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">CADE Prlor</h1>
-                                <p class="there_text" >There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <c:forEach var="fiction" items="${requestScope.fictions}">
                             <div class="iamge_movies">
                                 <div class="image_3">
-                                    <img src="assets/images/img-4.png" class="image" style="width:100%">
+                                    <img src="assets/images/book/${fiction.image}" alt="Book Image"  class="image" style="width:100%">
                                     <div class="middle">
                                         <div class="playnow_bt">buy</div>
                                     </div>
                                 </div>
-                                <h1 class="code_text">Bradon</h1>
-                                <p class="there_text">There are many variations </p>
+                                <h1 class="Title">${fiction.title}</h1>
+                                <p class="description">${fiction.description}</p>
                                 <div class="star_icon">
                                     <ul>
                                         <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
@@ -93,175 +78,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="iamge_movies">
-                                <div class="image_3">
-                                    <img src="assets/images/img-5.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">Anton Levin</h1>
-                                <p class="there_text">There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="iamge_movies">
-                                <div class="image_3">
-                                    <img src="assets/images/img-6.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">Sacha Styles</h1>
-                                <p class="there_text">There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="iamge_movies">
-                                <div class="image_3">
-                                    <img src="assets/images/img-7.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">Katledrazdu</h1>
-                                <p class="there_text">There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="seebt_1"><a href="#">See More</a></div>
-            </div>
-        </div>
-        <!-- best books saler section end -->
-        <!-- movies section start -->
-        <div class="movies_section layout_padding">
-            <div class="container">
-
-                <div class="movies_section_2 layout_padding">
-                    <h2 class="letest_text">NEW ARRIVALS</h2>
-                    <div class="seemore_bt"><a href="#">See More</a></div>
-                    <div class="movies_main">
-                        <div class="iamge_movies_main">
-                            <div class="iamge_movies">
-                                <div class="image_3">
-                                    <img src="assets/images/img-3.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">CADE Prlor</h1>
-                                <p class="there_text">There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="iamge_movies">
-                                <div class="image_3">
-                                    <img src="assets/images/img-4.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">Bradon</h1>
-                                <p class="there_text">There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="iamge_movies">
-                                <div class="image_3">
-                                    <img src="assets/images/img-5.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">Anton Levin</h1>
-                                <p class="there_text">There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="iamge_movies">
-                                <div class="image_3">
-                                    <img src="assets/images/img-6.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">Sacha Styles</h1>
-                                <p class="there_text">There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="iamge_movies">
-                                <div class="image_3">
-                                    <img src="assets/images/img-7.png" class="image" style="width:100%">
-                                    <div class="middle">
-                                        <div class="playnow_bt">buy</div>
-                                    </div>
-                                </div>
-                                <h1 class="code_text">Katledrazdu</h1>
-                                <p class="there_text">There are many variations </p>
-                                <div class="star_icon">
-                                    <ul>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                        <li><a href="#"><img src="assets/images/star-icon.png"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        </c:forEach>
                         </div>
                     </div>
                 </div>
