@@ -73,9 +73,9 @@
 
                                 </div>
                                 <div class="col-3 quantity-container">
-                                    <a href="#" class="quantity-btn decrease">-</a>
+                                    <button class="quantity-btn decrease" style="width: 30px;" >-</button>
                                     <input type="text" class="quantity" style="width: 30px; text-align: center;" value="${cartItem.quantity}" data-price="${cartItem.book.price}">
-                                    <a href="#" class="quantity-btn increase">+</a>
+                                    <button  class="quantity-btn increase" style="width: 30px;">+</button>
                                 </div>
                                 <div class="col-2 total">
                                     ${cartItem.book.price} VND
@@ -92,7 +92,7 @@
 
 
                         <div class="back-to-shop">
-                            <a href="${pageContext.request.contextPath}/index.jsp">&leftarrow;</a>
+                            <a href="/product">&leftarrow;</a>
                             <span class="text-muted">Back to shop</span>
                         </div>
                     </div>
