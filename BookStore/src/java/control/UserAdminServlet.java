@@ -4,6 +4,7 @@ package control;
 import dao.AccountDAO;
 import entity.Account.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author PC
  */
-@WebServlet(name="UserServlet", urlPatterns={"/user"})
+@WebServlet(name="UserServlet", urlPatterns={"/userAdmin"})
 public class UserAdminServlet extends HttpServlet {
    
 
@@ -57,7 +58,7 @@ public class UserAdminServlet extends HttpServlet {
     private User getUserFromRequest(HttpServletRequest request) {
         try {
             int id = Integer.parseInt(request.getParameter("userId"));
-            String user = request.getParameter("username");
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
             String name = request.getParameter("name");
             String email = request.getParameter("email");
@@ -65,7 +66,7 @@ public class UserAdminServlet extends HttpServlet {
             String address = request.getParameter("address");
             String role = request.getParameter("role");
             boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
-            return new User(id, name, password, name, email, phone, address, role, isActive);
+            return new User(id, username, password, name, email, phone, address, role, isActive);
         } catch (NumberFormatException e) {
         }
         return null;
