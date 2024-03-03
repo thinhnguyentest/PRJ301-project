@@ -196,133 +196,75 @@
         <jsp:include page="header.jsp"></jsp:include>
             <!--header-end-->
 
-            <!-- table left start -->
-            <div class="row" style="background-color: #3c0e0e">
-                <div class="col-lg-4">
-                    <!--ALL CATEGORIERS -->
-                    <div class="table-left 4">
-                        <div class="list_categories">
-                            <h2>ALL CATEGORIES</h2>
-                            <ul>
-                                <li><a href="product">All
-                                        Book</a></li>
-                                <li><a href="product?action=newArrival">
-                                        New Arrivals</a></li>
-                                <li>
-                                    <a href="product?action=category&category=Genre&input=Fiction">Fiction</a></li>
-                                </li>
-                                <li>
-                                    <a href="product?action=category&category=Genre&input=Non-Fiction">Non-Fiction</a></li>
-                                </li>
-                                <li>
-                                    <a href="product?action=category&category=Genre&input=Mystery">Mystery</a></li>
-                                </li>
-                                <li>
-                                    <a href="product?action=category&category=Genre&input=Fantasy">Fantasy</a></li>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--AUTHOR -->
-                    <div class="table-left ">
-                        <div class="list_categories">
-                            <h2>AUTHOR</h2>
-                            <ul>
-                                <a href="product">
-                                    <li>Fiction</li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--ALL CATEGORIERS -->
-                    <div class="table-left ">
-                        <div class="Price_categories">
-                            <h2>PRICE RANGE</h2>
-                            <ul>
-                                <a href="product">
-                                    <li>Dưới 100.000đ</li>
-                                </a>
-                                <a href="product">
-                                    <li>100.000đ-200.000đ</li>
-                                </a>
-                                <a href="product">
-                                    <li>200.000đ-300.000đ</li>
-                                </a>
-                                <a href="product">
-                                    <li>300.000đ-500.000đ</li>
-                                </a>
-                                <a href="product">
-                                    <li>500.000đ-1.000.000đ</li>
-                                </a>
-                                <a href="product">
-                                    <li>Trên 1.000.000đ</li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            <c:set var="books" value="${requestScope.books}" />
-            <c:set var="count" value="0" />
-            <c:set var="totalPages" value="${requestScope.totalPage}" />
-            <c:set var="currentPage" value="${requestScope.indexPage}" />
-            <div class="col-lg-8" style="background-color: #FFF">
-                
-                <!-- Inside the table where you display books -->
-                <div class="row " style="margin-top: 20px;">
+        <c:set var="books" value="${requestScope.books}" />
+        <c:set var="count" value="0" />
+        <c:set var="totalPages" value="${requestScope.totalPage}" />
+        <c:set var="currentPage" value="${requestScope.indexPage}" />
 
-                    <c:forEach var="book" items="${books}">
-                        <div class="col-lg-4">
-                            <!-- Display book details here -->
+        <!-- table left start -->
+     
+            <h1>Trang tìm kiếm</h1></br>
+            <h3>Có ${books.size()} sản phẩm được tìm thấy</h3>
+       
 
-                            <div class="book-container">
-                                <div class="image-container">
-                                    <img class="book-image" src="${book.image}" alt="${book.title} Image"
-                                         width="200">
-                                    <div class="overlay">
-                                        <div class="overlay-content">
-                                            <a href="cart?action=buy&id=${book.id}&quantity=1"
-                                               class=" btn buy-button">Buy</a>
-                                            <form action="detail" method="get">
-                                                <input type="hidden" name="bookId" value="${book.id}">
-                                                <button type="submit"
-                                                        class="btn btn-primary view-details-btn">View
-                                                    Details</button>
-                                            </form>
-                                        </div>
+        <div class="col-lg-12" style="background-color: #FFF">
+
+            <!-- Inside the table where you display books -->
+            <div class="row " style="margin-top: 20px;">
+
+                <c:forEach var="book" items="${books}">
+                    <div class="col-lg-3">
+                        <!-- Display book details here -->
+
+                        <div class="book-container">
+                            <div class="image-container">
+                                <img class="book-image" src="${book.image}" alt="${book.title} Image"
+                                     width="200">
+                                <div class="overlay">
+                                    <div class="overlay-content">
+                                        <a href="cart?action=buy&id=${book.id}&quantity=1"
+                                           class=" btn buy-button">Buy</a>
+                                        <form action="product" method="get">
+                                            <input type="hidden" name="action" value="show">
+                                            <input type="hidden" name="bookId" value="${book.id}">
+                                            <button type="submit"
+                                                    class="btn btn-primary view-details-btn">View
+                                                Details</button>
+                                        </form>
                                     </div>
                                 </div>
-                                <a href="product?action=show&bookId=${book.id}">
-                                    <h2>${book.title}</h2>
-                                </a>
-                                <p>Price: ${book.price} VND</p>
-                                <!-- Add more book details as needed -->
                             </div>
-
+                            <a href="product?action=show&bookId=${book.id}">
+                                <h2>${book.title}</h2>
+                            </a>
+                            <p>Price: ${book.price} VND</p>
+                            <!-- Add more book details as needed -->
                         </div>
 
-                        <c:set var="count" value="${count + 1}" />
+                    </div>
 
-                        <c:if test="${count % 3 == 0}">
-                        </div>
-                        <div class="row">
-                        </c:if>
-                    </c:forEach>
-                </div>
+                    <c:set var="count" value="${count + 1}" />
 
-                <!-- Pagination -->
-                <div style="display: flex; justify-content: center; margin: 20px;">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <c:forEach var="i" begin="1" end="${totalPages}">
-                                <li class="page-item ${currentPage==i?" active":""}">
-                                    <a class="page-link" href="product?page=${i}">${i}</a>
-                                </li>
-                            </c:forEach>
+                    <c:if test="${count % 4 == 0}">
+                    </div>
+                    <div class="row">
+                    </c:if>
+                </c:forEach>
+            </div>
+
+            <!-- Pagination -->
+            <div style="display: flex; justify-content: center; margin: 20px;">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <c:forEach var="i" begin="1" end="${totalPages}">
+                            <li class="page-item ${currentPage==i?" active":""}">
+                                <a class="page-link" href="product?page=${i}">${i}</a>
                             </li>
-                        </ul>
-                    </nav>
-                </div>
+                        </c:forEach>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
