@@ -19,6 +19,10 @@ public class Author implements Serializable{
     public Author() {
     }
 
+    public Author(int id) {
+        this.id = id;
+    }
+
     public Author(String name, Date birthday, String bio) {
         this.name = name;
         this.birthday = birthday;
@@ -71,5 +75,13 @@ public class Author implements Serializable{
     
     public boolean addAuthor() {
         return BookDAO.addAuthor(this);
+    }
+    
+    public boolean update() {
+        return BookDAO.updateAuthor(this);
+    }
+    
+    public boolean delete() {
+        return BookDAO.deleteAuthor(this);
     }
 }

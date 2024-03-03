@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,16 +32,17 @@
 
                         <div class="signin-form">
                             <h2 class="form-title">Sign up</h2>
-                            <form method="POST" action="login" class="register-form"
+                            <c:set var="cookie" value="${pageContext.request.cookies}"/>
+                            <form method="post" action="login" class="register-form"
                                   id="login-form">
                                 <div class="form-group">
                                     <label for="username"><i
                                             class="zmdi zmdi-account material-icons-name"></i></label> 
-                                            <input type="text" name="username" id="username" required="" placeholder="Username" />
+                                            <input type="text" name="username" id="username" value="${cookie.userC.value}" required="" placeholder="Username" />
                                 </div>
                                 <div class="form-group">
                                     <label for="password"><i class="zmdi zmdi-lock"></i></label> <input
-                                        type="password" name="password" id="password" required=""
+                                        type="password" name="password" value="${cookie.passC.value}" id="password" required=""
                                         placeholder="Password" />
                                 </div>
                                 <div class="form-group">
@@ -47,7 +50,7 @@
                                         <span><span></span></span><%= request.getAttribute("status")==null?"":request.getAttribute("status") %></label>
                                 </div>
                                 <div class="form-group">
-                                    <input type="checkbox" name="remember-me" id="remember-me"
+                                    <input type="checkbox" value="ON" name="remember-me" ${(cookie.rememC != null ? 'checked':'')}  id="remember-me"
                                            class="agree-term" /> 
                                     <label for="remember-me" class="label-agree-term">
                                         <span><span></span></span>Remember me</label>

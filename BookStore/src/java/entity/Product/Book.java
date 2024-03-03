@@ -13,19 +13,13 @@ public class Book implements Serializable{
     private float price;
     private Author author;
     private Publisher publisher;
-    private List<String> images = new ArrayList<>();
+    private String image;
 
     public Book() {
     }
 
-    public Book(String title, String genre, String description, int quantity, float price, Author author, Publisher publisher) {
-        this.title = title;
-        this.genre = genre;
-        this.description = description;
-        this.quantity = quantity;
-        this.price = price;
-        this.author = author;
-        this.publisher = publisher;
+    public Book(int id) {
+        this.id = id;
     }
 
     public Book(int id, String title, String genre, String description, int quantity, float price, int AuthorId, int PublisherId) {
@@ -37,7 +31,19 @@ public class Book implements Serializable{
         this.price = price;
         this.author = BookDAO.getAuthor(AuthorId);
         this.publisher = BookDAO.getPublisher(PublisherId);
-        this.images = BookDAO.getImages(id);
+        this.image = BookDAO.getImages(id);
+    }
+
+    public Book(int id, String title, String genre, String description, int quantity, float price, Author author, Publisher publisher, String image) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.author = author;
+        this.publisher = publisher;
+        this.image = image;
     }
 
     public int getId() {
@@ -104,24 +110,28 @@ public class Book implements Serializable{
         this.publisher = publisher;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
     public String toString() {
-        return "Book{" + "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + ", author=" + author + ", publisher=" + publisher + ", images=" + images + '}';
+        return "id=" + id + ", title=" + title + ", genre=" + genre + ", description=" + description + ", quantity=" + quantity + ", price=" + price + author + publisher + ", images=" + image + '}';
     }
-
+    
     public boolean addBook() {
-        return BookDAO.addBook(this);
+        return BookDAO.addBook(this) && BookDAO.addImage(this.getImage());
     }
 
-    public boolean updateBook() {
-        return BookDAO.update(this);
+    public boolean update() {
+        return BookDAO.updateBook(this) && BookDAO.updateImage(this);
+    }
+    
+    public boolean delete() {
+        return BookDAO.deleteBook(this);
     }
 }

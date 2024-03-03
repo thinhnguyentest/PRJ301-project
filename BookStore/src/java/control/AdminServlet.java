@@ -1,59 +1,58 @@
-
 package control;
+
 
 import dao.AccountDAO;
 import dao.BookDAO;
 import entity.Account.User;
 import entity.Product.Book;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name="AdminServlet", urlPatterns={"/admin"})
+
+
+@WebServlet(name = "AdminServlet", urlPatterns = "/admin")
 public class AdminServlet extends HttpServlet {
-   
+
+    private static final int ITEMS_PER_PAGE = 10;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        // Số lượng mục trên mỗi trang
-        int itemsPerPage = 10;
+            throws ServletException, IOException {
 
-        // Tính tổng số trang
         int totalBooks = BookDAO.totalBook();
-        int totalPagesBook = (int) Math.ceil((double) totalBooks / itemsPerPage);
-        
-        int totalUsers = AccountDAO.totalUser();
-        int totalPagesUser = (int) Math.ceil((double) totalUsers / itemsPerPage);
-        
-        // Lấy trang hiện tại từ tham số yêu cầu
-        String pageParamBook = request.getParameter("pageBook");
-        String pageParamUser = request.getParameter("pageUser");
-        
-        int currentPageBook = (pageParamBook != null) ? Integer.parseInt(pageParamBook) : 1;
-        int currentPageUser = (pageParamUser != null) ? Integer.parseInt(pageParamUser) : 1;
-        int offsetBook = (currentPageBook - 1) * itemsPerPage;
-        int offsetUser = (currentPageUser - 1) * itemsPerPage;
-        
-        // Lấy danh sách dữ liệu cho trang hiện tại
-        ArrayList<Book> books = BookDAO.getPagging(offsetBook, itemsPerPage);
-        ArrayList<User> users = AccountDAO.getPagging(offsetUser, itemsPerPage);
+        int totalPagesBook = (int) Math.ceil((double) totalBooks / ITEMS_PER_PAGE);
 
-        // Set thuộc tính cho JSP
-        request.setAttribute("listbooks", books);
-        request.setAttribute("totalPagesBook", totalPagesBook);
+        int totalUsers = AccountDAO.totalUser();
+        int totalPagesUser = (int) Math.ceil((double) totalUsers / ITEMS_PER_PAGE);
+
+        String currentPageBookParam = request.getParameter("pageBook");
+        int currentPageBook = (currentPageBookParam != null) ? Integer.parseInt(currentPageBookParam) : 1;
+        int offsetBook = (currentPageBook - 1) * ITEMS_PER_PAGE;
+
+        String currentPageUserParam = request.getParameter("pageUser");
+        int currentPageUser = (currentPageUserParam != null) ? Integer.parseInt(currentPageUserParam) : 1;
+        int offsetUser = (currentPageUser - 1) * ITEMS_PER_PAGE;
+
+        ArrayList<Book> books = BookDAO.getPagging(offsetBook, ITEMS_PER_PAGE);
+        ArrayList<User> users = AccountDAO.getPagging(offsetUser, ITEMS_PER_PAGE);
+
+        // Pass the data to the JSP page for rendering
+        request.setAttribute("books", books);
         request.setAttribute("currentPageBook", currentPageBook);
+        request.setAttribute("totalPagesBook", totalPagesBook);
         
-        request.setAttribute("listusers", users);
-        request.setAttribute("totalPagesUser", totalPagesUser);
+        request.setAttribute("users", users);
+        request.setAttribute("totalPagesUser", totalPagesUser);    
         request.setAttribute("currentPageUser", currentPageUser);
-        // Chuyển hướng sang trang JSP
+
         request.getRequestDispatcher("/admin.jsp").forward(request, response);
     }
-
+    
     public static void main(String[] args) {
         BookDAO.getPagging(1, 10).forEach(p -> System.out.println(p));
     }
