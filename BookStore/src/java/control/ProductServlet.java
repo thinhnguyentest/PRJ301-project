@@ -7,6 +7,7 @@ package control;
 
 
 import dao.BookDAO;
+import entity.Product.Author;
 import entity.Product.Book;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -31,6 +32,12 @@ public class ProductServlet extends HttpServlet {
             doGetDisplay(request, response);
         }else if(action.equals("newArrival")){
             doGetNewArrival(request, response);
+        }else if(action.equals("show")){
+            doGetDetail(request, response);
+        }else if(action.equals("category")){
+            doGetCatagory(request, response);
+        }else if(action.equals("search")){
+            doGetSearch(request, response);
         }
     }
     protected void doGetNewArrival(HttpServletRequest request, HttpServletResponse response) 
@@ -46,15 +53,42 @@ public class ProductServlet extends HttpServlet {
         if(page==null) page="1";
         int indexPage=Integer.parseInt(page);
         int totalPage=BookDAO.getNumberPage();
+        List<Author> authors =BookDAO.getAuthors();
         List<Book> books = BookDAO.getPagingBook(indexPage);
         request.setAttribute("books", books);
+        request.setAttribute("authors", authors);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("indexPage", indexPage);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/allBook.jsp");
         dispatcher.forward(request, response);
     }
-    
+    protected void doGetDetail(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        String bookId= request.getParameter("bookId");
+        Book book = BookDAO.getBookById(Integer.parseInt(bookId));
+        request.setAttribute("book", book);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/bookDetail.jsp");
+        dispatcher.forward(request, response);
+    }
+    protected void doGetSearch(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        String data = request.getParameter("input");
+        List<Book> books = BookDAO.searchBook("Title", data);
+        request.setAttribute("books", books);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/searchPage.jsp");
+        dispatcher.forward(request, response);
+    }
+    protected void doGetCatagory(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        String data = request.getParameter("input");
+        String category = request.getParameter("category");
+        List<Book> books = BookDAO.searchBook(category, data);
+        request.setAttribute("books", books);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/category.jsp");
+        dispatcher.forward(request, response);
+    }
     public static void main(String[] args) {
-        BookDAO.getPagingBook(1).forEach(p -> System.out.println(p));
+        
+        BookDAO.getAuthors().forEach(p -> System.out.println(p));
     }
 }
