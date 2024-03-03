@@ -35,7 +35,20 @@
                 <tbody>
                     <!-- Hiển thị dữ liệu sách từ máy chủ -->
                     <c:forEach var="book" items="${requestScope.books}">
-                        <tr>
+                        <tr data-book-authodId="${book.author.id}"
+                            data-book-authorName="${book.author.name}"
+                            data-book-authorBirthday="${book.author.birthday}"
+                            data-book-authorBio="${book.author.bio}"
+                            data-book-publisherId="${book.publisher.publisherId}"
+                            data-book-publisherName="${book.publisher.publisherName}"
+                            data-book-establishedDate="${book.publisher.establishedDate}"
+                            data-book-id="${book.id}"
+                            data-book-title="${book.title}"
+                            data-book-genre="${book.genre}"
+                            data-book-description="${book.description}"
+                            data-book-quantity="${book.quantity}"
+                            data-book-price="${book.price}"
+                            data-book-image="${book.image}">
                             <td>${book.id}</td>
                             <td>${book.author.name}</td>
                             <td>${book.publisher.publisherName}</td>
@@ -45,7 +58,6 @@
                             <td>${book.quantity}</td>
                             <td>${book.price}</td>
                             <td><img src="${book.image}" alt="Book Image" style="width: 120px"></td>
-
                             <td>
                                 <a href="#bookForm" style="padding: 20px;">
                                     <button onclick="editBook(${book.id})">Sửa</button>
@@ -58,20 +70,7 @@
                                     <button onclick="parentNode.submit()">Xóa</button>
                                 </form>
 
-                                <input type="text" id="authorId_${book.id}" value="${book.author.id}" hidden>
-                                <input type="text" id="authorName_${book.id}" value="${book.author.name}" hidden>
-                                <input type="text" id="authorBirthday_${book.id}" value="${book.author.birthday}" hidden>
-                                <input type="text" id="authorBio_${book.id}" value="${book.author.bio}" hidden>
-                                <input type="text" id="publisherId_${book.id}" value="${book.publisher.publisherId}" hidden>
-                                <input type="text" id="publisherName_${book.id}" value="${book.publisher.publisherName}" hidden>
-                                <input type="text" id="establishedDate_${book.id}" value="${book.publisher.dateEstablished}" hidden>
-                                <input type="text" id="bookId_${book.id}" value="${book.id}" hidden>
-                                <input type="text" id="bookTitle_${book.id}" value="${book.title}" hidden>
-                                <input type="text" id="genre_${book.id}" value="${book.genre}" hidden>
-                                <input type="text" id="description_${book.id}" value="${book.description}" hidden>
-                                <input type="text" id="quantity_${book.id}" value="${book.quantity}" hidden> 
-                                <input type="text" id="price_${book.id}" value="${book.price}" hidden>
-                                <input type="text" id="image_${book.id}" value="${book.image}" hidden>
+                                
                             </td>
                         </tr>
                     </c:forEach>
@@ -148,14 +147,14 @@
                         <input type="text" id="quantity" name="quantity" required><br>
 
                         <label for="price">Price:</label>
-                        <input type="text" id="price" name="price" step="5000" required><br>
+                        <input type="number" id="price" name="price" step="5000" required><br>
 
                         <label for="image">Select Image :</label>
                         <input type="text" name="image" id="image" required>
                     </fieldset>
 
                     <button type="button" onclick="parentNode.submit()">Lưu</button>
-                    <a href="books"><button type="button" onclick="cancelBookForm()">Hủy</button></a>
+                    <a href="#books"><button type="button" onclick="cancelBookForm()">Hủy</button></a>
                 </form>
             </div>
         </section>

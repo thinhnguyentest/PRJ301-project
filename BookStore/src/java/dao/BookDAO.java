@@ -85,6 +85,20 @@ public class BookDAO {
         }
         return false;
     }
+    
+    public static boolean addImage(Book b) {
+        String QUERY = "INSERT INTO ImageStoring (BookId, FilePath) "
+                + "VALUES (?,?)";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setInt(1, b.getId());
+                pst.setString(2, b.getImage());
+                return pst.execute();
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
 
 //    ---------------------------------------------------------------------------------------------
     public static ArrayList<Book> listBook() {

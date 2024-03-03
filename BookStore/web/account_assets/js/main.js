@@ -46,22 +46,39 @@ function cancelBookForm() {
 }
 
 function editBook(bookId) {
-    document.getElementById("authorId").value = document.getElementById("authorId_" + bookId).value;
-    document.getElementById("authorName").value = document.getElementById("authorName_" + bookId).value;
-    document.getElementById("birthday").value = document.getElementById("authorBirthday_"+ bookId).value;
-    document.getElementById("bio").innerHTML = document.getElementById("authorBio_"+ bookId).value;
+    var row = document.querySelector(`[data-user-id="${bookId}"]`);
+    document.getElementById("action").value = "update";
     
-    document.getElementById("publisherId").value = document.getElementById("publisherId_"+ bookId).value;
-    document.getElementById("publisherName").value = document.getElementById("publisherName_"+ bookId).value;
-    document.getElementById("establishedDate").value = document.getElementById("establishedDate_"+ bookId).value;
+    var authorId = row.dataset.bookAuthodId;
+    var authorName = row.dataset.bookAuthodName;
+    var birthday = row.dataset.bookBirthday;
+    var bio = row.dataset.bookBio;
+    var publisherId = row.dataset.bookPublisherId;
+    var publisherName = row.dataset.bookPublisherName;
+    var establishedDate = row.dataset.bookEstablishedDate;
+    var id = row.dataset.bookId;
+    var title = row.dataset.bookTitle;    
+    var genre = row.dataset.bookGenre;    
+    var description = row.dataset.bookDescription;    
+    var quantity = row.dataset.bookQuantity;    
+    var price = row.dataset.bookPrice;    
+    var image = row.dataset.bookImage;    
+    document.getElementById("authorId").value = authorId;
+    document.getElementById("authorName").value = authorName;
+    document.getElementById("birthday").value = birthday;
+    document.getElementById("bio").innerHTML = bio;
     
-    document.getElementById("bookId").value = document.getElementById("bookId_"+ bookId).value;
-    document.getElementById("bookTitle").value = document.getElementById("bookTitle_"+ bookId).value;
-    document.getElementById("genre").value = document.getElementById("genre_"+ bookId).value;
-    document.getElementById("description").innerHTML = document.getElementById("description_"+ bookId).value;
-    document.getElementById("quantity").value = document.getElementById("quantity_"+ bookId).value;
-    document.getElementById("price").value = document.getElementById("price_"+ bookId).value;
-    document.getElementById("image").value = document.getElementById("image_"+ bookId).value;
+    document.getElementById("publisherId").value = publisherId;
+    document.getElementById("publisherName").value = publisherName;
+    document.getElementById("establishedDate").value = establishedDate;
+    
+    document.getElementById("bookId").value = id;
+    document.getElementById("bookTitle").value = title;
+    document.getElementById("genre").value = genre;
+    document.getElementById("description").innerHTML = description;
+    document.getElementById("quantity").value = quantity;
+    document.getElementById("price").value = price;
+    document.getElementById("image").value = image;
 
     // Display the bookForm
     document.getElementById("action").value = "update";
