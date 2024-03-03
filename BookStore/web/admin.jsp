@@ -4,9 +4,7 @@
     Author     : tuanngp
 --%>
 
-<%@ page isELIgnored ="false" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,11 +25,8 @@
                     <li><a href="#transactions">Giao dịch</a></li>
                 </ul>
             </nav>
-            <p style="color: red; padding: 12px 0">${requestScope.statusAdmin}</p>
         </header>
-        
-        
-        
+
     <!--Quan li user-->    
     <jsp:include page="adminUser.jsp"></jsp:include>
     <!--end-->
