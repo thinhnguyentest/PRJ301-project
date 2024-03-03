@@ -10,9 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        
-        
-        
+
+
+
         <!-------------------------------------------------------------------------------->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <!-- style css -->
@@ -33,36 +33,36 @@
         <!-------------------------------------------------------------------------------->
         <style>
             #dropdown-menu{
-    position: fixed;
-    z-index: 2;
-    background-color: orange;
-}
+                position: fixed;
+                z-index: 2;
+                background-color: orange;
+            }
 
-#dropdown-menu {
-    display: none;
-    position: absolute;
-    min-width: 160px;
-    box-shadow: #df9911;
-    z-index: 1;
-}
-.dropdown-toggle{
-    background-color: #df9911;
-}
+            #dropdown-menu {
+                display: none;
+                position: absolute;
+                min-width: 160px;
+                box-shadow: #df9911;
+                z-index: 1;
+            }
+            .dropdown-toggle{
+                background-color: #df9911;
+            }
 
-.dropdown {
-    margin-right: 40px;
-}
+            .dropdown {
+                margin-right: 40px;
+            }
 
-.dropdown:hover #dropdown-menu {
-    display: block;
-}
-#search_input_wrapper {
-    display: none;
-}
+            .dropdown:hover #dropdown-menu {
+                display: block;
+            }
+            #search_input_wrapper {
+                display: none;
+            }
 
-#search_input_wrapper.show {
-    display: block;
-}
+            #search_input_wrapper.show {
+                display: block;
+            }
         </style>
     </head>
     <body>
@@ -77,20 +77,20 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="row nav-item active menu">
                             <div class="dropdown" onmouseover="openDropdown()" onmouseout="closeDropdown()">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false">
-                            CATEGORIES
-                        </button>
-                        <ul id="dropdown-menu">
-                            <li><a href="allBook.jsp"><button class="dropdown-item" type="button">All Book</button></a></li>
-                            <li><a href="login.jsp"><button class="dropdown-item" type="button">Best Saler</button></a></li>
-                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">New Arrivals</button></a></li>
-                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Decolonization</button></a></li>
-                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Fiction</button></a></li>
-                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Poetry</button></a></li>
-                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Comic & Graphic Novel</button></a></li>
-                            <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Language</button></a></li>
-                        </ul>
-                    </div>
+                                <button class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false">
+                                    CATEGORIES
+                                </button>
+                                <ul id="dropdown-menu">
+                                    <li><a href="allBook.jsp"><button class="dropdown-item" type="button">All Book</button></a></li>
+                                    <li><a href="login.jsp"><button class="dropdown-item" type="button">Best Saler</button></a></li>
+                                    <li><a href="allbook.jsp"><button class="dropdown-item" type="button">New Arrivals</button></a></li>
+                                    <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Decolonization</button></a></li>
+                                    <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Fiction</button></a></li>
+                                    <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Poetry</button></a></li>
+                                    <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Comic & Graphic Novel</button></a></li>
+                                    <li><a href="allbook.jsp"><button class="dropdown-item" type="button">Language</button></a></li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link single-line" href="allBook.jsp">All BOOKS</a>
@@ -113,19 +113,18 @@
                     </ul>
                     <div class="search_icon">
                         <form action="search" >
-                            
-                         </a>
-                        <div id="search_input_wrapper row">
-                            <form action="search" >
-                                <input type="text" id="search_input" placeholder="Search..." onblur="hideSearch()">
-                                <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
-                            </form>                        
-                            
-                        </div>
-                     </div>
+
+                            <div id="search_input_wrapper row">
+                                <form action="search" >
+                                    <input type="text" id="search_input" placeholder="Search..." onblur="hideSearch()">
+                                    <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+                                </form>                        
+
+                            </div>
+                    </div>
                     <div class="search_icon"><a href="registration.jsp"><img src="assets/images/eye-icon.png"><span class="padding_left_15">Register</span></a></div>
                     <div class="search_icon"><a href="login.jsp"><img src="assets/images/user-icon.png"><span class="padding_left_15">login</span></a></div>
-                    
+
                     <div class="search_icon"><a href="#"><img class="image_cart" src="assets/images/image-cart_90604.png"><span class="padding_left_15">Cart</span></a></div>
                 </div>
             </nav>

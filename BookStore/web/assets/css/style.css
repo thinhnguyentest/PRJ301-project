@@ -805,7 +805,8 @@ input.email_text::placeholder {
     float: left;
     background-color: #212121;
     height: auto;
-    padding: 90px 0px;
+    bottom: 0;
+    position: absolute;
 }
 
 .footer_menu {
