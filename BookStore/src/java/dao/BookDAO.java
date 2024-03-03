@@ -27,9 +27,9 @@ public class BookDAO {
                 pst.setString(3, b.getDescription());
                 pst.setInt(4, b.getQuantity());
                 pst.setFloat(5, b.getPrice());
-                pst.setInt(6, b.getAuthor().getId());
-                pst.setInt(7, b.getPublisher().getPublisherId());
-                return pst.execute();
+                pst.setInt(6, getAuthorIdLastest());
+                pst.setInt(7, getPublisherIdLastest());
+                return pst.executeUpdate() > 0;
             }
         } catch (Exception e) {
         }
@@ -65,6 +65,20 @@ public class BookDAO {
         return false;
     }
     
+    public static boolean addImage(String image) {
+        String QUERY = "INSERT INTO ImageStoring (BookId, FilePath) "
+                + "VALUES (?,?)";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setInt(1, getBookIdLastest());
+                pst.setString(2, image);
+                return pst.executeUpdate()>0;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
     public static boolean addImage(Book b) {
         String QUERY = "INSERT INTO ImageStoring (BookId, FilePath) "
                 + "VALUES (?,?)";
@@ -103,20 +117,19 @@ public class BookDAO {
         return list;
     }
 
-    public static List<String> getImages(int id) {
-        List<String> list = new ArrayList<>();
+    public static String getImages(int id) {
         String QUERY = "SELECT * FROM ImageStoring WHERE BookId=?";
         try ( Connection conn = DBcontext.getConnection()) {
             try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
                 pst.setInt(1, id);
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
-                    list.add(rs.getString("FilePath"));
+                    return (rs.getString("FilePath"));
                 }
             }
         } catch (Exception e) {
         }
-        return list;
+        return "";
     }
 
     public static Author getAuthor(int id) {
@@ -209,12 +222,12 @@ public class BookDAO {
 
         return book;
     }
-<<<<<<< HEAD
+
     public static List<Book> getNewBooks(int top) {
         List<Book> list = new ArrayList<>();
         String QUERY = "SELECT TOP (?) * FROM Books ORDER BY BookId DESC";
-        try (Connection conn = DBcontext.getConnection()) {
-            try (PreparedStatement pst = conn.prepareStatement(QUERY)) {
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
                 pst.setInt(1, top);
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
@@ -234,12 +247,13 @@ public class BookDAO {
         }
         return list;
     }
+
     //function to get best seller books that have been sold the most
     public static List<Book> getBestSellerBooks() {
         List<Book> list = new ArrayList<>();
         String QUERY = "SELECT TOP 10 * FROM Books ORDER BY QuantitySold DESC";
-        try (Connection conn = DBcontext.getConnection()) {
-            try (PreparedStatement pst = conn.prepareStatement(QUERY)) {
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
                     list.add(new Book(rs.getInt(1),
@@ -258,12 +272,56 @@ public class BookDAO {
         }
         return list;
     }
-      
 
-=======
->>>>>>> 1f9a138cdc060e31c4573c8a75f05ba1c38875e9
+    public static int getAuthorIdLastest() {
+        String QUERY = "SELECT TOP 1 AuthorId\n"
+                + "FROM Authors\n"
+                + "ORDER BY AuthorId DESC;";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+
+    public static int getPublisherIdLastest() {
+        String QUERY = "SELECT TOP 1 PublisherId\n"
+                + "FROM Publishers\n"
+                + "ORDER BY PublisherId DESC;";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+
+    public static int getBookIdLastest() {
+        String QUERY = "SELECT TOP 1 BookId\n"
+                + "FROM Books\n"
+                + "ORDER BY BookId DESC;";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+
 //    ----------------------------------------------------------------------------------------------------
-
     public static boolean updateBook(Book b) {
         String QUERY = "UPDATE Books SET Title=?, Genre=?, Description=?, Quantity=?, Price=?, AuthorId=?, PublisherId=? WHERE BookId=?";
         try ( Connection conn = DBcontext.getConnection()) {
@@ -308,6 +366,70 @@ public class BookDAO {
                 return pst.executeUpdate() > 0;
             }
         } catch (SQLException e) {
+        }
+        return false;
+    }
+    
+    public static boolean updateImage(Book b) {
+        String QUERY = "UPDATE ImageStoring SET FilePath=? WHERE BookId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement pst = conn.prepareStatement(QUERY)) {
+                pst.setString(1, b.getImage());
+                pst.setInt(2, b.getId());
+                return pst.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+//    -----------------------------------------------------------------------------------------------------
+
+    public static boolean deleteAuthor(Author author) {
+        String SQL = "DELETE FROM Authors WHERE AuthorId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
+                preparedStatement.setInt(1, author.getId());
+                return preparedStatement.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    public static boolean deletePublisher(Publisher publisher) {
+        String SQL = "DELETE FROM Publishers WHERE PublisherId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
+                preparedStatement.setInt(1, publisher.getPublisherId());
+                return preparedStatement.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    public static boolean deleteBook(Book b) {
+        deleteImage(b);
+
+        String SQL = "DELETE FROM Books WHERE BookId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
+                preparedStatement.setInt(1, b.getId());
+                return preparedStatement.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    public static boolean deleteImage(Book b) {
+        String SQL = "DELETE FROM ImageStoring WHERE BookId=?";
+        try ( Connection conn = DBcontext.getConnection()) {
+            try ( PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
+                preparedStatement.setInt(1, b.getId());
+                return preparedStatement.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
         }
         return false;
     }

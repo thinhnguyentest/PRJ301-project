@@ -1,42 +1,65 @@
-
 package control;
 
 import dao.AccountDAO;
 import entity.Account.User;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  *
  * @author PC
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String remember = request.getParameter("remember");
         HttpSession session = request.getSession();
-
-        validateInput(username, password, request);
+        Cookie cu = new Cookie("userC", username);
+        Cookie cp = new Cookie("passC", password);
+        Cookie cr = new Cookie("rememC", remember);
+        if (cr != null && cr.equals("ON")) {
+            cu.setMaxAge(60 * 60 * 24 * 7); // 7 ngay
+            cp.setMaxAge(60 * 60 * 24 * 7);
+            cr.setMaxAge(60 * 60 * 24 * 7);
+        } else {
+            cu.setMaxAge(0); // 7 ngay
+            cp.setMaxAge(0);
+            cr.setMaxAge(0);
+        }
+        response.addCookie(cu);
+        response.addCookie(cp);
+        response.addCookie(cr);
 
         if (AccountDAO.authenticateUser(username, password)) {
-            User u = AccountDAO.searchUser(username);
-            session.setAttribute("accountActive", u);
-            if (u.getRole().equals("admin")) {
-                request.getRequestDispatcher("admin").forward(request, response);
-            } else {
-                request.getRequestDispatcher("home").forward(request, response);
+            User user = AccountDAO.searchUser(username);
+            if (user == null) {
+                request.setAttribute("ms", "user or password invalid");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else if (user.getRole().equals("admin")) {
+                session.setAttribute("admin", user);
+                session.setMaxInactiveInterval(60 * 60 * 24);
+                response.sendRedirect("admin");
+            } else if (user.getRole().equals("user")) {
+                session.setAttribute("user", user);
+                session.setMaxInactiveInterval(60 * 60 * 24);
+                response.sendRedirect("home");
             }
-            
-        } else {
-            setErrorStatus("Thông tin đăng nhập không chính xác.", request);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
@@ -53,4 +76,3 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("status", message);
     }
 }
-

@@ -7,9 +7,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Shopping Cart</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
         <link rel="stylesheet" href="assets/css/cart.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
         <script>
             $(document).ready(function () {
                 $(".quantity-btn").on("click", function () {
@@ -43,16 +43,17 @@
                 // Initial update when the page loads
                 updateTotal();
             });
+
         </script>
     </head>
     <body>
-        
+
         <div class="" > 
             <div class="row">
                 <div class="col">
                     <jsp:include page="header.jsp"></jsp:include>
+                    </div>
                 </div>
-            </div>
                 <div class="card ">
                     <div class="row">
                         <div class="col-md-8 cart">
@@ -135,8 +136,5 @@
             </div>
 
         </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-
     </body>
 </html>

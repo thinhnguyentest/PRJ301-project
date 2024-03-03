@@ -43,10 +43,7 @@
                     <span class="introduce">Follow instagram để thỉnh thoảng nghe mấy điều nhảm nhí: </span>
                     <span class="read-more">@gacxeptiem</span>
                 </p>
-                </p>
             </div>
         </div>
-
     </body>
-
 </html>

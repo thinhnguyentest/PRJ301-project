@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            <h1>Quản lý admin</h1>
+            <h1 style="margin: 12px"><a href="admin" style="text-decoration: none;color: #fff;font-weight: bold;transition: color 0.3s ease;">Quản lý admin</a></h1>
             <nav>
                 <ul>
                     <li><a href="#users">Người dùng</a></li>
@@ -29,26 +29,26 @@
             </nav>
             <p style="color: red; padding: 12px 0">${requestScope.statusAdmin}</p>
         </header>
-        
-        
-        
-    <!--Quan li user-->    
-    <jsp:include page="adminUser.jsp"></jsp:include>
-    <!--end-->
-    
-    <!--Quan li sach-->
-    <jsp:include page="adminBook.jsp"></jsp:include>
-    <!--end-->
 
-    <section id="transactions">
-        <h2>Quản lý Giao dịch</h2>
-        <!-- Đặt bảng hoặc danh sách giao dịch ở đây -->
-    </section>
 
-    <footer>
-        <p>&copy; 2024 Trang web bán sách</p>   
-    </footer>
-    
-</body>
+
+        <!--Quan li user-->    
+        <jsp:include page="adminUser.jsp"></jsp:include>
+            <!--end-->
+
+            <!--Quan li sach-->
+        <jsp:include page="adminBook.jsp"></jsp:include>
+        <!--end-->
+
+        <section id="transactions">
+            <h2>Quản lý Giao dịch</h2>
+            <!-- Đặt bảng hoặc danh sách giao dịch ở đây -->
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Trang web bán sách</p>   
+        </footer>
+
+    </body>
 </html>
 

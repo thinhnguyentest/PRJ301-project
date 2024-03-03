@@ -15,10 +15,9 @@
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
-        <!-------------------------------------------------------------------------------->
         <!-- bootstrap css -->
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.css"/>
         <!-- fevicon -->
         <link rel="icon" href="assets/assets/images/fevicon.png" type="image/gif" />
         <!-- Scrollbar Custom CSS -->
@@ -34,8 +33,9 @@
         <link href="assets/css/prettyPhoto.css" rel="stylesheet">
         <link href="assets/css/price-range.css" rel="stylesheet">
         <link href="assets/css/bookDetail.css" rel="stylesheet">  
-        <!-------------------------------------------------------------------------------->
+        
     </head>
+    
     <body>
         <!-- header section start -->
         <jsp:include page="header.jsp" ></jsp:include>
@@ -81,11 +81,11 @@
                             <div class="col-sm-7">
                                 <div class="product-information"><!--/product-information-->                            
                                     <h2 class="detail_title">${book.title}</h2>                               
-                                    <h3>Tác giả: </b>${book.author.name}</h3>
+                                    <h3>Tác giả: ${book.author.name}</h3>
                                     <h3 class="detail_title">Price: ${book.price} VND</h3>
-                                    <h3>Nhà xuất bản: ${book.publisher.getPublisherName()}</p></h3>
+                                    <h3>Nhà xuất bản: ${book.publisher.getPublisherName()}</h3>
 
-                                    <h3 clase "detail_title">Mô tả sản phẩm</h3>
+                                    <h3 class="detail_title">Mô tả sản phẩm</h3>
                                     <p id="short-description">${book.description}</p>
                                     <a href="#details" data-toggle="tab">Xem thêm...</a>
                                     <br>
@@ -126,13 +126,13 @@
         <!-- javascript --> 
         <script src="js/owl.carousel.js"></script>
         <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>
         <script>
-            $('#datepicker').datepicker({
-                uiLibrary: 'bootstrap4'
-            });
+                                                $('#datepicker').datepicker({
+                                                    uiLibrary: 'bootstrap4'
+                                                });
         </script>
-        <script type="text/javascript">
+        <script>
             var i = 1;
             function quantityChange(n) {
                 var quantity = document.getElementById("quantityInput");

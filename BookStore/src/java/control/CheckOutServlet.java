@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author PC
  */
-@WebServlet(name="UserServlet", urlPatterns={"/user"})
-public class UserServlet extends HttpServlet {
+@WebServlet(name="CheckOutServlet", urlPatterns={"/checkout"})
+public class CheckOutServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,10 +31,10 @@ public class UserServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserServlet</title>");  
+            out.println("<title>Servlet CheckOutServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CheckOutServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
